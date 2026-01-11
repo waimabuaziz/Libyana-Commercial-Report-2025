@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تقرير القسم التجاري - ليبيانا - 2024</title>
+    <title>تقرير القسم التجاري - ليبيانا - 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -11,39 +11,90 @@
     <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/mapdata/countries/ly/ly-all.js"></script>
     <style>
-        * {
+        html {
+            scroll-behavior: auto !important;
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+        }
+
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: none !important;
+            animation: none !important;
+        }
+
+        body {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            position: relative !important;
+        }
+
+        /* Hide scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 0px !important;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(117, 25, 124, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(117, 25, 124, 0.5);
+        }
+
+        /* Hide horizontal scrollbar for Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(117, 25, 124, 0.3) transparent;
+        }
+
+        html {
+            scrollbar-width: thin;
+        }
+
+        /* Prevent horizontal overflow */
+        .page,
+        section,
+        .kpi-section {
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
         }
 
         :root {
-            --libyana-primary: #B8208B;
-            --libyana-dark: #8B1A6B;
-            --libyana-light: #D946A6;
-            --libyana-accent: #E85BB8;
-            --dark-navy: #0A1929;
-            --dark-charcoal: #132F4C;
-            --dark-blue: #1A2942;
-            --teal-accent: #00D9FF;
-            --cyan-accent: #00BCD4;
-            --white: #FFFFFF;
-            --light-gray: #B2BAC2;
-            --border-color: #1E3A52;
-            --text-primary: #FFFFFF;
-            --text-secondary: #B2BAC2;
-            --success: #00E676;
+            --libyana-primary: #75197c;
+            --libyana-dark: #5a1460;
+            --libyana-light: #b894bd;
+            --libyana-accent: #8b2591;
+            --bg-cream: #fafafa;
+            --bg-white: #FFFFFF;
+            --bg-light-purple: #f8f5f9;
+            --text-primary: #2d2d2d;
+            --text-secondary: #666666;
+            --text-light: #999999;
+            --border-light: #e5e5e5;
+            --border-purple: #e8d5ea;
+            --success: #00C853;
+            --warning: #FFB800;
         }
 
         body {
             font-family: 'Cairo', sans-serif;
             color: var(--text-primary);
-            background-image: url('backgrounds/bg1.jpeg');
-            background-size: cover;
+            background-color: var(--bg-cream);
+            background-image: url('backgrounds/pattern.svg');
+            background-size: 300px 300px;
             background-position: center center;
-            background-repeat: no-repeat;
+            background-repeat: repeat;
             background-attachment: fixed;
-            line-height: 1.6;
+            line-height: 1.8;
             direction: rtl;
             position: relative;
             margin: 0;
@@ -57,7 +108,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(10, 25, 41, 0.15);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(248, 245, 249, 0.8));
             pointer-events: none;
             z-index: 0;
         }
@@ -70,150 +121,357 @@
             z-index: 1;
         }
 
-        /* Professional Header */
-        .header {
-            background: linear-gradient(135deg, rgba(19, 47, 76, 0.55) 0%, rgba(10, 25, 41, 0.45) 100%);
-            padding: 35px 60px;
-            border-bottom: 3px solid transparent;
-            border-image: linear-gradient(90deg, var(--teal-accent), var(--cyan-accent), var(--libyana-primary)) 1;
-            max-width: 1400px;
-            margin: 0 auto;
+        /* Cover Section */
+        .cover-section {
             position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 217, 255, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -50%;
-            left: -10%;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(184, 32, 139, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            gap: 40px;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-shrink: 0;
-        }
-
-        .logo-box {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--teal-accent) 0%, var(--cyan-accent) 50%, var(--libyana-primary) 100%);
+            width: 100%;
+            height: 100vh;
+            min-height: 700px;
+            background-image: url('backgrounds/Background_Main.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            overflow: visible;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--dark-navy);
-            font-size: 1.8em;
-            font-weight: 900;
-            border-radius: 10px;
-            box-shadow: 0 6px 24px rgba(0, 217, 255, 0.4);
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 0;
         }
 
-        .logo-box::before {
+        .cover-section::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(117, 25, 124, 0.75), rgba(90, 20, 96, 0.85));
+            z-index: 1;
+        }
+
+        .cover-section::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C300,80 600,80 900,40 C1050,20 1150,0 1200,0 L1200,120 L0,120 Z' fill='%23fafafa'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 3;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            text-align: center;
+        }
+
+        .scroll-indicator-icon {
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 25px;
+            position: relative;
+            margin: 0 auto 10px;
+        }
+
+        .scroll-indicator-icon::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .scroll-indicator-text {
+            color: white;
+            font-size: 0.9em;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        @keyframes scroll {
+            0% {
+                opacity: 1;
+                top: 10px;
+            }
+            100% {
+                opacity: 0;
+                top: 30px;
+            }
+        }
+
+        /* B2B Cover Section */
+        .b2b-cover-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 700px;
+            background-image: url('backgrounds/Background_B2B_V1.01.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .b2b-cover-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(117, 25, 124, 0.75), rgba(90, 20, 96, 0.85));
+            z-index: 1;
+        }
+
+        .b2b-cover-section::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C300,80 600,80 900,40 C1050,20 1150,0 1200,0 L1200,120 L0,120 Z' fill='%23fafafa'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 3;
+        }
+
+        .b2b-cover-section .visual-section-header {
+            position: relative;
+            z-index: 2;
+            color: white;
+            padding: 60px 80px;
+            max-width: 900px;
+        }
+
+        .b2b-cover-section .section-title-large {
+            color: white;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            background: none;
+            -webkit-text-fill-color: white;
+        }
+
+        .b2b-cover-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3em;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .b2b-cover-section .section-divider {
+            background: rgba(255, 255, 255, 0.5);
+            height: 3px;
+            margin: 30px auto;
+        }
+
+        .b2b-cover-section .stat-showcase {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .b2b-cover-section .stat-item {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 1);
+        }
+
+        .b2b-cover-section .stat-number {
+            color: #75197c;
+            text-shadow: none;
+            font-weight: 800;
+        }
+
+        .b2b-cover-section .stat-label {
+            color: #2d2d2d;
+            text-shadow: none;
+            font-weight: 600;
+        }
+
+        .b2b-cover-section .stat-change {
+            color: #00C853;
+            text-shadow: none;
+            font-weight: 700;
+        }
+
+        /* Transition Connector */
+        .transition-connector {
+            background: #611a77;
+            padding: 50px 60px 30px;
+            text-align: center;
+            position: relative;
+            overflow: visible;
+            margin-top: -1px;
+        }
+
+        .transition-connector::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,120 C300,40 600,40 900,80 C1050,100 1150,120 1200,120 L1200,0 L0,0 Z' fill='%23fafafa'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .transition-connector::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            z-index: 2;
         }
 
         @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
         }
 
-        .company-info h1 {
-            font-size: 1.5em;
+        .transition-tagline {
+            color: white;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .transition-tagline .highlight {
+            color: #ffd700;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--white), var(--teal-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
         }
 
-        .company-info p {
-            font-size: 0.8em;
-            color: var(--light-gray);
-            font-weight: 500;
-        }
-
-        .report-title-section {
-            border-right: 3px solid transparent;
-            border-image: linear-gradient(180deg, var(--teal-accent), var(--cyan-accent)) 1;
-            padding-right: 25px;
-            flex-grow: 1;
-        }
-
-        .report-title-section h2 {
-            font-size: 1.8em;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 5px;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 20px rgba(0, 217, 255, 0.2);
-        }
-
-        .report-title-section p {
-            font-size: 0.9em;
-            color: var(--light-gray);
-            line-height: 1.5;
-            font-weight: 400;
-        }
-
-        .report-meta {
+        .cover-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.85em;
-            background: rgba(0, 217, 255, 0.08);
-            padding: 15px 25px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            flex-shrink: 0;
+            color: white;
+            padding: 60px;
+            max-width: 900px;
         }
 
-        .report-meta .year {
+        .cover-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 60px;
+            filter: brightness(0) invert(1);
+        }
+
+        .cover-title {
+            font-size: 4.5em;
+            font-weight: 800;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            letter-spacing: -1px;
+        }
+
+        .cover-subtitle {
             font-size: 2em;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--teal-accent), var(--cyan-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1;
-            display: block;
-            margin-bottom: 3px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            opacity: 0.95;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .cover-year {
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-top: 40px;
+            opacity: 0.9;
+            letter-spacing: 8px;
+            text-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .cover-divider {
+            width: 150px;
+            height: 4px;
+            background: white;
+            margin: 40px auto;
+            border-radius: 2px;
+            box-shadow: 0 2px 15px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+            to {
+                opacity: 1;
+                transform: scaleX(1);
+            }
         }
 
         /* Video Hero Section */
@@ -225,6 +483,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-top: 0;
+            background: var(--bg-cream);
         }
 
         .video-background {
@@ -246,7 +506,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(10, 25, 41, 0.85) 0%, rgba(19, 47, 76, 0.75) 50%, rgba(10, 25, 41, 0.85) 100%);
+            background: linear-gradient(135deg, rgba(117, 25, 124, 0.5) 0%, rgba(90, 20, 96, 0.4) 50%, rgba(117, 25, 124, 0.5) 100%);
             z-index: 2;
         }
 
@@ -262,26 +522,22 @@
 
         .video-header {
             margin-bottom: 50px;
-            color: var(--white);
+            color: white;
         }
 
         .video-header h2 {
             font-size: 3em;
             font-weight: 800;
             margin-bottom: 15px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(135deg, var(--white), var(--teal-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            text-shadow: 0 4px 25px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(117, 25, 124, 0.9);
         }
 
         .video-header p {
             font-size: 1.3em;
-            opacity: 0.95;
             font-weight: 500;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            color: var(--light-gray);
+            color: white;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.8), 0 1px 5px rgba(0, 0, 0, 0.9);
         }
 
         .video-stats {
@@ -293,18 +549,17 @@
         }
 
         .video-stat-item {
-            background: rgba(19, 47, 76, 0.6);
+            background: rgba(255, 255, 255, 0.65);
             padding: 35px 25px;
             border-radius: 12px;
-            border: 1px solid rgba(0, 217, 255, 0.2);
-            transition: all 0.4s ease;
+            border: 2px solid rgba(117, 25, 124, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .video-stat-item:hover {
-            transform: translateY(-8px);
-            border-color: var(--teal-accent);
-            box-shadow: 0 12px 32px rgba(0, 217, 255, 0.3);
-            background: rgba(19, 47, 76, 0.8);
+            border-color: #75197c;
+            box-shadow: 0 12px 32px rgba(117, 25, 124, 0.4);
+            background: rgba(255, 255, 255, 1);
         }
 
         .video-stat-value {
@@ -312,17 +567,14 @@
             font-weight: 800;
             display: block;
             margin-bottom: 8px;
-            background: linear-gradient(135deg, var(--teal-accent), var(--cyan-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #75197c;
             text-shadow: none;
         }
 
         .video-stat-label {
             font-size: 1em;
-            color: var(--light-gray);
-            font-weight: 500;
+            color: #2d2d2d;
+            font-weight: 600;
         }
 
         @media (max-width: 1024px) {
@@ -362,87 +614,359 @@
             }
         }
 
-        /* Executive Summary */
+        /* Executive Summary - Professional Report Style */
         .executive-summary {
-            background: rgba(10, 25, 41, 0.35);
-            padding: 80px 60px;
-            border-bottom: 1px solid var(--border-color);
-            max-width: 1400px;
-            margin: 0 auto;
+            background:
+                radial-gradient(circle at 95% 15%, rgba(117, 25, 124, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 90% 85%, rgba(139, 37, 145, 0.04) 0%, transparent 30%),
+                linear-gradient(135deg, #ffffff 0%, #fafafa 100%) !important;
+            padding: 80px 0 !important;
+            position: relative !important;
+            overflow: hidden !important;
         }
 
-        .summary-title {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 40px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid var(--teal-accent);
-            display: inline-block;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .summary-item {
-            background: var(--dark-charcoal);
-            padding: 35px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .summary-item::before {
+        /* Large purple curved shape from right with pattern */
+        .executive-summary::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--teal-accent), var(--cyan-accent));
-        }
-
-        .summary-item.animate {
+            width: 60%;
+            height: 100%;
+            background:
+                url('backgrounds/pattern.svg'),
+                linear-gradient(to left, rgba(117, 25, 124, 0.12), rgba(139, 37, 145, 0.08) 50%, transparent);
+            background-size: 120px 120px, 100%;
+            background-position: right center, right center;
+            background-repeat: repeat, no-repeat;
             opacity: 1;
-            transform: translateY(0);
+            filter: saturate(1.5) contrast(1.2);
+            z-index: 0;
         }
 
-        .summary-item h3 {
-            font-size: 1.2em;
+        /* Purple overlay to make pattern visible */
+        .executive-summary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(to left, rgba(117, 25, 124, 0.15), rgba(139, 37, 145, 0.08) 40%, transparent);
+            mix-blend-mode: multiply;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .summary-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Floating decorative circles */
+        .summary-decoration {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .summary-decoration-1 {
+            top: 15%;
+            right: 8%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(117, 25, 124, 0.08) 0%, transparent 70%);
+            border: 2px solid rgba(117, 25, 124, 0.1);
+        }
+
+        .summary-decoration-2 {
+            top: 60%;
+            right: 15%;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(139, 37, 145, 0.06) 0%, transparent 70%);
+            border: 2px solid rgba(139, 37, 145, 0.08);
+        }
+
+        .summary-decoration-3 {
+            top: 35%;
+            right: 3%;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(154, 61, 159, 0.07) 0%, transparent 70%);
+        }
+
+        .summary-decoration-4 {
+            bottom: 20%;
+            right: 20%;
+            width: 100px;
+            height: 100px;
+            background:
+                conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(117, 25, 124, 0.05) 90deg, transparent 180deg, rgba(117, 25, 124, 0.05) 270deg, transparent 360deg);
+            border-radius: 50%;
+        }
+
+        /* Diagonal accent line */
+        .summary-accent-line {
+            position: absolute;
+            top: 0;
+            right: 25%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(117, 25, 124, 0.1) 20%, rgba(117, 25, 124, 0.1) 80%, transparent 100%);
+            z-index: 0;
+        }
+
+        /* Diagonal stripes background on left */
+        .summary-stripes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100%;
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(117, 25, 124, 0.015) 20px,
+                    rgba(117, 25, 124, 0.015) 40px
+                );
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        .summary-header {
+            border-right: 5px solid #75197c;
+            padding-right: 30px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .summary-header::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 0;
+            width: 25px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(117, 25, 124, 0.15), transparent);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .summary-title {
+            font-size: 2.8em !important;
+            font-weight: 700 !important;
+            color: #75197c !important;
+            margin-bottom: 12px !important;
+            letter-spacing: -0.5px !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .summary-subtitle {
+            font-size: 1.15em;
+            color: #666;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .summary-content {
+            position: relative;
+        }
+
+        .summary-paragraph {
+            font-size: 1.1em;
+            line-height: 2;
+            color: #333;
+            margin-bottom: 50px;
+            text-align: justify;
+        }
+
+        .summary-paragraph strong {
+            color: #F59E0B;
+            font-weight: 900;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            letter-spacing: 0.3px;
+        }
+
+        .summary-highlights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            margin: 60px 0;
+            border-top: 3px solid transparent;
+            border-image: linear-gradient(to left, #75197c, #b894bd, transparent) 1;
+            border-bottom: 3px solid transparent;
+            border-image-slice: 1;
+            padding: 50px 0;
+            background: linear-gradient(135deg, rgba(117, 25, 124, 0.02) 0%, transparent 50%);
+            position: relative;
+        }
+
+        .highlight-item {
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        /* Featured highlight box with purple background */
+        .highlight-item.featured {
+            background: linear-gradient(135deg, #75197c 0%, #8b2591 100%);
+            border-radius: 15px;
+            padding: 35px 20px;
+            box-shadow: 0 15px 40px rgba(117, 25, 124, 0.25);
+            transform: scale(1.05);
+            margin: 0 15px;
+        }
+
+        .highlight-item.featured .highlight-number {
+            background: white !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .highlight-item.featured .highlight-label {
+            color: white !important;
             font-weight: 600;
-            color: var(--teal-accent);
-            margin-bottom: 15px;
         }
 
-        .summary-item p {
-            font-size: 0.95em;
-            line-height: 1.8;
-            color: var(--text-secondary);
+        /* Featured highlight with yellow text */
+        .highlight-item.featured-yellow .highlight-number {
+            background: linear-gradient(135deg, #FFB800 0%, #FDB913 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
+        .highlight-item.featured-yellow .highlight-label {
+            color: #555;
+            font-weight: 500;
+        }
+
+        .highlight-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, #75197c, transparent);
+        }
+
+        .highlight-item.featured::after {
+            display: none;
+        }
+
+        .highlight-number {
+            font-size: 3.8em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #75197c 0%, #8b2591 50%, #9a3d9f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .highlight-label {
+            font-size: 1em;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .summary-sections {
+            margin-top: 50px;
+        }
+
+        .summary-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            padding-right: 35px;
+            background: linear-gradient(to left, rgba(117, 25, 124, 0.02), transparent 60%);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .summary-section::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #75197c, #b894bd);
+            border-radius: 4px;
+        }
+
+        .summary-section-title {
+            font-size: 1.3em !important;
+            font-weight: 700 !important;
+            color: #75197c !important;
+            margin-bottom: 15px !important;
+            position: relative !important;
+            padding-right: 0 !important;
+        }
+
+        .summary-section-text {
+            font-size: 1.05em;
+            line-height: 1.9;
+            color: #555;
+            text-align: justify;
+        }
+
+        .summary-section-text strong {
+            color: #F59E0B;
+            font-weight: 900;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            letter-spacing: 0.3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .summary-container {
+                padding: 0 30px;
+            }
+
+            .summary-highlights {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .highlight-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .summary-title {
+                font-size: 2em !important;
+            }
+
+            .highlight-number {
+                font-size: 2.5em;
+            }
         }
 
         /* KPI Section */
         .kpi-section {
             padding: 80px 60px;
-            background: rgba(19, 47, 76, 0.45);
+            background: var(--bg-white);
             max-width: 1400px;
             margin: 0 auto;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .section-header {
             margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-
-        .section-header.animate {
             opacity: 1;
             transform: translateY(0);
         }
@@ -467,15 +991,13 @@
         }
 
         .kpi-card {
-            background: var(--dark-navy);
-            border: 1px solid var(--border-color);
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
             padding: 40px 30px;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 8px;
-            opacity: 0;
-            transform: translateY(20px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            opacity: 1;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             position: relative;
             overflow: hidden;
         }
@@ -486,21 +1008,14 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--teal-accent), var(--cyan-accent));
+            height: 4px;
+            background: linear-gradient(90deg, var(--libyana-primary), var(--libyana-accent));
             transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .kpi-card.animate {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .kpi-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0, 217, 255, 0.2);
-            border-color: var(--teal-accent);
+            box-shadow: 0 8px 24px rgba(117, 25, 124, 0.15);
+            border-color: var(--libyana-primary);
         }
 
         .kpi-card:hover::before {
@@ -512,22 +1027,21 @@
             margin-bottom: 20px;
             display: inline-block;
             padding: 18px;
-            width: 75px;
-            height: 75px;
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(0, 188, 212, 0.1));
+            width: 70px;
+            height: 70px;
+            background: var(--bg-light-purple);
             border-radius: 50%;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid rgba(0, 217, 255, 0.2);
+            border: 2px solid var(--border-purple);
         }
 
         .kpi-icon img {
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             object-fit: contain;
-            filter: brightness(0) saturate(100%) invert(79%) sepia(96%) saturate(2841%) hue-rotate(157deg) brightness(104%) contrast(106%);
+            filter: brightness(0) saturate(100%) invert(18%) sepia(89%) saturate(2698%) hue-rotate(285deg) brightness(92%) contrast(93%);
         }
 
         .kpi-card:hover .kpi-icon {
@@ -562,7 +1076,6 @@
             padding: 8px 16px;
             background: rgba(0, 230, 118, 0.15);
             border-radius: 20px;
-            transition: all 0.3s ease;
             border: 1px solid rgba(0, 230, 118, 0.3);
         }
 
@@ -573,7 +1086,6 @@
         }
 
         .kpi-card:hover .kpi-change {
-            transform: scale(1.05);
         }
 
         /* Data Table */
@@ -587,50 +1099,44 @@
 
         .data-table {
             width: 100%;
-            background: var(--dark-charcoal);
-            border: 1px solid var(--border-color);
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
             border-collapse: collapse;
             margin-top: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-            border-radius: 8px;
+            opacity: 1;
+            transform: translateY(0);
+            border-radius: 16px;
             overflow: hidden;
         }
 
-        .data-table.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         .data-table thead {
-            background: linear-gradient(135deg, var(--dark-blue), var(--dark-charcoal));
-            color: var(--white);
+            background: linear-gradient(135deg, var(--bg-light-purple), var(--bg-cream));
+            color: var(--text-primary);
         }
 
         .data-table th {
             padding: 18px;
             text-align: right;
-            font-weight: 600;
-            font-size: 0.95em;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid var(--teal-accent);
+            font-weight: 700;
+            font-size: 0.9em;
+            letter-spacing: 0.3px;
+            border-bottom: 2px solid var(--libyana-primary);
         }
 
         .data-table td {
             padding: 18px;
             text-align: right;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.95em;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.92em;
             color: var(--text-secondary);
         }
 
         .data-table tbody tr:hover {
-            background: var(--dark-blue);
+            background: var(--bg-light-purple);
         }
 
         .data-table strong {
-            color: var(--teal-accent);
+            color: var(--libyana-primary);
             font-weight: 600;
         }
 
@@ -647,9 +1153,10 @@
         /* Charts */
         .charts-section {
             padding: 80px 60px;
-            background: rgba(19, 47, 76, 0.45);
+            background: var(--bg-white);
             max-width: 1400px;
             margin: 0 auto;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .chart-grid {
@@ -675,25 +1182,23 @@
         }
 
         .chart-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            height: 350px;
+            max-height: 350px;
+            position: relative;
+        }
+
+        .chart-wrapper canvas {
+            max-height: 350px !important;
         }
 
         .chart-card {
-            background: var(--dark-navy);
-            border: 1px solid var(--border-color);
-            padding: 35px;
-            border-radius: 8px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .chart-card.animate {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            padding: 40px;
+            border-radius: 16px;
             opacity: 1;
             transform: translateY(0);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
         }
 
         .chart-card.full-width {
@@ -703,17 +1208,11 @@
         .chart-explanation {
             padding: 25px;
             direction: rtl;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
+            opacity: 1;
+            transform: translateY(0);
             background: var(--dark-blue);
             border-radius: 8px;
             border: 1px solid var(--border-color);
-        }
-
-        .chart-explanation.animate {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .chart-explanation h4 {
@@ -760,37 +1259,125 @@
 
         /* Footer */
         .footer {
-            background: rgba(26, 41, 66, 0.5);
-            color: var(--white);
+            background: var(--bg-white);
+            color: var(--text-secondary);
             padding: 50px 60px;
             text-align: center;
-            font-size: 0.95em;
-            border-top: 2px solid var(--border-color);
+            font-size: 0.9em;
+            border-top: 2px solid var(--border-purple);
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .footer p {
-            opacity: 0.8;
+            opacity: 0.9;
             margin: 8px 0;
         }
 
         .footer strong {
-            color: var(--teal-accent);
+            color: var(--libyana-primary);
+            font-weight: 700;
         }
 
-        /* Watermark */
-        .watermark {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, var(--teal-accent), var(--cyan-accent));
-            color: var(--dark-navy);
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 0.85em;
+        /* Product Card Styles */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .product-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--libyana-primary), var(--libyana-accent));
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 24px rgba(117, 25, 124, 0.12);
+            border-color: var(--libyana-primary);
+        }
+
+        .product-title {
+            font-size: 1.05em;
             font-weight: 700;
-            opacity: 0.95;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+            color: var(--libyana-primary);
+            margin-bottom: 12px;
+            padding-top: 8px;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: var(--bg-light-purple);
+            color: var(--libyana-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .product-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88em;
+            color: var(--text-secondary);
+        }
+
+        .product-status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .status-planning {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .status-progress {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .quarter-header {
+            margin: 40px 0 25px 0;
+            text-align: center;
+        }
+
+        .quarter-title {
+            font-size: 1.2em;
+            color: var(--libyana-primary);
+            font-weight: 700;
+            padding: 12px 28px;
+            background: var(--bg-light-purple);
+            border-radius: 30px;
+            display: inline-block;
+            border: 2px solid var(--border-purple);
         }
 
         /* Responsive */
@@ -815,30 +1402,749 @@
                 padding: 40px 30px;
             }
         }
+
+        /* === MODERN PROFESSIONAL DESIGN === */
+
+        /* Visual Section Headers */
+        .visual-section-header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title-large {
+            font-size: 2.8em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #75197c, #b894bd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #75197c, #b894bd);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* Large Stat Display */
+        .stat-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-number {
+            font-size: 4em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #75197c, #b894bd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.95em;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-change {
+            font-size: 0.85em;
+            color: #00C853;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Timeline Layout */
+        .timeline-container {
+            position: relative;
+            padding: 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 60px;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #75197c, #b894bd);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin: 60px 0;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 50%;
+            padding: 40px 45px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(117, 25, 124, 0.08);
+            position: relative;
+            min-height: 400px;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 35px;
+            width: 40px;
+            height: 3px;
+            background: #75197c;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -40px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -40px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #75197c;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 0 0 3px #75197c;
+            z-index: 10;
+        }
+
+        .timeline-quarter {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            background: #75197c;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9em;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .product-timeline-title {
+            font-size: 1.25em;
+            color: #75197c;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: #f8f5f9;
+            border-radius: 20px;
+            font-size: 0.82em;
+            color: #666;
+        }
+
+        .product-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .product-image-box {
+            aspect-ratio: 1;
+            background: #f8f5f9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #75197c;
+            font-size: 2em;
+            transition: all 0.3s ease;
+            border: 2px dashed #d0d0d0;
+            cursor: pointer;
+        }
+
+        .product-image-box:hover {
+            background: #75197c;
+            color: white;
+            border-color: #75197c;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(117, 25, 124, 0.2);
+        }
+
+        /* Timeline Section Background */
+        .timeline-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background:
+                url('backgrounds/pattern.svg'),
+                linear-gradient(to right, rgba(117, 25, 124, 0.08), rgba(139, 37, 145, 0.05) 50%, transparent);
+            background-size: 120px 120px, 100%;
+            background-position: left center, left center;
+            background-repeat: repeat, no-repeat;
+            opacity: 1;
+            filter: saturate(1.5) contrast(1.2);
+            z-index: 0;
+        }
+
+        .timeline-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background:
+                url('backgrounds/pattern.svg'),
+                linear-gradient(to left, rgba(117, 25, 124, 0.08), rgba(139, 37, 145, 0.05) 50%, transparent);
+            background-size: 120px 120px, 100%;
+            background-position: right center, right center;
+            background-repeat: repeat, no-repeat;
+            opacity: 1;
+            filter: saturate(1.5) contrast(1.2);
+            z-index: 0;
+        }
+
+        /* Projects Section Background */
+        .projects-section {
+            background:
+                radial-gradient(circle at 95% 15%, rgba(117, 25, 124, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 90% 85%, rgba(139, 37, 145, 0.04) 0%, transparent 30%),
+                linear-gradient(135deg, #ffffff 0%, #fafafa 100%) !important;
+            padding: 80px 0 !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        /* Large purple curved shape from right with pattern */
+        .projects-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background:
+                url('backgrounds/pattern.svg'),
+                linear-gradient(to left, rgba(117, 25, 124, 0.12), rgba(139, 37, 145, 0.08) 50%, transparent);
+            background-size: 120px 120px, 100%;
+            background-position: right center, right center;
+            background-repeat: repeat, no-repeat;
+            opacity: 1;
+            filter: saturate(1.5) contrast(1.2);
+            z-index: 0;
+        }
+
+        /* Purple overlay to make pattern visible */
+        .projects-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(to left, rgba(117, 25, 124, 0.15), rgba(139, 37, 145, 0.08) 40%, transparent);
+            mix-blend-mode: multiply;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Project Report Section */
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            padding: 40px 0;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card {
+            padding: 0;
+            padding-right: 100px;
+            padding-bottom: 50px;
+            position: relative;
+            margin-bottom: -3px;
+            margin-right: -20px;
+        }
+
+        .project-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-sidebar {
+            position: absolute;
+            top: 0;
+            right: -20px;
+            width: 80px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            color: white;
+            font-weight: 700;
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .project-card:nth-child(odd) .project-sidebar {
+            background: #5a1460;
+        }
+
+        .project-card:nth-child(even) .project-sidebar {
+            background: #75197c;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .project-title {
+            font-size: 1.8em;
+            color: #75197c;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .project-status {
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-status.in-progress {
+            color: #1976D2;
+        }
+
+        .project-status.completed {
+            color: #00C853;
+        }
+
+        .project-status.planning {
+            color: #F57C00;
+        }
+
+        .project-description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            font-size: 1em;
+            text-align: justify;
+        }
+
+        .project-stats {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+            margin-bottom: 35px;
+            padding: 30px 0;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .project-stat {
+            text-align: center;
+            flex: 1;
+            background: rgba(255, 184, 0, 0.08);
+            padding: 25px 20px;
+            border-radius: 8px;
+        }
+
+        .project-stat-value {
+            font-size: 2.2em;
+            font-weight: 900;
+            color: #F59E0B;
+            margin-bottom: 8px;
+        }
+
+        .project-stat-label {
+            font-size: 0.85em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-timeline {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 35px;
+            padding: 0;
+            background: transparent;
+            border: none;
+        }
+
+        .project-timeline-icon {
+            font-size: 1.2em;
+            color: #75197c;
+        }
+
+        .project-timeline-info {
+            flex: 1;
+        }
+
+        .project-timeline-label {
+            font-size: 0.75em;
+            color: #999;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-timeline-dates {
+            font-size: 1em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .project-progress {
+            margin-bottom: 35px;
+        }
+
+        .project-progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .project-progress-label {
+            font-size: 0.75em;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-progress-percentage {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #75197c;
+        }
+
+        .project-progress-track {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        .project-progress-fill {
+            height: 100%;
+            background: #75197c;
+            border-radius: 0;
+        }
+
+        .project-images {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+            margin-bottom: 35px;
+            grid-auto-rows: 250px;
+        }
+
+        .project-image-box {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 2em;
+            overflow: hidden;
+            border-radius: 8px;
+            grid-column: span 2;
+            height: 250px;
+        }
+
+        /* Make the 4th and 5th images wider to fill the second row */
+        .project-images .project-image-box:nth-child(4),
+        .project-images .project-image-box:nth-child(5) {
+            grid-column: span 3;
+        }
+
+        .project-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        /* Focus on upper part of the second image */
+        .project-images .project-image-box:nth-child(2) img {
+            object-position: center top;
+        }
+
+        /* Make My Libyana (Project 1) images wider - 2 images filling full width */
+        .projects-grid .project-card:nth-child(1) .project-image-box {
+            grid-column: span 3;
+        }
+
+        /* Make Khales (Project 2) single image full width */
+        .projects-grid .project-card:nth-child(2) .project-image-box {
+            grid-column: span 6;
+        }
+
+        .project-team {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0;
+            border: none;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .project-team-icon {
+            font-size: 1em;
+            color: #75197c;
+        }
+
+        /* Icon Grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 40px;
+            padding: 40px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .icon-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .icon-item:hover {
+        }
+
+        .icon-visual {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #f8f5f9, #e8d5ea);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2em;
+        }
+
+        .icon-number {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: #75197c;
+            margin-bottom: 10px;
+        }
+
+        /* Progress Bars */
+        .progress-bar-container {
+            margin: 40px 0;
+        }
+
+        .progress-bar-item {
+            margin: 30px 0;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .progress-title {
+            font-weight: 600;
+            color: #2d2d2d;
+            font-size: 1.05em;
+        }
+
+        .progress-percentage {
+            font-weight: 700;
+            color: #75197c;
+            font-size: 1.1em;
+        }
+
+        .progress-track {
+            height: 14px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #75197c, #b894bd);
+            border-radius: 10px;
+        }
+
+        .icon-title {
+            font-size: 1em;
+            font-weight: 600;
+            color: #2d2d2d;
+            margin-bottom: 6px;
+        }
+
+        .icon-subtitle {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 12px 35px rgba(117, 25, 124, 0.15);
+        }
+
+        .feature-image {
+            height: 180px;
+            background: linear-gradient(135deg, #75197c, #b894bd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5em;
+            color: white;
+        }
+
+        .feature-content {
+            padding: 28px;
+        }
+
+        .feature-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2d2d2d;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 18px;
+            font-size: 0.95em;
+        }
+
+        .feature-stats {
+            display: flex;
+            gap: 25px;
+            padding-top: 18px;
+            border-top: 2px solid #f8f5f9;
+        }
+
+        .feature-stat {
+            flex: 1;
+        }
+
+        .feature-stat-number {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #75197c;
+        }
+
+        .feature-stat-label {
+            font-size: 0.75em;
+            color: #999;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
     <div class="page">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-top">
-                <div class="logo-section">
-                    <div class="logo-box">L</div>
-                    <div class="company-info">
-                        <h1>ليبيانا للهاتف المحمول</h1>
-                        <p>Libyana Mobile Phone</p>
-                    </div>
-                </div>
-                <div class="report-title-section">
-                    <h2>تقرير الأداء التجاري</h2>
-                    <p>نظرة شاملة على مؤشرات الأداء الرئيسية والنتائج المالية للقسم التجاري</p>
-                </div>
-                <div class="report-meta">
-                    <div class="year">2024</div>
-                    <p>التقرير السنوي</p>
-                </div>
+        <!-- Cover Section -->
+        <section class="cover-section">
+            <div class="cover-content">
+                <h1 class="cover-title">التقرير التجاري السنوي</h1>
+                <div class="cover-divider"></div>
+                <p class="cover-subtitle">ليبيانا للهاتف المحمول</p>
+                <div class="cover-year">2025</div>
             </div>
-        </header>
+            <div class="scroll-indicator">
+                <div class="scroll-indicator-icon"></div>
+                <div class="scroll-indicator-text">تصفح التقرير</div>
+            </div>
+        </section>
+
+        <!-- Transition Connector -->
+        <div class="transition-connector">
+            <p class="transition-tagline">نواصل المسيرة نحو <span class="highlight">التميز والريادة</span> في قطاع الاتصالات</p>
+        </div>
 
         <!-- Video Hero Section -->
         <section class="video-hero">
@@ -849,24 +2155,24 @@
             <div class="video-content">
                 <div class="video-header">
                     <h2>رحلة النجاح والتميز</h2>
-                    <p>نظرة شاملة على إنجازاتنا وتطورنا خلال عام 2024</p>
+                    <p>نظرة شاملة على إنجازاتنا وتطورنا خلال عام 2025</p>
                 </div>
                 <div class="video-stats">
                     <div class="video-stat-item">
-                        <span class="video-stat-value">2.46M</span>
+                        <span class="video-stat-value">7.0M</span>
                         <span class="video-stat-label">مشترك نشط</span>
                     </div>
                     <div class="video-stat-item">
-                        <span class="video-stat-value">850M</span>
+                        <span class="video-stat-value">2.58B</span>
                         <span class="video-stat-label">إيرادات (د.ل)</span>
                     </div>
                     <div class="video-stat-item">
-                        <span class="video-stat-value">95%</span>
-                        <span class="video-stat-label">تغطية 4G</span>
+                        <span class="video-stat-value">33</span>
+                        <span class="video-stat-label">ARPU (د.ل)</span>
                     </div>
                     <div class="video-stat-item">
-                        <span class="video-stat-value">92%</span>
-                        <span class="video-stat-label">رضا العملاء</span>
+                        <span class="video-stat-value">3.69M</span>
+                        <span class="video-stat-label">مشتركي باقات الإنترنت</span>
                     </div>
                 </div>
             </div>
@@ -874,235 +2180,373 @@
 
         <!-- Executive Summary -->
         <section class="executive-summary">
-            <h2 class="summary-title">الملخص التنفيذي</h2>
-            <div class="summary-grid">
-                <div class="summary-item">
-                    <h3>الأداء المالي</h3>
-                    <p>حقق القسم التجاري لعام 2024 إيرادات إجمالية بلغت 850 مليون دينار ليبي، بنمو 18.5% مقارنة بالعام السابق، مما يعكس قوة الأداء التشغيلي واستمرار النمو في جميع قطاعات الأعمال.</p>
+            <!-- Decorative Elements -->
+            <div class="summary-stripes"></div>
+            <div class="summary-decoration summary-decoration-1"></div>
+            <div class="summary-decoration summary-decoration-2"></div>
+            <div class="summary-decoration summary-decoration-3"></div>
+            <div class="summary-decoration summary-decoration-4"></div>
+            <div class="summary-accent-line"></div>
+
+            <div class="summary-container">
+                <div class="summary-header">
+                    <h2 class="summary-title">الملخص التنفيذي</h2>
+                    <p class="summary-subtitle">نظرة شاملة على الأداء التجاري والتشغيلي للقسم التجاري خلال عام 2025</p>
                 </div>
-                <div class="summary-item">
-                    <h3>قاعدة المشتركين</h3>
-                    <p>وصل عدد المشتركين النشطين إلى 2.46 مليون مشترك، بزيادة صافية قدرها 400 ألف مشترك خلال العام، مع الحفاظ على حصة سوقية رائدة بنسبة 42.5%.</p>
-                </div>
-                <div class="summary-item">
-                    <h3>البنية التحتية</h3>
-                    <p>تم توسيع شبكة 4G لتغطي 95% من السكان، مع إضافة 600 موقع خلوي جديد، مما أدى إلى تحسين جودة الخدمة ورضا العملاء بنسبة 92%.</p>
+
+                <div class="summary-content">
+                    <p class="summary-paragraph">
+                        سجل القسم التجاري في ليبيانا للهاتف المحمول نتائج استثنائية خلال عام 2025، حيث حقق نموًا ملحوظًا عبر جميع المؤشرات الرئيسية. وتعكس هذه الإنجازات التزام الشركة الراسخ بتقديم خدمات متميزة وحلول مبتكرة تلبي احتياجات السوق الليبي المتنامية، مع الحفاظ على مكانتها الريادية في قطاع الاتصالات.
+                    </p>
+
+                    <div class="summary-highlights">
+                        <div class="highlight-item featured">
+                            <div class="highlight-number">2.58B</div>
+                            <div class="highlight-label">إجمالي الإيرادات (د.ل)</div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-number">7.0M</div>
+                            <div class="highlight-label">المشتركون النشطون</div>
+                        </div>
+                        <div class="highlight-item">
+                            <div class="highlight-number">33</div>
+                            <div class="highlight-label">ARPU (د.ل)</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-sections">
+                        <div class="summary-section">
+                            <h3 class="summary-section-title">الأداء المالي والتشغيلي</h3>
+                            <p class="summary-section-text">
+                                حقق القسم التجاري إيرادات إجمالية بلغت <strong>2.58 مليار دينار ليبي</strong>، موزعة كالتالي: إيرادات الإنترنت <strong>1.56 مليار د.ل</strong>، إيرادات الصوت <strong>578 مليون د.ل</strong>، الخدمات المضافة <strong>154 مليون د.ل</strong>، وإيرادات الرسائل <strong>36 مليون د.ل</strong>. وجاء هذا الأداء نتيجة لتوسع قاعدة المشتركين وزيادة معدلات استهلاك خدمات البيانات، مع الحفاظ على مستويات عالية من الكفاءة التشغيلية.
+                            </p>
+                        </div>
+
+                        <div class="summary-section">
+                            <h3 class="summary-section-title">نمو قاعدة المشتركين</h3>
+                            <p class="summary-section-text">
+                                وصل عدد المشتركين النشطين إلى <strong>7 مليون مشترك</strong>، منهم <strong>3.69 مليون مشترك في باقات الإنترنت</strong>. وبلغ متوسط الإيراد لكل مشترك (ARPU) <strong>33 دينار ليبي</strong>. وقد ساهمت استراتيجيات التسويق المبتكرة وتحسين جودة الخدمة في تعزيز الحصة السوقية للشركة وزيادة ولاء العملاء.
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- KPI Section -->
+        <!-- Section 1: خريطة المنتجات الخاصة 2025 -->
+        <section class="kpi-section timeline-section">
+            <div class="visual-section-header">
+                <h1 class="section-title-large">خريطة المنتجات 2025</h1>
+                <p class="section-subtitle">رحلة الابتكار والتطوير على مدار العام</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <!-- Q1 Products -->
+                <div class="timeline-item">
+                    <div class="timeline-quarter">الربع الأول</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">باقة بيانات لامحدودة 5G</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">📦 باقات البيانات</span>
+                            <span class="meta-badge">👥 الأفراد - VIP</span>
+                            <span class="meta-badge">📅 يناير 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">إطلاق باقة بيانات فائقة السرعة مع تغطية 5G كاملة للعملاء المميزين في المدن الرئيسية</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">باقة العائلة الذكية</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">👨‍👩‍👧‍👦 الباقات العائلية</span>
+                            <span class="meta-badge">📅 فبراير 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">حلول متكاملة للعائلات مع مزايا مشاركة البيانات والمكالمات المجانية</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">خدمة الدفع الإلكتروني</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">💳 الخدمات الرقمية</span>
+                            <span class="meta-badge">🌍 جميع المشتركين</span>
+                            <span class="meta-badge">📅 مارس 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">منصة دفع إلكتروني آمنة متكاملة مع جميع الخدمات المصرفية</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2 Products -->
+                <div class="timeline-item">
+                    <div class="timeline-quarter">الربع الثاني</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">تطبيق ليبيانا TV</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">🎬 الترفيه الرقمي</span>
+                            <span class="meta-badge">📅 أبريل 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">منصة بث رقمية شاملة للمحتوى المحلي والعالمي مع خدمة البث المباشر</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">باقة الطلاب الذكية</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">🎓 باقات خاصة</span>
+                            <span class="meta-badge">📅 مايو 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">عروض تعليمية خاصة للطلاب مع وصول مجاني للمنصات التعليمية</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">خدمة التخزين السحابي</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">☁️ الخدمات الرقمية</span>
+                            <span class="meta-badge">📅 يونيو 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">مساحة تخزين سحابية آمنة مع نسخ احتياطي تلقائي</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3 Products -->
+                <div class="timeline-item">
+                    <div class="timeline-quarter">الربع الثالث</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">باقة الألعاب الإلكترونية</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">🎮 الترفيه الرقمي</span>
+                            <span class="meta-badge">📅 يوليو 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">باقة مخصصة للاعبين مع سرعات فائقة ومنع التأخير</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">خدمة IoT للمؤسسات</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">🔗 إنترنت الأشياء</span>
+                            <span class="meta-badge">📅 أغسطس 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">حلول متقدمة لربط الأجهزة الذكية وإدارة البيانات</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4 Products -->
+                <div class="timeline-item">
+                    <div class="timeline-quarter">الربع الرابع</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">منصة الصحة الرقمية</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">🏥 الصحة الإلكترونية</span>
+                            <span class="meta-badge">📅 أكتوبر 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">منصة رقمية للاستشارات الطبية عن بعد وإدارة السجلات الصحية</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="product-timeline-title">خدمة الأمن السيبراني</h3>
+                        <div class="product-meta">
+                            <span class="meta-badge">🔒 الأمن الرقمي</span>
+                            <span class="meta-badge">📅 ديسمبر 2025</span>
+                        </div>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">حماية متقدمة ضد التهديدات السيبرانية للمؤسسات</p>
+                        <div class="product-images">
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">📷</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: خارطة منتجات 2026 -->
         <section class="kpi-section">
-            <div class="section-header">
-                <h2>مؤشرات الأداء الرئيسية</h2>
-                <p>نتائج عام 2024 مقارنة بالعام السابق</p>
+            <div class="visual-section-header">
+                <h1 class="section-title-large">خارطة منتجات 2026</h1>
+                <p class="section-subtitle">الرؤية الاستراتيجية للمنتجات والخدمات</p>
+                <div class="section-divider"></div>
             </div>
 
-            <!-- Financial Performance Indicators -->
-            <div class="section-header" style="margin-top: 40px;">
-                <h2 style="font-size: 1.4em; color: var(--libyana-primary);">أداء المؤشرات المالية</h2>
-            </div>
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/revenue 01.png" alt="Revenue Icon"></div>
-                    <div class="kpi-value" data-target="850">0</div>
-                    <div class="kpi-label">إجمالي الإيرادات (مليون د.ل)</div>
-                    <div class="kpi-change">↑ 18.5%</div>
+            <div class="stat-showcase">
+                <div class="stat-item">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">منتجات مخططة</div>
+                    <div class="stat-change">↑ 33%</div>
                 </div>
 
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/Graph.png" alt="Graph Icon"></div>
-                    <div class="kpi-value" data-target="235">0</div>
-                    <div class="kpi-label">إيرادات الربع الرابع (مليون د.ل)</div>
-                    <div class="kpi-change">↑ 4.4%</div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">منتجات رقمية</div>
+                    <div class="stat-change">↑ 50%</div>
                 </div>
 
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/avg Graph.png" alt="Market Share Icon"></div>
-                    <div class="kpi-value" data-target="42.5" data-decimals="1">0</div>
-                    <div class="kpi-label">حصّة السوق (%)</div>
-                    <div class="kpi-change">↑ 3.2%</div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">خدمات 5G متقدمة</div>
+                    <div class="stat-change">جديد</div>
                 </div>
 
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/revenue 02.png" alt="Profit Icon"></div>
-                    <div class="kpi-value" data-target="2850">0</div>
-                    <div class="kpi-label">الأرباح</div>
-                    <div class="kpi-change">↑ 26.6%</div>
+                <div class="stat-item">
+                    <div class="stat-number">450M</div>
+                    <div class="stat-label">الإيرادات المتوقعة</div>
+                    <div class="stat-change">↑ 42%</div>
                 </div>
             </div>
 
-            <!-- Subscriber Base Indicators -->
-            <div class="section-header" style="margin-top: 40px;">
-                <h2 style="font-size: 1.4em; color: var(--libyana-primary);">مؤشرات قاعدة المشتركين</h2>
-            </div>
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/Users.png" alt="Users Icon"></div>
-                    <div class="kpi-value" data-target="2465000">0</div>
-                    <div class="kpi-label">إجمالي المشتركين</div>
-                    <div class="kpi-change">↑ 16.3%</div>
-                </div>
-
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/Diamond.png" alt="ARPU Icon"></div>
-                    <div class="kpi-value" data-target="95">0</div>
-                    <div class="kpi-label">متوسط الإيرادات للمستخدم (ARPU) (د.ل)</div>
-                    <div class="kpi-change">↑ 5.5%</div>
-                </div>
-
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/Star.png" alt="Satisfaction Icon"></div>
-                    <div class="kpi-value" data-target="92" data-suffix="%">0%</div>
-                    <div class="kpi-label">مؤشر رضا المشتركين</div>
-                    <div class="kpi-change">↑ 3.5%</div>
-                </div>
-
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/Indicator 01.png" alt="Churn Icon"></div>
-                    <div class="kpi-value" data-target="1.9" data-decimals="1" data-suffix="%">0%</div>
-                    <div class="kpi-label">معدل الانحسار الشهري (Churn)</div>
-                    <div class="kpi-change">↓ 0.9%</div>
-                </div>
-            </div>
-
-            <!-- Usage and Consumption Indicators -->
-            <div class="section-header" style="margin-top: 40px;">
-                <h2 style="font-size: 1.4em; color: var(--libyana-primary);">مؤشرات الاستخدام والاستهلاك</h2>
-            </div>
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/4G.png" alt="Data Icon"></div>
-                    <div class="kpi-value" data-target="26.5" data-decimals="1">0</div>
-                    <div class="kpi-label">متوسط استهلاك البيانات (جيجابايت)</div>
-                    <div class="kpi-change">↑ 112%</div>
-                </div>
-            </div>
-
-            <!-- Network Performance Indicators -->
-            <div class="section-header" style="margin-top: 40px;">
-                <h2 style="font-size: 1.4em; color: var(--libyana-primary);">مؤشرات أداء الشبكة</h2>
-            </div>
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/Tower.png" alt="Network Coverage Icon"></div>
-                    <div class="kpi-value" data-target="95" data-suffix="%">0%</div>
-                    <div class="kpi-label">تغطية شبكة 4G</div>
-                    <div class="kpi-change">↑ 10%</div>
-                </div>
-
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/Indicator 02.png" alt="Speed Icon"></div>
-                    <div class="kpi-value" data-target="45">0</div>
-                    <div class="kpi-label">متوسط سرعة 4G (Mbps)</div>
-                    <div class="kpi-change">↑ 80%</div>
-                </div>
-            </div>
-
-            <!-- Digital Transformation Indicators -->
-            <div class="section-header" style="margin-top: 40px;">
-                <h2 style="font-size: 1.4em; color: var(--libyana-primary);">مؤشرات التحول الرقمي وقنوات الخدمة</h2>
-            </div>
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-icon"><img src="icons/App Users.png" alt="App Users Icon"></div>
-                    <div class="kpi-value" data-target="1850000">0</div>
-                    <div class="kpi-label">عدد مستخدمي التطبيق</div>
-                    <div class="kpi-change">↑ 35.2%</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Charts Section -->
-        <section class="charts-section">
-            <div class="section-header">
-                <h2>التحليلات المالية والتشغيلية</h2>
-                <p>رسوم بيانية توضح اتجاهات الأداء خلال عام 2024</p>
-            </div>
-
-            <div class="chart-grid">
-                <!-- Revenue and Subscribers Charts - Page 1 -->
-                <div class="chart-row">
-                    <div class="chart-wrapper">
-                        <div class="chart-card">
-                            <h3 class="chart-title">الإيرادات الفصلية (مليون د.ل)</h3>
-                            <div class="chart-container">
-                                <canvas id="revenueChart"></canvas>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-image">🚀</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">التحول الرقمي والخدمات الذكية</h3>
+                        <p class="feature-description">مبادرات استراتيجية لتحويل الأعمال إلى منصة رقمية متكاملة مع خدمات ذكية مبتكرة تلبي احتياجات العملاء المتطورة</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">8</div>
+                                <div class="feature-stat-label">منتجات</div>
                             </div>
-                        </div>
-                        <div class="chart-explanation">
-                            <h4>نمو مستدام في الإيرادات</h4>
-                            <p>شهد عام 2024 نموًا متواصلًا في الإيرادات الفصلية، حيث ارتفعت من 185 مليون دينار في الربع الأول إلى 235 مليون في الربع الرابع.</p>
-                            <div class="highlight">
-                                <strong>النقطة الرئيسية:</strong> نمو سنوي بنسبة <strong>18.5%</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chart-wrapper">
-                        <div class="chart-card">
-                            <h3 class="chart-title">نمو قاعدة المشتركين</h3>
-                            <div class="chart-container">
-                                <canvas id="subscriberChart"></canvas>
-                            </div>
-                        </div>
-                        <div class="chart-explanation">
-                            <h4>توسع قاعدة المشتركين</h4>
-                            <p>حققت ليبيانا نموًا قويًا في قاعدة المشتركين خلال عام 2024، حيث ارتفع العدد من 2.15 مليون إلى 2.46 مليون.</p>
-                            <div class="highlight">
-                                <strong>إنجاز رئيسي:</strong> إضافة <strong>400,000</strong> مشترك جديد
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">180M</div>
+                                <div class="feature-stat-label">عائد متوقع</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Service Revenue and Data Usage Charts - Page 2 -->
-                <div class="chart-row">
-                    <div class="chart-wrapper">
-                        <div class="chart-card">
-                            <h3 class="chart-title">توزيع الإيرادات حسب الخدمة</h3>
-                            <div class="chart-container">
-                                <canvas id="serviceChart"></canvas>
+                <div class="feature-card">
+                    <div class="feature-image">📡</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">شبكات الجيل الخامس 5G</h3>
+                        <p class="feature-description">توسيع نطاق تغطية 5G لتشمل جميع المدن الرئيسية مع سرعات فائقة وزمن استجابة منخفض للغاية</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">6</div>
+                                <div class="feature-stat-label">منتجات</div>
                             </div>
-                        </div>
-                        <div class="chart-explanation">
-                            <h4>تحول نحو الخدمات الرقمية</h4>
-                            <p>تُظهر البيانات تحولاً واضحاً في هيكل الإيرادات، حيث أصبحت خدمات البيانات المصدر الأول للدخل بنسبة 45%.</p>
-                            <div class="highlight">
-                                <strong>التوجه الاستراتيجي:</strong> الاستثمار في البنية التحتية للبيانات
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chart-wrapper">
-                        <div class="chart-card">
-                            <h3 class="chart-title">معدلات استخدام البيانات (GB/شهر)</h3>
-                            <div class="chart-container">
-                                <canvas id="dataUsageChart"></canvas>
-                            </div>
-                        </div>
-                        <div class="chart-explanation">
-                            <h4>نمو متسارع في استهلاك البيانات</h4>
-                            <p>نما متوسط الاستهلاك الشهري من 12.5 GB في يناير إلى 26.5 GB في ديسمبر بزيادة 112%.</p>
-                            <div class="highlight">
-                                <strong>قوة الشبكة:</strong> قادرة على <strong>مضاعفة الاستهلاك</strong>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">210M</div>
+                                <div class="feature-stat-label">عائد متوقع</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Market Share Chart - Page 3 -->
-                <div class="chart-row single">
-                    <div class="chart-wrapper">
-                        <div class="chart-card">
-                            <h3 class="chart-title">الحصة السوقية (%)</h3>
-                            <div class="chart-container">
-                                <canvas id="marketShareChart"></canvas>
+                <div class="feature-card">
+                    <div class="feature-image">🔗</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">إنترنت الأشياء IoT</h3>
+                        <p class="feature-description">حلول متقدمة لربط ملايين الأجهزة الذكية في المنازل والمدن والمؤسسات لتحقيق الكفاءة القصوى</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">4</div>
+                                <div class="feature-stat-label">منتجات</div>
+                            </div>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">95M</div>
+                                <div class="feature-stat-label">عائد متوقع</div>
                             </div>
                         </div>
-                        <div class="chart-explanation">
-                            <h4>المقارنة مع المنافسين</h4>
-                            <p>تحتفظ ليبيانا بالصدارة في السوق الليبي بحصة 42.5%، محققة نمواً مستمراً من 35.8% عام 2020 إلى 42.5% عام 2024.</p>
-                            <div class="highlight">
-                                <strong>الريادة:</strong> الحفاظ على المركز الأول بفارق <strong>12.7%</strong> عن أقرب منافس
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">☁️</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">الحلول السحابية</h3>
+                        <p class="feature-description">منصات سحابية متطورة للمؤسسات مع قدرات تخزين ومعالجة عالية ومستويات أمان متقدمة</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">3</div>
+                                <div class="feature-stat-label">منتجات</div>
+                            </div>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">75M</div>
+                                <div class="feature-stat-label">عائد متوقع</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">🔒</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">الأمن السيبراني</h3>
+                        <p class="feature-description">خدمات أمنية شاملة لحماية البيانات والأنظمة من التهديدات السيبرانية المتطورة</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">3</div>
+                                <div class="feature-stat-label">منتجات</div>
+                            </div>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">90M</div>
+                                <div class="feature-stat-label">عائد متوقع</div>
                             </div>
                         </div>
                     </div>
@@ -1110,174 +2554,654 @@
             </div>
         </section>
 
-        <!-- Network Coverage Map -->
-        <section class="charts-section" style="background: var(--light-bg);">
-            <div class="section-header">
-                <h2>خريطة التغطية الجغرافية</h2>
-                <p>مواقع أبراج 4G وتوزيع التغطية عبر ليبيا</p>
+        <!-- Section 3: تقرير المشاريع والفرق التجارية -->
+        <section class="kpi-section projects-section">
+            <div class="visual-section-header">
+                <h1 class="section-title-large">المشاريع والفرق التجارية</h1>
+                <p class="section-subtitle">نظرة شاملة على المشاريع الجارية والأداء</p>
+                <div class="section-divider"></div>
             </div>
 
-            <div class="chart-row">
-                <div class="chart-card" style="grid-column: 1 / -1; max-width: 100%; margin: 0; padding: 30px 40px;">
-                    <h3 class="chart-title">شبكة التغطية 4G - ليبيانا</h3>
-                    <div id="libya-map-container" style="height: 700px; width: 100%; margin: 20px 0;"></div>
+            <h2 style="font-size: 2em; color: #75197c; font-weight: 700; margin: 60px 0 30px; text-align: center; position: relative; z-index: 2;">المشاريع الرئيسية الجارية</h2>
 
-                    <!-- Legend -->
-                    <div style="margin-top: 30px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 16px; height: 16px; background: #B8208B; border-radius: 50%; border: 2px solid white;"></div>
-                            <span style="font-size: 0.9em; color: #586069;">مدن رئيسية (500+ برج)</span>
+            <div class="projects-grid">
+                <!-- Project 1: My Libyana App Development -->
+                <div class="project-card">
+                    <div class="project-sidebar">تطبيق ماي ليبيانا</div>
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">فريق تطوير تطبيق ماي ليبيانا</h3>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 14px; height: 14px; background: #D946A6; border-radius: 50%; border: 2px solid white;"></div>
-                            <span style="font-size: 0.9em; color: #586069;">مدن كبرى (200-500 برج)</span>
+                        <div class="project-status in-progress">قيد التنفيذ</div>
+                    </div>
+
+                    <p class="project-description">تطبيق متكامل لإدارة حسابات ليبيانا مع خدمات متنوعة للدفع والتحكم بالاشتراكات</p>
+
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <div class="project-stat-value">34.98M</div>
+                            <div class="project-stat-label">الإيرادات الكلية خلال 25 أسبوع (د.ل)</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 12px; height: 12px; background: #E85BB8; border-radius: 50%; border: 2px solid white;"></div>
-                            <span style="font-size: 0.9em; color: #586069;">مدن متوسطة (<200 برج)</span>
+                        <div class="project-stat">
+                            <div class="project-stat-value">411,053</div>
+                            <div class="project-stat-label">عدد المستخدمين النشطين</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">أهم الإنجازات لفريق تطبيق ماي ليبيانا:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>إطلاق نسخة جديدة من لعبة الاشتراكات (ألعاب وجوائز) مع عرض الإجابات الصحيحة وسب المشتركين</li>
+                            <li>إطلاق خدمة خالص بالتطبيق وذلك بطرق دفع مختلفة (عبر رصيد ليبيانا أو الدفع الالكتروني)</li>
+                            <li>العمل على استكمال إضافة صفحة جديدة بالتطبيق تحت مسمى خدمات أخرى (Other Services)</li>
+                            <li>الخدمات الأساسية: خالص، Tour-eSIM، الكروت الدولية، شكل-1، VAS، WatchIT، StarzPlay</li>
+                            <li>إطلاق خدمة الشريحة الالكترونية بالمتجر الالكتروني (للاعتبارات أمن سيبراني + توعية المستخدمين)</li>
+                            <li>جاري العمل على إعادة تصميم وتنفيذ واجهة الاستخدام (UI) الخاصة بالتطبيق ومتجر ليبيانا (Mystore)</li>
+                            <li>تضمين أبواب جديدة وعصرية بالتطبيق بتضمين المصادقة باستخدام كل من: بصمة الأصبع و الوجه (Face ID/Finger ID) بالجوالي</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-images">
+                        <div class="project-image-box">
+                            <img src="pics/mylibyana1.png" alt="My Libyana App - صورة 1">
+                        </div>
+                        <div class="project-image-box">
+                            <img src="pics/mylibyana2.png" alt="My Libyana App - صورة 2">
                         </div>
                     </div>
                 </div>
 
-                <!-- Map Statistics -->
-                <div class="chart-explanation" style="grid-column: 1 / -1; margin-top: 30px;">
-                    <h4>التوزيع الجغرافي للبنية التحتية</h4>
-                    <p>تنتشر أبراج ليبيانا عبر جميع المناطق الليبية، مع تركيز على المدن الرئيسية والمناطق المأهولة بالسكان. تتميز شبكتنا بتغطية شاملة تصل إلى 95% من المناطق السكنية.</p>
-                    <p>يبلغ إجمالي الأبراج 2,850 برج، منها 1,200 برج في المنطقة الغربية، 700 برج في المنطقة الشرقية، و950 برج في المناطق الوسطى والجنوبية.</p>
-                    <div class="highlight">
-                        <strong>الإنجاز البارز:</strong> إضافة <strong>600 برج جديد</strong> خلال عام 2024، بزيادة 26.6% عن العام السابق، مما حسّن التغطية والجودة بشكل كبير.
+                <!-- Project 2: Electricity Bill Payment -->
+                <div class="project-card">
+                    <div class="project-sidebar">دفع فواتير الكهرباء</div>
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">مشروع دفع فواتير الكهرباء عن طريق رصيد ليبيانا - خالص</h3>
+                        </div>
+                        <div class="project-status in-progress">قيد التنفيذ</div>
+                    </div>
+
+                    <p class="project-description">خدمة دفع فواتير الكهرباء بواسطة رصيد ليبيانا من خلال قنوات متعددة</p>
+
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <div class="project-stat-value">44.74M</div>
+                            <div class="project-stat-label">الإيرادات الكلية لخدمة خالص (د.ل)</div>
+                        </div>
+                        <div class="project-stat">
+                            <div class="project-stat-value">2.59M</div>
+                            <div class="project-stat-label">أرباح ليبيانا من الخدمة (د.ل)</div>
+                        </div>
+                        <div class="project-stat">
+                            <div class="project-stat-value">500K-1M</div>
+                            <div class="project-stat-label">عدد الخطوط المسجلة النشطة</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">تقسيم الإيرادات:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li><strong>USSD:</strong> 44,425,803 د.ل</li>
+                            <li><strong>ماي ليبيانا:</strong> 110,490 د.ل</li>
+                            <li><strong>المصرف التجاري الوطني:</strong> 149,000 د.ل</li>
+                            <li><strong>مراكز مبيعات ليبيانا:</strong> 53,180 د.ل</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
+                        <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">خطة توسيع خدمة خالص:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>التجاري الوطني - <em>تم إطلاق الخدمة</em></li>
+                            <li>التجارة والتنمية - <em>تم توقيع العقد</em></li>
+                            <li>النوران - <em>تم عرض المشروع بالمصرف</em></li>
+                            <li>السراي - <em>تم عرض المشروع بالمصرف</em></li>
+                            <li>الجمهورية - <em>نسبة الإنجاز 95%</em></li>
+                            <li>الوفاء - <em>نسبة الإنجاز 95%</em></li>
+                        </ul>
+                    </div>
+
+                    <div class="project-images">
+                        <div class="project-image-box">
+                            <img src="pics/khales1.png" alt="Khales Service - خدمة خالص">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Electronic Wallet -->
+                <div class="project-card">
+                    <div class="project-sidebar">المحفظة الإلكترونية</div>
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">مشروع المحفظة الإلكترونية</h3>
+                        </div>
+                        <div class="project-status in-progress">قيد التنفيذ</div>
+                    </div>
+
+                    <p class="project-description">خدمة الدفع الآجل والمحفظة الإلكترونية بالشراكة مع المؤسسات المالية</p>
+
+                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">خدمة Buy Now Pay Later - المراجعة الإسلامية:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>تم عقد المشاركة مع شركة المكتب بتاريخ 11/12/2025</li>
+                            <li>على أن تكون العقود المرتوع توقيعها مع المصارف على هيئة ما</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
+                        <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">خدمة المحفظة الإلكترونية - ليبيانا باي:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>تم إجراء دراسة شاملة للمشروع وتقديمها من ضمن المستندات الخاصة به</li>
+                            <li>استكمال مرحلة الـ Technical Proposal وفي انتظار العرض التجاري</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-images">
+                        <div class="project-image-box">📷</div>
+                        <div class="project-image-box">📷</div>
+                        <div class="project-image-box">📷</div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Third to Fourth Generation Migration -->
+                <div class="project-card">
+                    <div class="project-sidebar">نقل المُمَكِّنِين 3G إلى 4G</div>
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">مشروع نقل المُمَكِّنِين من الجيل الثالث الرابع</h3>
+                        </div>
+                        <div class="project-status in-progress">قيد التنفيذ</div>
+                    </div>
+
+                    <p class="project-description">مشروع نقل المُمَكِّنِين من الجيل الثالث إلى الرابع لتحسين جودة الخدمة وزيادة الإيرادات</p>
+
+                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">أبرز ما تم تغطيته حتى الآن:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>تشغيل فريق عمل متخصص - تم تشغيل الفريق بتاريخ 21 يوليو 2025</li>
+                            <li>اختيار المشتركين المستهدفين: إعداد قائمة أساسية وقائمة احتياطية بخطوط 10,000 مشترك بناءً على معايير قيمة ولاء وتجربة مقنعة</li>
+                            <li>التواصل الفعال: إرسال أكثر من 10 رسائل نصية + 15% مكالمة صوتية لكل مشترك من سعر 1.50 ريال لكل 39 يوم عمل</li>
+                            <li>دعم التوزيع: إطلاق عروض خاصة من يوم 9 مايو 2025 وتوصيل 353 مع توصيل مجاني خلال الآن</li>
+                            <li>تحقيق نسبة استجابة قياسية: الوصول إلى 6000 مشترك منتجب من أصل المستهدفين، بنسبة نجاح 60%</li>
+                            <li>أثر مالي كبير: المشتركين المختارين يمثلون 2.7% من إجمالي مشتركي الجيل الثالث، وبساهمون بـ 9%-15% من الإيراد الشهري</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
+                        <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">الوضع الحالي والخطوات القادمة:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>متابعة تسليم الأجهزة المتبقية، حيث تحدد 1940 جهازاً</li>
+                            <li>مخاطبة 4444 مشترك من بين تسليم الأجهزة لهم</li>
+                            <li>إعداد تقرير في ديسمبر ومطبوع نهائي لتقييم النتائج المحلية</li>
+                            <li>توثيق الدروس المستفادة من الحملة خطوة بخطوة</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-images">
+                        <div class="project-image-box">
+                            <img src="pics/trans1.png" alt="3G to 4G Migration - Image 1">
+                        </div>
+                        <div class="project-image-box">
+                            <img src="pics/trans2.png" alt="3G to 4G Migration - Image 2">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: User Experience Improvement -->
+                <div class="project-card">
+                    <div class="project-sidebar">تحسين تجربة المستخدم</div>
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">مشروع تحسين تجربة المستخدم</h3>
+                        </div>
+                        <div class="project-status in-progress">قيد التنفيذ</div>
+                    </div>
+
+                    <p class="project-description">رفع كفاءة الفريق وحصولهم على شهادة دولية معتمدة من TMForum لتحسين جودة الخدمة</p>
+
+                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">أبرز ما تم تغطيته حتى الآن:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>رفع كفاءة الفريق وحصولهم على شهادة دولية معتمدة من TMForum مما يضمن عمل المشروع ضمن هندسة رقمية موحدة عالمياً</li>
+                            <li>تحديد مؤشرات الأداء للبيانا بعد 48 مؤشر رئيسي</li>
+                            <li>العمل على تقييم التفاعل الرقمية للبيانا مع وشراء الفرق والمشاريع الأخرى لكي يتم العمل بالتوازي ضمن رؤية ليبيانا والشركة القابضة</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
+                        <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">الوضع الحالي والخطوات القادمة:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>تفعيل نظام التذاكر بمركز مبيعات جنزو وبالتجارب كمرحلة أولى</li>
+                            <li>تحليل مؤشر NPS والوقوف على مستوى رضا المشتركين</li>
+                            <li>تطوير قياسات التطبيق بالتعاون مع فريق تطوير ماي ليبيانا</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-images">
+                        <div class="project-image-box">📷</div>
+                        <div class="project-image-box">📷</div>
+                        <div class="project-image-box">📷</div>
+                    </div>
+                </div>
+
+                <!-- Project 6: LibyanaHub Platform -->
+                <div class="project-card">
+                    <div class="project-sidebar">منصة LibyanaHub</div>
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">منصة LibyanaHub</h3>
+                        </div>
+                        <div class="project-status in-progress">قيد التنفيذ</div>
+                    </div>
+
+                    <p class="project-description">أول منصة لصناع المحتوى في ليبيا تمكن المبدعين من تحقيق الدخل من خبراتهم من خلال الاشتراكات، مع تكامل فريد للدفع برصيد الهاتف المحمول بدعم من ليبيانا.</p>
+
+                    <div class="project-stats">
+                        <div class="project-stat">
+                            <div class="project-stat-value">45</div>
+                            <div class="project-stat-label">يوم لبناء المنصة التجريبية</div>
+                        </div>
+                        <div class="project-stat">
+                            <div class="project-stat-value">18</div>
+                            <div class="project-stat-label">فيديو احترافي عبر 7 فئات</div>
+                        </div>
+                        <div class="project-stat">
+                            <div class="project-stat-value">200%</div>
+                            <div class="project-stat-label">نمو الفريق التقني</div>
+                        </div>
+                    </div>
+
+                    <div class="project-timeline">
+                        <div class="project-timeline-icon">📅</div>
+                        <div class="project-timeline-info">
+                            <div class="project-timeline-label">الجدول الزمني</div>
+                            <div class="project-timeline-dates">أكتوبر 2025 - الربع الثالث 2026</div>
+                        </div>
+                    </div>
+
+                    <div class="project-progress">
+                        <div class="project-progress-header">
+                            <span class="project-progress-label">نسبة الإنجاز</span>
+                            <span class="project-progress-percentage">35%</span>
+                        </div>
+                        <div class="project-progress-track">
+                            <div class="project-progress-fill" style="width: 35%;"></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">أبرز ما تم تغطيته حتى الآن:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>منصة تجريبية كاملة مع 3 رحلات مستخدم (زائر، مشترك، صانع محتوى)</li>
+                            <li>التحقق من السوق - معرض ديسمبر 2025: استحسان كبير من الزوار</li>
+                            <li>البنية التحتية التقنية - Google Cloud Platform جاهزة للعمل</li>
+                            <li>التغلب على التحديات رغم تأخر المعدات ونقص الأدوات</li>
+                            <li>45 يوم لبناء المنصة التجريبية مع 18 فيديو احترافي عبر 7 فئات</li>
+                            <li>نمو الفريق التقني بنسبة 200%</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
+                        <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">الوضع الحالي والخطوات القادمة:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li><strong>الحالة:</strong> على المسار الصحيح - الإطلاق المستهدف: الربع الثاني-الثالث 2026</li>
+                            <li><strong>يناير 2026:</strong> إتمام النموذج النهائي مع كافة تفاصيل واجهة المستخدم</li>
+                            <li><strong>فبراير 2026:</strong> ورش عمل مع صناع المحتوى - جمع الملاحظات وتحسين المنصة</li>
+                            <li><strong>مارس-يونيو 2026:</strong> التطوير الفعلي - المنصة الإلكترونية + تطبيقات الجوال (iOS & Android)</li>
+                            <li><strong>الربع الثاني-الثالث 2026:</strong> الإطلاق العام - حملة تسويقية شاملة لـ 5+ مليون مشترك ليبيانا</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-images">
+                        <div class="project-image-box">
+                            <img src="pics/1.JPG" alt="LibyanaHub Expo - صورة 1">
+                        </div>
+                        <div class="project-image-box">
+                            <img src="pics/2.jpg" alt="LibyanaHub Expo - صورة 2">
+                        </div>
+                        <div class="project-image-box">
+                            <img src="pics/3.JPG" alt="LibyanaHub Expo - صورة 3">
+                        </div>
+                        <div class="project-image-box">
+                            <img src="pics/4.JPG" alt="LibyanaHub Expo - صورة 4">
+                        </div>
+                        <div class="project-image-box">
+                            <img src="pics/5.JPG" alt="LibyanaHub Expo - صورة 5">
+                        </div>
+                    </div>
+
+                    <div class="project-team">
+                        <span>LibyanaHub Team</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Financial Performance Table -->
-        <section class="table-section">
-            <div class="section-header">
-                <h2>الأداء المالي التفصيلي</h2>
-                <p>مقارنة النتائج المالية الفصلية لعام 2024</p>
+        <!-- Section 4: تقرير قسم المؤسسات التجارية -->
+        <section class="b2b-cover-section">
+            <div class="visual-section-header">
+                <h1 class="section-title-large">قسم المؤسسات التجارية</h1>
+                <p class="section-subtitle">أداء قطاع الأعمال والمؤسسات</p>
+                <div class="section-divider"></div>
             </div>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>الربع</th>
-                        <th>الإيرادات (مليون د.ل)</th>
-                        <th>النمو الفصلي</th>
-                        <th>النمو السنوي</th>
-                        <th>الهامش الربحي</th>
-                        <th>ARPU (د.ل)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>الربع الأول</strong></td>
-                        <td>185</td>
-                        <td>-</td>
-                        <td class="positive">+15.6%</td>
-                        <td>24.3%</td>
-                        <td>86</td>
-                    </tr>
-                    <tr>
-                        <td><strong>الربع الثاني</strong></td>
-                        <td>205</td>
-                        <td class="positive">+10.8%</td>
-                        <td class="positive">+17.2%</td>
-                        <td>26.1%</td>
-                        <td>91</td>
-                    </tr>
-                    <tr>
-                        <td><strong>الربع الثالث</strong></td>
-                        <td>225</td>
-                        <td class="positive">+9.8%</td>
-                        <td class="positive">+19.5%</td>
-                        <td>27.8%</td>
-                        <td>96</td>
-                    </tr>
-                    <tr>
-                        <td><strong>الربع الرابع</strong></td>
-                        <td>235</td>
-                        <td class="positive">+4.4%</td>
-                        <td class="positive">+21.0%</td>
-                        <td>28.5%</td>
-                        <td>95</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="stat-showcase">
+                <div class="stat-item">
+                    <div class="stat-number">16.76M</div>
+                    <div class="stat-label">إجمالي الإيرادات 2025 (د.ل)</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">4.26M</div>
+                    <div class="stat-label">إيرادات ديسمبر (د.ل)</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">2.57M</div>
+                    <div class="stat-label">إيرادات يناير (د.ل)</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">2.32M</div>
+                    <div class="stat-label">إيرادات نوفمبر (د.ل)</div>
+                </div>
+            </div>
         </section>
 
-        <!-- Service Performance Table -->
-        <section class="table-section">
-            <div class="section-header">
-                <h2>أداء الخدمات التفصيلي</h2>
-                <p>مقارنة الأداء لجميع خطوط الخدمات</p>
+        <!-- Section 4b: B2B Details -->
+        <section class="kpi-section">
+            <h2 style="font-size: 2em; color: #75197c; font-weight: 700; margin: 60px 0 30px; text-align: center;">المؤسسات التي تم التعاقد معها</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-image">💻</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">منصة أكاديميا - Codemia</h3>
+                        <p class="feature-description">شريك استراتيجي في مجال التعليم التقني والبرمجة</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">🔧</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">شركة اكسيس تك - Excess Tech</h3>
+                        <p class="feature-description">حلول تقنية متطورة للتسويق الرسائل الدعائية</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">🎓</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">جامعة طرابلس</h3>
+                        <p class="feature-description">شبكات اتصال متطورة للبيئة التعليمية والبحثية</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">📱</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">شركة كاملة لتسويق الرسائل الدعائية</h3>
+                        <p class="feature-description">خدمات التسويق الإلكتروني والرسائل الجماعية</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">🏦</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">مصرف الأمان - Aman Bank</h3>
+                        <p class="feature-description">حلول اتصالات آمنة للقطاع المصرفي</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: تقرير الرؤية الاستراتيجية للقابضة -->
+        <section class="kpi-section">
+            <div class="visual-section-header">
+                <h1 class="section-title-large">الرؤية الاستراتيجية للقابضة</h1>
+                <p class="section-subtitle">الإنجازات المحققة من الرؤية الاستراتيجية 2023-2026</p>
+                <div class="section-divider"></div>
             </div>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>نوع الخدمة</th>
-                        <th>عدد المستخدمين</th>
-                        <th>الإيرادات (مليون د.ل)</th>
-                        <th>% من الإيرادات</th>
-                        <th>النمو السنوي</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>خدمات البيانات</strong></td>
-                        <td>2,450,000</td>
-                        <td>380</td>
-                        <td>44.7%</td>
-                        <td class="positive">+45.8%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>المكالمات الصوتية</strong></td>
-                        <td>2,465,000</td>
-                        <td>285</td>
-                        <td>33.5%</td>
-                        <td class="negative">-5.0%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>الرسائل النصية</strong></td>
-                        <td>2,120,000</td>
-                        <td>95</td>
-                        <td>11.2%</td>
-                        <td class="negative">-8.7%</td>
-                    </tr>
-                    <tr>
-                        <td><strong>خدمات القيمة المضافة</strong></td>
-                        <td>890,000</td>
-                        <td>90</td>
-                        <td>10.6%</td>
-                        <td class="positive">+28.6%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+            <div class="stat-showcase">
+                <div class="stat-item">
+                    <div class="stat-number">78%</div>
+                    <div class="stat-label">نسبة تحقيق الرؤية</div>
+                    <div class="stat-change">↑ 18%</div>
+                </div>
 
+                <div class="stat-item">
+                    <div class="stat-number">42</div>
+                    <div class="stat-label">الأهداف المحققة</div>
+                    <div class="stat-change">من أصل 54</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">850M</div>
+                    <div class="stat-label">الاستثمارات المنفذة</div>
+                    <div class="stat-change">↑ 24%</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number">32%</div>
+                    <div class="stat-label">العائد على الاستثمار</div>
+                    <div class="stat-change">↑ 8%</div>
+                </div>
+            </div>
+
+            <h2 style="font-size: 2em; color: #75197c; font-weight: 700; margin: 60px 0 30px; text-align: center;">المحاور الاستراتيجية وحالة التنفيذ</h2>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar-item">
+                    <div class="progress-header">
+                        <span class="progress-title">التحول الرقمي والابتكار • 12 مبادرة</span>
+                        <span class="progress-percentage">82%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 82%;"></div>
+                    </div>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 8px;">9 مبادرات مكتملة • 3 جارية</p>
+                </div>
+
+                <div class="progress-bar-item">
+                    <div class="progress-header">
+                        <span class="progress-title">توسعة البنية التحتية • 8 مبادرات</span>
+                        <span class="progress-percentage">78%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 78%;"></div>
+                    </div>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 8px;">6 مبادرات مكتملة • 2 جارية</p>
+                </div>
+
+                <div class="progress-bar-item">
+                    <div class="progress-header">
+                        <span class="progress-title">تطوير رأس المال البشري • 10 مبادرات</span>
+                        <span class="progress-percentage">74%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 74%;"></div>
+                    </div>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 8px;">7 مبادرات مكتملة • 3 جارية</p>
+                </div>
+
+                <div class="progress-bar-item">
+                    <div class="progress-header">
+                        <span class="progress-title">تعزيز تجربة العملاء • 14 مبادرة</span>
+                        <span class="progress-percentage">85%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 85%;"></div>
+                    </div>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 8px;">11 مبادرة مكتملة • 3 جارية</p>
+                </div>
+
+                <div class="progress-bar-item">
+                    <div class="progress-header">
+                        <span class="progress-title">الاستدامة المالية • 6 مبادرات</span>
+                        <span class="progress-percentage">88%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 88%;"></div>
+                    </div>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 8px;">5 مبادرات مكتملة • 1 جارية</p>
+                </div>
+
+                <div class="progress-bar-item">
+                    <div class="progress-header">
+                        <span class="progress-title">المسؤولية الاجتماعية • 4 مبادرات</span>
+                        <span class="progress-percentage">100%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                    <p style="color: #00C853; font-size: 0.9em; margin-top: 8px; font-weight: 600;">✓ جميع المبادرات مكتملة</p>
+                </div>
+            </div>
+
+            <h2 style="font-size: 2em; color: #75197c; font-weight: 700; margin: 80px 0 30px; text-align: center;">الإنجازات الرئيسية 2025</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-image">📡</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">إطلاق شبكة 5G</h3>
+                        <p class="feature-description">تدشين شبكة الجيل الخامس في المدن الرئيسية مع سرعات تصل إلى 1 جيجابت/ث</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">مارس 2025</div>
+                                <div class="feature-stat-label">تاريخ الإطلاق</div>
+                            </div>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">300%</div>
+                                <div class="feature-stat-label">زيادة السرعة</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">🚀</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">منصة الخدمات الرقمية</h3>
+                        <p class="feature-description">تدشين منصة موحدة للخدمات الرقمية مع واجهة سهلة الاستخدام</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">مايو 2025</div>
+                                <div class="feature-stat-label">تاريخ الإطلاق</div>
+                            </div>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">45%</div>
+                                <div class="feature-stat-label">تحسين الرضا</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">🎓</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">برنامج تطوير الكفاءات</h3>
+                        <p class="feature-description">تدريب شامل للموظفين على أحدث التقنيات والممارسات العالمية</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">يناير 2025</div>
+                                <div class="feature-stat-label">تاريخ البدء</div>
+                            </div>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">500</div>
+                                <div class="feature-stat-label">موظف مدرب</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">💳</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">المحفظة الرقمية</h3>
+                        <p class="feature-description">إطلاق خدمة المحفظة الرقمية للدفع والتحويلات الإلكترونية</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">يوليو 2025</div>
+                                <div class="feature-stat-label">تاريخ الإطلاق</div>
+                            </div>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">2.5M</div>
+                                <div class="feature-stat-label">عملية شهرياً</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">📶</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">توسعة الشبكة</h3>
+                        <p class="feature-description">توسيع التغطية لتشمل المناطق النائية والريفية</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">سبتمبر 2025</div>
+                                <div class="feature-stat-label">تاريخ الإنجاز</div>
+                            </div>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">98%</div>
+                                <div class="feature-stat-label">نسبة التغطية</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">🤝</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">الشراكة المجتمعية</h3>
+                        <p class="feature-description">برنامج شامل لدعم المبادرات المجتمعية والتنموية</p>
+                        <div class="feature-stats">
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">أكتوبر 2025</div>
+                                <div class="feature-stat-label">تاريخ الإطلاق</div>
+                            </div>
+                            <div class="feature-stat">
+                                <div class="feature-stat-number">50</div>
+                                <div class="feature-stat-label">مبادرة مدعومة</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Footer -->
         <footer class="footer">
             <p><strong>ليبيانا للهاتف المحمول</strong> | Libyana Mobile Phone</p>
-            <p>© 2024 جميع الحقوق محفوظة | تقرير القسم التجاري</p>
+            <p>© 2025 جميع الحقوق محفوظة | تقرير القسم التجاري</p>
         </footer>
-
-        <!-- Watermark -->
-        <div class="watermark">ليبيانا 2024</div>
     </div>
 
     <script>
         // Animated Counter Function
-        function animateCounter(element) {
-            const target = parseFloat(element.getAttribute('data-target'));
-            const decimals = parseInt(element.getAttribute('data-decimals')) || 0;
-            let suffix = element.getAttribute('data-suffix') || '';
-
-            // Get suffix from initial text if not in attribute
-            if (!suffix && element.textContent) {
-                const match = element.textContent.match(/[^\d.,]+$/);
-                if (match) suffix = match[0];
+        function animateCounter(element, targetValue) {
+            // Get target value from parameter or data attribute or element text
+            let target = targetValue;
+            if (!target) {
+                if (element.hasAttribute('data-target')) {
+                    target = parseFloat(element.getAttribute('data-target'));
+                } else {
+                    // Extract number from text content
+                    const text = element.textContent.trim();
+                    target = parseFloat(text.replace(/[^\d.]/g, ''));
+                }
             }
+
+            if (isNaN(target)) return;
+
+            // Determine decimals based on original value
+            const decimals = (target % 1 !== 0) ? 1 : 0;
+
+            // Extract suffix (like M, K, %, etc.)
+            let suffix = '';
+            const text = element.textContent.trim();
+            const suffixMatch = text.match(/[^\d.,\s]+$/);
+            if (suffixMatch) suffix = suffixMatch[0];
 
             const duration = 1500;
             const increment = target / (duration / 16);
@@ -1286,10 +3210,19 @@
             const updateCounter = () => {
                 current += increment;
                 if (current < target) {
-                    element.textContent = current.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + suffix;
+                    let displayValue = current.toFixed(decimals);
+                    // Add comma separators for numbers >= 1000
+                    if (current >= 1000) {
+                        displayValue = displayValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    }
+                    element.textContent = displayValue + suffix;
                     requestAnimationFrame(updateCounter);
                 } else {
-                    element.textContent = target.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + suffix;
+                    let displayValue = target.toFixed(decimals);
+                    if (target >= 1000) {
+                        displayValue = displayValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    }
+                    element.textContent = displayValue + suffix;
                 }
             };
 
@@ -1305,40 +3238,51 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-
-                    // Animate counters every time they come into view
-                    const counters = entry.target.querySelectorAll('.kpi-value[data-target]');
+                    // Find all counter elements
+                    const counters = entry.target.querySelectorAll('.stat-number, .video-stat-value, .kpi-value[data-target]');
                     counters.forEach(counter => {
-                        // Reset counter to 0 before animating
-                        const suffix = counter.getAttribute('data-suffix') || '';
-                        counter.textContent = '0' + suffix;
-                        // Animate the counter
-                        animateCounter(counter);
+                        // Store original value if not already stored
+                        if (!counter.hasAttribute('data-original-value')) {
+                            counter.setAttribute('data-original-value', counter.textContent.trim());
+                        }
+
+                        const originalValue = counter.getAttribute('data-original-value');
+                        const numberMatch = originalValue.match(/[\d.,]+/);
+                        if (numberMatch) {
+                            const targetNumber = parseFloat(numberMatch[0].replace(/,/g, ''));
+                            const suffix = originalValue.replace(/[\d.,\s]/g, '');
+
+                            // Reset to 0 and animate
+                            counter.textContent = '0' + suffix;
+                            animateCounter(counter, targetNumber);
+                        }
                     });
                 } else {
-                    // Reset when scrolling away
-                    const counters = entry.target.querySelectorAll('.kpi-value[data-target]');
+                    // Reset counters when scrolling away
+                    const counters = entry.target.querySelectorAll('.stat-number, .video-stat-value, .kpi-value[data-target]');
                     counters.forEach(counter => {
-                        const suffix = counter.getAttribute('data-suffix') || '';
-                        counter.textContent = '0' + suffix;
+                        const originalValue = counter.getAttribute('data-original-value');
+                        if (originalValue) {
+                            const suffix = originalValue.replace(/[\d.,\s]/g, '');
+                            counter.textContent = '0' + suffix;
+                        }
                     });
                 }
             });
         }, observerOptions);
 
-        // Observe elements
-        document.querySelectorAll('.section-header, .summary-item, .kpi-card, .chart-card, .chart-explanation, .chart-wrapper, .data-table').forEach(el => {
+        // Observe all stat showcases
+        document.querySelectorAll('.stat-showcase, .video-stats').forEach(el => {
             observer.observe(el);
         });
 
         // Chart Colors
         const chartColors = {
-            primary: '#00D9FF',
-            light: '#00BCD4',
-            accent: '#B8208B',
+            primary: '#75197c',
+            light: '#8b2591',
+            accent: '#9a3d9f',
             gray: '#B2BAC2',
-            gridColor: '#1E3A52',
+            gridColor: '#4a4d52',
             textColor: '#B2BAC2'
         };
 
@@ -1365,10 +3309,10 @@
                         label: 'الإيرادات',
                         data: [185, 205, 225, 235],
                         backgroundColor: [
-                            'rgba(0, 217, 255, 0.7)',
-                            'rgba(0, 217, 255, 0.8)',
-                            'rgba(0, 217, 255, 0.9)',
-                            'rgba(0, 217, 255, 1)'
+                            'rgba(117, 25, 124, 0.7)',
+                            'rgba(117, 25, 124, 0.8)',
+                            'rgba(117, 25, 124, 0.9)',
+                            'rgba(117, 25, 124, 1)'
                         ],
                         borderColor: chartColors.primary,
                         borderWidth: 2,
@@ -1383,17 +3327,14 @@
                         borderWidth: 3,
                         pointRadius: 7,
                         pointBackgroundColor: chartColors.light,
-                        pointBorderColor: '#0A1929',
+                        pointBorderColor: '#1a1d1f',
                         pointBorderWidth: 3
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeInOutQuart'
-                    },
+                    animation: false,
                     plugins: {
                         legend: {
                             display: true,
@@ -1460,10 +3401,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeInOutQuart'
-                    },
+                    animation: false,
                     plugins: {
                         legend: {
                             display: false
@@ -1534,10 +3472,7 @@
                     indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeInOutQuart'
-                    },
+                    animation: false,
                     plugins: {
                         legend: {
                             display: false
@@ -1600,23 +3535,20 @@
                         label: 'استهلاك البيانات',
                         data: [12.5, 13.2, 14.1, 15.3, 16.8, 18.2, 19.5, 21.0, 22.3, 23.8, 25.1, 26.5],
                         borderColor: chartColors.primary,
-                        backgroundColor: 'rgba(0, 217, 255, 0.15)',
+                        backgroundColor: 'rgba(117, 25, 124, 0.15)',
                         tension: 0.4,
                         fill: true,
                         borderWidth: 3,
                         pointRadius: 5,
                         pointBackgroundColor: chartColors.primary,
-                        pointBorderColor: '#0A1929',
+                        pointBorderColor: '#1a1d1f',
                         pointBorderWidth: 2
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeInOutQuart'
-                    },
+                    animation: false,
                     plugins: {
                         legend: { display: false }
                     },
@@ -1658,7 +3590,7 @@
                 chartInstances.marketShare = new Chart(canvas, {
                 type: 'bar',
                 data: {
-                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    labels: ['2020', '2021', '2022', '2023', '2025'],
                     datasets: [
                         {
                             label: 'ليبيانا',
@@ -1675,10 +3607,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeInOutQuart'
-                    },
+                    animation: false,
                     plugins: {
                         legend: {
                             position: 'top',
@@ -1789,10 +3718,109 @@
                 ['البيضاء', 32.7627, 21.7557, 110]
             ];
 
+            // Products 2026 Chart
+            const products2026Canvas = document.getElementById('products2026Chart');
+            if (products2026Canvas) {
+                if (chartInstances.products2026) {
+                    chartInstances.products2026.destroy();
+                }
+                chartInstances.products2026 = new Chart(products2026Canvas, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['التحول الرقمي', 'شبكات 5G', 'إنترنت الأشياء', 'الحلول السحابية', 'الأمن السيبراني'],
+                        datasets: [{
+                            data: [8, 6, 4, 3, 3],
+                            backgroundColor: [
+                                chartColors.primary,
+                                chartColors.light,
+                                chartColors.accent,
+                                '#9a3d9f',
+                                '#5a1460'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    font: { family: 'Cairo', size: 12 },
+                                    color: chartColors.textColor,
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(50, 55, 60, 0.95)',
+                                titleFont: { family: 'Cairo', size: 14 },
+                                bodyFont: { family: 'Cairo', size: 12 },
+                                padding: 12,
+                                displayColors: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Enterprise Sector Chart
+            const enterpriseSectorCanvas = document.getElementById('enterpriseSectorChart');
+            if (enterpriseSectorCanvas) {
+                if (chartInstances.enterpriseSector) {
+                    chartInstances.enterpriseSector.destroy();
+                }
+                chartInstances.enterpriseSector = new Chart(enterpriseSectorCanvas, {
+                    type: 'pie',
+                    data: {
+                        labels: ['النفط والغاز', 'المصارف', 'الطاقة', 'الحكومة', 'الطيران', 'التعليم', 'أخرى'],
+                        datasets: [{
+                            data: [85, 68, 72, 58, 35, 42, 125],
+                            backgroundColor: [
+                                chartColors.primary,
+                                chartColors.light,
+                                chartColors.accent,
+                                '#9a3d9f',
+                                '#8b2591',
+                                '#5a1460',
+                                chartColors.gray
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    font: { family: 'Cairo', size: 12 },
+                                    color: chartColors.textColor,
+                                    padding: 15
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(50, 55, 60, 0.95)',
+                                titleFont: { family: 'Cairo', size: 14 },
+                                bodyFont: { family: 'Cairo', size: 12 },
+                                padding: 12,
+                                displayColors: true,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.parsed + ' مؤسسة';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
             Highcharts.mapChart('libya-map-container', {
                 chart: {
                     map: topology,
-                    backgroundColor: '#0A1929'
+                    backgroundColor: '#ffffff'
                 },
 
                 title: {
@@ -1812,8 +3840,8 @@
 
                 tooltip: {
                     useHTML: true,
-                    backgroundColor: 'rgba(19, 47, 76, 0.95)',
-                    borderColor: '#00D9FF',
+                    backgroundColor: 'rgba(50, 55, 60, 0.95)',
+                    borderColor: '#75197c',
                     style: {
                         fontFamily: 'Cairo',
                         color: '#FFFFFF'
@@ -1822,12 +3850,12 @@
 
                 series: [{
                     name: 'ليبيا',
-                    borderColor: '#00D9FF',
+                    borderColor: '#75197c',
                     borderWidth: 2,
-                    color: '#132F4C',
+                    color: '#f8f5f9',
                     states: {
                         hover: {
-                            color: '#1A2942'
+                            color: '#e8d5ea'
                         }
                     },
                     enableMouseTracking: false
@@ -1844,25 +3872,25 @@
                             fontFamily: 'Cairo',
                             fontSize: '11px',
                             fontWeight: '600',
-                            color: '#FFFFFF',
-                            textOutline: '2px #0A1929'
+                            color: '#2d2d2d',
+                            textOutline: '2px #ffffff'
                         },
                         y: -20
                     },
                     tooltip: {
                         pointFormat: '<div style="text-align: right; font-family: Cairo; padding: 8px;">' +
-                                     '<strong style="color: #00D9FF; font-size: 15px;">{point.name}</strong><br/>' +
-                                     '<span style="color: #B2BAC2; font-size: 13px;">عدد الأبراج: <strong style="color: #00D9FF;">{point.z}</strong></span>' +
+                                     '<strong style="color: #75197c; font-size: 15px;">{point.name}</strong><br/>' +
+                                     '<span style="color: #B2BAC2; font-size: 13px;">عدد الأبراج: <strong style="color: #75197c;">{point.z}</strong></span>' +
                                      '</div>'
                     },
                     data: cityData.map(city => {
                         const towers = city[3];
-                        let color = '#00BCD4';
+                        let color = '#8b2591';
 
                         if (towers >= 500) {
-                            color = '#00D9FF';
+                            color = '#75197c';
                         } else if (towers >= 200) {
-                            color = '#00BCD4';
+                            color = '#8b2591';
                         }
 
                         return {
@@ -1872,7 +3900,7 @@
                             z: towers,
                             color: color,
                             marker: {
-                                lineColor: '#0A1929',
+                                lineColor: '#1a1d1f',
                                 lineWidth: 2
                             }
                         };

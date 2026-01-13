@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script src="https://code.highcharts.com/maps/highmaps.js"></script>
     <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/mapdata/countries/ly/ly-all.js"></script>
@@ -145,7 +146,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(117, 25, 124, 0.75), rgba(90, 20, 96, 0.85));
+            background: transparent;
             z-index: 1;
         }
 
@@ -333,7 +334,7 @@
 
         /* Transition Connector */
         .transition-connector {
-            background: #611a77;
+            background: #951b81;
             padding: 50px 60px 30px;
             text-align: center;
             position: relative;
@@ -410,6 +411,7 @@
             font-size: 4.5em;
             font-weight: 800;
             margin-bottom: 30px;
+            margin-top: -320px;
             line-height: 1.2;
             text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
             letter-spacing: -1px;
@@ -421,6 +423,10 @@
             margin-bottom: 20px;
             opacity: 0.95;
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .cover-year {
@@ -430,6 +436,10 @@
             opacity: 0.9;
             letter-spacing: 8px;
             text-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .cover-divider {
@@ -882,6 +892,89 @@
             font-size: 1em;
             color: #555;
             font-weight: 500;
+        }
+
+        /* Revenue Breakdown Widget */
+        .revenue-breakdown-widget {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            padding: 0 20px;
+        }
+
+        .mini-stat-card {
+            background: linear-gradient(135deg, rgba(117, 25, 124, 0.05) 0%, rgba(117, 25, 124, 0.02) 100%);
+            border: 2px solid rgba(117, 25, 124, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mini-stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #75197c, #FFB800);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mini-stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(117, 25, 124, 0.15);
+            border-color: #75197c;
+        }
+
+        .mini-stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .mini-stat-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            filter: grayscale(0.3);
+            transition: all 0.3s ease;
+        }
+
+        .mini-stat-card:hover .mini-stat-icon {
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        .mini-stat-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFB800 0%, #FDB913 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 10px 0;
+            line-height: 1.2;
+        }
+
+        .mini-stat-label {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .revenue-breakdown-widget {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .mini-stat-value {
+                font-size: 2em;
+            }
         }
 
         .summary-sections {
@@ -1657,6 +1750,268 @@
             z-index: 0;
         }
 
+        /* Customer Care Section */
+        .customer-care-section {
+            background:
+                radial-gradient(circle at 5% 15%, rgba(117, 25, 124, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 10% 85%, rgba(139, 37, 145, 0.04) 0%, transparent 30%),
+                linear-gradient(135deg, #ffffff 0%, #fafafa 100%) !important;
+            padding: 80px 0 !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .customer-care-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60%;
+            height: 100%;
+            background:
+                url('backgrounds/pattern.svg'),
+                linear-gradient(to right, rgba(117, 25, 124, 0.12), rgba(139, 37, 145, 0.08) 50%, transparent);
+            background-size: 120px 120px, 100%;
+            background-position: left center, left center;
+            background-repeat: repeat, no-repeat;
+            opacity: 1;
+            filter: saturate(1.5) contrast(1.2);
+            z-index: 0;
+        }
+
+        .customer-care-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(117, 25, 124, 0.15), rgba(139, 37, 145, 0.08) 40%, transparent);
+            mix-blend-mode: multiply;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .customer-care-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Top KPI Boxes - Simple & Clean */
+        .care-kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .care-kpi-box {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px 15px;
+            text-align: center;
+        }
+
+        .care-kpi-value {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: #75197c;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .care-kpi-label {
+            font-size: 0.85em;
+            color: #666;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Main Content Layout */
+        .care-main-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Line Chart Card */
+        .care-line-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+        }
+
+        .care-line-header {
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f5f5f5;
+        }
+
+        .care-line-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2d2d2d;
+        }
+
+        .care-line-chart {
+            height: 300px;
+        }
+
+        /* Pie Charts Column */
+        .care-pie-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .care-pie-box {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+        }
+
+        .care-pie-title {
+            font-size: 1em;
+            font-weight: 700;
+            color: #75197c;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .care-pie-chart {
+            height: 140px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .care-pie-chart canvas {
+            max-width: 140px;
+            max-height: 140px;
+            margin: 0 auto;
+        }
+
+        .care-pie-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .care-pie-stat {
+            text-align: center;
+            padding: 8px;
+            background: #f9f9f9;
+        }
+
+        .care-pie-stat-value {
+            font-size: 1.2em;
+            font-weight: 800;
+            color: #75197c;
+            line-height: 1;
+        }
+
+        .care-pie-stat-label {
+            font-size: 0.75em;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* Bottom Metrics */
+        .care-bottom-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .care-metric-box {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .care-metric-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #75197c 0%, #951b81 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .care-metric-icon i {
+            font-size: 1.8em;
+            color: white;
+        }
+
+        .care-metric-content {
+            flex: 1;
+        }
+
+        .care-metric-value {
+            font-size: 2em;
+            font-weight: 800;
+            color: #2d2d2d;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .care-metric-label {
+            font-size: 0.95em;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Insights Box */
+        .care-insights-box {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-right: 4px solid #75197c;
+            padding: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .care-insights-box .care-insights-list {
+            flex: 1;
+        }
+
+        .care-insights-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #75197c;
+            margin-bottom: 20px;
+        }
+
+        .care-insights-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .care-insights-list li {
+            padding: 12px 0;
+            position: relative;
+            line-height: 1.6;
+            color: #2d2d2d;
+            font-size: 0.9em;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .care-insights-list li:last-child {
+            border-bottom: none;
+        }
+
         /* Projects Section Background */
         .projects-section {
             background:
@@ -1827,6 +2182,413 @@
             color: #666;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+        }
+
+        /* Subscriber Growth Chart Elegant Styling */
+        .subscriber-growth-chart-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(117, 25, 124, 0.03) 0%, rgba(117, 25, 124, 0.08) 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(117, 25, 124, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subscriber-growth-chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #75197c, #FFB800, #75197c);
+            opacity: 0.6;
+        }
+
+        .chart-header-section {
+            text-align: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .chart-title-elegant {
+            font-size: 0.85em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #75197c 0%, #9a3d9f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 8px 0;
+            position: relative;
+        }
+
+        .chart-subtitle {
+            font-size: 0.9em;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .chart-visual-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 10px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            backdrop-filter: blur(10px);
+            height: 175px;
+        }
+
+        .chart-visual-wrapper canvas {
+            max-height: 100%;
+        }
+
+        /* Mini Chart Boxes */
+        .mini-chart-box {
+            background: linear-gradient(135deg, rgba(117, 25, 124, 0.05) 0%, rgba(117, 25, 124, 0.1) 100%);
+            border: 1px solid rgba(117, 25, 124, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mini-chart-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #75197c, #FFB800);
+            opacity: 0.7;
+        }
+
+        .mini-chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .mini-chart-title {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #555;
+            margin: 0;
+        }
+
+        .mini-chart-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #75197c;
+        }
+
+        .mini-chart-canvas-wrapper {
+            height: 100px;
+            position: relative;
+        }
+
+        .mini-chart-canvas-wrapper canvas {
+            max-height: 100%;
+        }
+
+        .chart-insight-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .insight-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(117, 25, 124, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .insight-item:hover {
+            transform: translateY(-3px);
+            border-color: rgba(117, 25, 124, 0.3);
+            background: rgba(117, 25, 124, 0.08);
+        }
+
+        .insight-item.highlight {
+            background: linear-gradient(135deg, rgba(117, 25, 124, 0.15), rgba(255, 184, 0, 0.1));
+            border: 2px solid rgba(117, 25, 124, 0.3);
+        }
+
+        .insight-label {
+            display: block;
+            font-size: 0.85em;
+            color: #999;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .insight-value {
+            display: block;
+            font-size: 1.3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFB800 0%, #FDB913 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .insight-item.highlight .insight-value {
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #75197c 0%, #FFB800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Revenue Growth Chart (same styling as subscriber chart) */
+        .revenue-growth-chart-container {
+            margin-top: 30px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(255, 184, 0, 0.03) 0%, rgba(245, 158, 11, 0.08) 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .revenue-growth-chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #F59E0B, #FFB800, #F59E0B);
+            opacity: 0.6;
+        }
+
+        .revenue-growth-chart-container .chart-title-elegant {
+            background: linear-gradient(135deg, #F59E0B 0%, #FFB800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Dual Chart Layout for Khales */
+        .dual-chart-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .revenue-table-section,
+        .bars-chart-section {
+            padding: 30px;
+            background: rgba(117, 25, 124, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(117, 25, 124, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bars-chart-section {
+            background: rgba(245, 158, 11, 0.02);
+            border-color: rgba(245, 158, 11, 0.1);
+        }
+
+        .revenue-table-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #75197c;
+        }
+
+        .bars-chart-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #F59E0B;
+        }
+
+        .creative-bars-wrapper {
+            background: transparent;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Revenue Breakdown Table Styles */
+        .revenue-breakdown-table {
+            margin-top: 20px;
+            background: transparent;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr;
+            gap: 15px;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(117, 25, 124, 0.15);
+            transition: all 0.2s ease;
+            align-items: center;
+            background: transparent;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-row:not(.table-header):not(.table-footer):hover {
+            background: transparent;
+        }
+
+        .table-header {
+            background: transparent;
+            font-weight: 700;
+            color: #75197c;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #75197c;
+        }
+
+        .table-footer {
+            background: transparent;
+            font-weight: 700;
+            color: #333;
+            border-top: 2px solid #75197c;
+            border-bottom: none;
+        }
+
+        .dominant-row {
+            background: transparent;
+        }
+
+        .table-cell {
+            font-size: 0.95em;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .channel-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .revenue-amount {
+            font-weight: 700;
+            color: #75197c;
+            font-size: 1.05em;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .percentage-bar {
+            position: relative;
+            width: 100%;
+            height: 22px;
+            background: rgba(117, 25, 124, 0.08);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .percentage-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: rgba(117, 25, 124, 0.4);
+            border-radius: 6px;
+            transition: width 1.5s ease-out;
+            animation: fillBar 1.5s ease-out;
+        }
+
+        @keyframes fillBar {
+            from { width: 0 !important; }
+        }
+
+        .percentage-text {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #333;
+            z-index: 1;
+        }
+
+        .growth-text-simple {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .growth-highlight {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #F59E0B;
+        }
+
+        @media (max-width: 768px) {
+            .dual-chart-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .table-row {
+                grid-template-columns: 1.5fr 1fr 0.8fr;
+                gap: 8px;
+                padding: 12px 15px;
+                font-size: 0.9em;
+            }
+
+            .channel-name {
+                font-size: 0.85em;
+            }
+
+            .creative-bars-wrapper {
+                height: 250px;
+                padding: 15px;
+            }
+
+            .chart-insight-box {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .chart-visual-wrapper {
+                height: 140px;
+            }
+
+            .subscriber-growth-chart-container,
+            .revenue-growth-chart-container {
+                padding: 15px;
+            }
+
+            /* Stack charts vertically on mobile */
+            div[style*="display: flex"][style*="gap: 20px"] {
+                flex-direction: column !important;
+            }
+
+            /* Stack mini charts on mobile */
+            div[style*="grid-template-columns: repeat(2, 1fr)"] {
+                grid-template-columns: 1fr !important;
+            }
         }
 
         .project-timeline {
@@ -2082,6 +2844,16 @@
             color: white;
         }
 
+        .feature-image img {
+            width: 90px !important;
+            height: 90px !important;
+            padding: 25px;
+            background: white;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
         .feature-content {
             padding: 28px;
         }
@@ -2129,16 +2901,6 @@
     <div class="page">
         <!-- Cover Section -->
         <section class="cover-section">
-            <div class="cover-content">
-                <h1 class="cover-title">التقرير التجاري السنوي</h1>
-                <div class="cover-divider"></div>
-                <p class="cover-subtitle">ليبيانا للهاتف المحمول</p>
-                <div class="cover-year">2025</div>
-            </div>
-            <div class="scroll-indicator">
-                <div class="scroll-indicator-icon"></div>
-                <div class="scroll-indicator-text">تصفح التقرير</div>
-            </div>
         </section>
 
         <!-- Transition Connector -->
@@ -2214,6 +2976,30 @@
                         </div>
                     </div>
 
+                    <!-- Revenue Breakdown Widget -->
+                    <div class="revenue-breakdown-widget">
+                        <div class="mini-stat-card">
+                            <div class="mini-stat-icon">🌐</div>
+                            <div class="mini-stat-value highlight-number">1.56</div>
+                            <div class="mini-stat-label">إيرادات الإنترنت (مليار د.ل)</div>
+                        </div>
+                        <div class="mini-stat-card">
+                            <div class="mini-stat-icon">📞</div>
+                            <div class="mini-stat-value highlight-number">578</div>
+                            <div class="mini-stat-label">إيرادات الصوت (مليون د.ل)</div>
+                        </div>
+                        <div class="mini-stat-card">
+                            <div class="mini-stat-icon">⭐</div>
+                            <div class="mini-stat-value highlight-number">154</div>
+                            <div class="mini-stat-label">الخدمات المضافة (مليون د.ل)</div>
+                        </div>
+                        <div class="mini-stat-card">
+                            <div class="mini-stat-icon">💬</div>
+                            <div class="mini-stat-value highlight-number">36</div>
+                            <div class="mini-stat-label">إيرادات الرسائل (مليون د.ل)</div>
+                        </div>
+                    </div>
+
                     <div class="summary-sections">
                         <div class="summary-section">
                             <h3 class="summary-section-title">الأداء المالي والتشغيلي</h3>
@@ -2245,182 +3031,41 @@
             <div class="timeline-container">
                 <div class="timeline-line"></div>
 
-                <!-- Q1 Products -->
+                <!-- Q1 Product Example 1 -->
                 <div class="timeline-item">
                     <div class="timeline-quarter">الربع الأول</div>
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h3 class="product-timeline-title">باقة بيانات لامحدودة 5G</h3>
+                        <h3 class="product-timeline-title">اسم المنتج الأول (مثال)</h3>
                         <div class="product-meta">
-                            <span class="meta-badge">📦 باقات البيانات</span>
-                            <span class="meta-badge">👥 الأفراد - VIP</span>
-                            <span class="meta-badge">📅 يناير 2025</span>
+                            <span class="meta-badge">فئة المنتج</span>
+                            <span class="meta-badge">الفئة المستهدفة</span>
+                            <span class="meta-badge">شهر/سنة</span>
                         </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">إطلاق باقة بيانات فائقة السرعة مع تغطية 5G كاملة للعملاء المميزين في المدن الرئيسية</p>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">وصف تفصيلي للمنتج والمزايا التي يقدمها (هذا نص تجريبي)</p>
                         <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">صورة 1</div>
+                            <div class="product-image-box">صورة 2</div>
+                            <div class="product-image-box">صورة 3</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="product-timeline-title">باقة العائلة الذكية</h3>
-                        <div class="product-meta">
-                            <span class="meta-badge">👨‍👩‍👧‍👦 الباقات العائلية</span>
-                            <span class="meta-badge">📅 فبراير 2025</span>
-                        </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">حلول متكاملة للعائلات مع مزايا مشاركة البيانات والمكالمات المجانية</p>
-                        <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="product-timeline-title">خدمة الدفع الإلكتروني</h3>
-                        <div class="product-meta">
-                            <span class="meta-badge">💳 الخدمات الرقمية</span>
-                            <span class="meta-badge">🌍 جميع المشتركين</span>
-                            <span class="meta-badge">📅 مارس 2025</span>
-                        </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">منصة دفع إلكتروني آمنة متكاملة مع جميع الخدمات المصرفية</p>
-                        <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Q2 Products -->
+                <!-- Q2 Product Example 2 -->
                 <div class="timeline-item">
                     <div class="timeline-quarter">الربع الثاني</div>
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h3 class="product-timeline-title">تطبيق ليبيانا TV</h3>
+                        <h3 class="product-timeline-title">اسم المنتج الثاني (مثال)</h3>
                         <div class="product-meta">
-                            <span class="meta-badge">🎬 الترفيه الرقمي</span>
-                            <span class="meta-badge">📅 أبريل 2025</span>
+                            <span class="meta-badge">فئة المنتج</span>
+                            <span class="meta-badge">شهر/سنة</span>
                         </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">منصة بث رقمية شاملة للمحتوى المحلي والعالمي مع خدمة البث المباشر</p>
+                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">وصف تفصيلي للمنتج والمزايا التي يقدمها (هذا نص تجريبي)</p>
                         <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="product-timeline-title">باقة الطلاب الذكية</h3>
-                        <div class="product-meta">
-                            <span class="meta-badge">🎓 باقات خاصة</span>
-                            <span class="meta-badge">📅 مايو 2025</span>
-                        </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">عروض تعليمية خاصة للطلاب مع وصول مجاني للمنصات التعليمية</p>
-                        <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="product-timeline-title">خدمة التخزين السحابي</h3>
-                        <div class="product-meta">
-                            <span class="meta-badge">☁️ الخدمات الرقمية</span>
-                            <span class="meta-badge">📅 يونيو 2025</span>
-                        </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">مساحة تخزين سحابية آمنة مع نسخ احتياطي تلقائي</p>
-                        <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Q3 Products -->
-                <div class="timeline-item">
-                    <div class="timeline-quarter">الربع الثالث</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="product-timeline-title">باقة الألعاب الإلكترونية</h3>
-                        <div class="product-meta">
-                            <span class="meta-badge">🎮 الترفيه الرقمي</span>
-                            <span class="meta-badge">📅 يوليو 2025</span>
-                        </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">باقة مخصصة للاعبين مع سرعات فائقة ومنع التأخير</p>
-                        <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="product-timeline-title">خدمة IoT للمؤسسات</h3>
-                        <div class="product-meta">
-                            <span class="meta-badge">🔗 إنترنت الأشياء</span>
-                            <span class="meta-badge">📅 أغسطس 2025</span>
-                        </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">حلول متقدمة لربط الأجهزة الذكية وإدارة البيانات</p>
-                        <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Q4 Products -->
-                <div class="timeline-item">
-                    <div class="timeline-quarter">الربع الرابع</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="product-timeline-title">منصة الصحة الرقمية</h3>
-                        <div class="product-meta">
-                            <span class="meta-badge">🏥 الصحة الإلكترونية</span>
-                            <span class="meta-badge">📅 أكتوبر 2025</span>
-                        </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">منصة رقمية للاستشارات الطبية عن بعد وإدارة السجلات الصحية</p>
-                        <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="product-timeline-title">خدمة الأمن السيبراني</h3>
-                        <div class="product-meta">
-                            <span class="meta-badge">🔒 الأمن الرقمي</span>
-                            <span class="meta-badge">📅 ديسمبر 2025</span>
-                        </div>
-                        <p style="color: #666; margin-top: 12px; line-height: 1.6;">حماية متقدمة ضد التهديدات السيبرانية للمؤسسات</p>
-                        <div class="product-images">
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
-                            <div class="product-image-box">📷</div>
+                            <div class="product-image-box">صورة 1</div>
+                            <div class="product-image-box">صورة 2</div>
+                            <div class="product-image-box">صورة 3</div>
                         </div>
                     </div>
                 </div>
@@ -2437,43 +3082,43 @@
 
             <div class="stat-showcase">
                 <div class="stat-item">
-                    <div class="stat-number">24</div>
+                    <div class="stat-number">XX</div>
                     <div class="stat-label">منتجات مخططة</div>
-                    <div class="stat-change">↑ 33%</div>
+                    <div class="stat-change">↑ XX%</div>
                 </div>
 
                 <div class="stat-item">
-                    <div class="stat-number">15</div>
+                    <div class="stat-number">XX</div>
                     <div class="stat-label">منتجات رقمية</div>
-                    <div class="stat-change">↑ 50%</div>
+                    <div class="stat-change">↑ XX%</div>
                 </div>
 
                 <div class="stat-item">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">خدمات 5G متقدمة</div>
+                    <div class="stat-number">XX</div>
+                    <div class="stat-label">خدمات متقدمة</div>
                     <div class="stat-change">جديد</div>
                 </div>
 
                 <div class="stat-item">
-                    <div class="stat-number">450M</div>
+                    <div class="stat-number">XXM</div>
                     <div class="stat-label">الإيرادات المتوقعة</div>
-                    <div class="stat-change">↑ 42%</div>
+                    <div class="stat-change">↑ XX%</div>
                 </div>
             </div>
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-image">🚀</div>
+                    <div class="feature-image"><img src="icons/Star.png" alt="icon"></div>
                     <div class="feature-content">
-                        <h3 class="feature-title">التحول الرقمي والخدمات الذكية</h3>
-                        <p class="feature-description">مبادرات استراتيجية لتحويل الأعمال إلى منصة رقمية متكاملة مع خدمات ذكية مبتكرة تلبي احتياجات العملاء المتطورة</p>
+                        <h3 class="feature-title">اسم فئة المنتج الأولى (مثال)</h3>
+                        <p class="feature-description">وصف تفصيلي لفئة المنتجات والخدمات المقدمة ضمن هذه الفئة (هذا نص تجريبي للتوضيح فقط)</p>
                         <div class="feature-stats">
                             <div class="feature-stat">
-                                <div class="feature-stat-number">8</div>
+                                <div class="feature-stat-number">X</div>
                                 <div class="feature-stat-label">منتجات</div>
                             </div>
                             <div class="feature-stat">
-                                <div class="feature-stat-number">180M</div>
+                                <div class="feature-stat-number">XXM</div>
                                 <div class="feature-stat-label">عائد متوقع</div>
                             </div>
                         </div>
@@ -2481,73 +3126,204 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">📡</div>
+                    <div class="feature-image"><img src="icons/Tower.png" alt="icon"></div>
                     <div class="feature-content">
-                        <h3 class="feature-title">شبكات الجيل الخامس 5G</h3>
-                        <p class="feature-description">توسيع نطاق تغطية 5G لتشمل جميع المدن الرئيسية مع سرعات فائقة وزمن استجابة منخفض للغاية</p>
+                        <h3 class="feature-title">اسم فئة المنتج الثانية (مثال)</h3>
+                        <p class="feature-description">وصف تفصيلي لفئة المنتجات والخدمات المقدمة ضمن هذه الفئة (هذا نص تجريبي للتوضيح فقط)</p>
                         <div class="feature-stats">
                             <div class="feature-stat">
-                                <div class="feature-stat-number">6</div>
+                                <div class="feature-stat-number">X</div>
                                 <div class="feature-stat-label">منتجات</div>
                             </div>
                             <div class="feature-stat">
-                                <div class="feature-stat-number">210M</div>
+                                <div class="feature-stat-number">XXM</div>
                                 <div class="feature-stat-label">عائد متوقع</div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="feature-card">
-                    <div class="feature-image">🔗</div>
-                    <div class="feature-content">
-                        <h3 class="feature-title">إنترنت الأشياء IoT</h3>
-                        <p class="feature-description">حلول متقدمة لربط ملايين الأجهزة الذكية في المنازل والمدن والمؤسسات لتحقيق الكفاءة القصوى</p>
-                        <div class="feature-stats">
-                            <div class="feature-stat">
-                                <div class="feature-stat-number">4</div>
-                                <div class="feature-stat-label">منتجات</div>
+        <!-- Section: تقرير قسم خدمة العملاء -->
+        <section class="kpi-section customer-care-section">
+            <div class="visual-section-header">
+                <h1 class="section-title-large">تقرير قسم خدمة العملاء</h1>
+                <p class="section-subtitle">تحليل شامل لأداء خدمة العملاء ومؤشرات الجودة</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="customer-care-container">
+                <!-- Top KPI Row -->
+                <div class="care-kpi-row">
+                    <div class="care-kpi-box">
+                        <div class="care-kpi-value">3.7M</div>
+                        <div class="care-kpi-label">إجمالي المكالمات</div>
+                    </div>
+                    <div class="care-kpi-box">
+                        <div class="care-kpi-value">0:36</div>
+                        <div class="care-kpi-label">متوسط الانتظار</div>
+                    </div>
+                    <div class="care-kpi-box">
+                        <div class="care-kpi-value">58,361</div>
+                        <div class="care-kpi-label">إجمالي الشكاوى</div>
+                    </div>
+                    <div class="care-kpi-box">
+                        <div class="care-kpi-value">+6</div>
+                        <div class="care-kpi-label">مؤشر NPS</div>
+                    </div>
+                    <div class="care-kpi-box">
+                        <div class="care-kpi-value">71,628</div>
+                        <div class="care-kpi-label">معاملات التغطية</div>
+                    </div>
+                </div>
+
+                <!-- Main Layout: Line Chart + Pie Charts -->
+                <div class="care-main-layout">
+                    <!-- Left Column: Line Chart + Insights -->
+                    <div style="display: flex; flex-direction: column;">
+                        <!-- Line Chart -->
+                        <div class="care-line-card" style="margin-bottom: 20px;">
+                            <div class="care-line-header">
+                                <div class="care-line-title">تحليل الشكاوى الفصلية</div>
                             </div>
-                            <div class="feature-stat">
-                                <div class="feature-stat-number">95M</div>
-                                <div class="feature-stat-label">عائد متوقع</div>
+                            <div class="care-line-chart">
+                                <canvas id="complaintsLineChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Insights Box -->
+                        <div class="care-insights-box">
+                            <div class="care-insights-title">النقاط الرئيسية والتوصيات</div>
+                            <ul class="care-insights-list">
+                                <li>سجل الربع الثاني (يوليو-سبتمبر) أعلى عدد من الشكاوى بـ 23,646 شكوى مقارنة بـ 19,229 في الربع الأول</li>
+                                <li>وصل إجمالي الشكاوى إلى 58,361 خلال الأرباع الثلاثة، حيث تمثل شكاوى التغطية 43% من الإجمالي</li>
+                                <li>شهد الربع الثالث انخفاض ملحوظ في الشكاوى بنسبة 34.5% مقارنة بالربع الثاني</li>
+                                <li>97.2% من طلبات الخدمات الصديقة هي طلبات إلغاء الاشتراك من الخدمات غير المرغوبة</li>
+                                <li>تحسن ملحوظ في NPS من -12 إلى +6 بزيادة قدرها 18 نقطة تعكس تحسن رضا العملاء</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Pie Charts Column -->
+                    <div class="care-pie-column">
+                        <!-- Total Complaints Distribution -->
+                        <div class="care-pie-box">
+                            <div class="care-pie-title">الشكاوى</div>
+                            <div class="care-pie-chart">
+                                <canvas id="complaintsDistChart"></canvas>
+                            </div>
+                            <div class="care-pie-stats">
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">19,229</div>
+                                    <div class="care-pie-stat-label">الربع الأول</div>
+                                </div>
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">23,646</div>
+                                    <div class="care-pie-stat-label">الربع الثاني</div>
+                                </div>
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">15,486</div>
+                                    <div class="care-pie-stat-label">الربع الثالث</div>
+                                </div>
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">-</div>
+                                    <div class="care-pie-stat-label">الربع الرابع</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Coverage Complaints Quarterly -->
+                        <div class="care-pie-box">
+                            <div class="care-pie-title">شكاوى التغطية</div>
+                            <div class="care-pie-chart">
+                                <canvas id="coverageQuarterlyChart"></canvas>
+                            </div>
+                            <div class="care-pie-stats">
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">40.2%</div>
+                                    <div class="care-pie-stat-label">الربع الأول</div>
+                                </div>
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">30.7%</div>
+                                    <div class="care-pie-stat-label">الربع الثاني</div>
+                                </div>
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">26.6%</div>
+                                    <div class="care-pie-stat-label">الربع الثالث</div>
+                                </div>
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">34.6%</div>
+                                    <div class="care-pie-stat-label">الربع الرابع</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Added Services -->
+                        <div class="care-pie-box">
+                            <div class="care-pie-title">الخدمات المضافة</div>
+                            <div class="care-pie-chart">
+                                <canvas id="friendlyServicesChart"></canvas>
+                            </div>
+                            <div class="care-pie-stats">
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">11,080</div>
+                                    <div class="care-pie-stat-label">عدد المكالمات</div>
+                                </div>
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">97.2%</div>
+                                    <div class="care-pie-stat-label">الغاء الاشتراك</div>
+                                </div>
+                                <div class="care-pie-stat">
+                                    <div class="care-pie-stat-value">2.8%</div>
+                                    <div class="care-pie-stat-label">صعوبة الاشتراك</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-image">☁️</div>
-                    <div class="feature-content">
-                        <h3 class="feature-title">الحلول السحابية</h3>
-                        <p class="feature-description">منصات سحابية متطورة للمؤسسات مع قدرات تخزين ومعالجة عالية ومستويات أمان متقدمة</p>
-                        <div class="feature-stats">
-                            <div class="feature-stat">
-                                <div class="feature-stat-number">3</div>
-                                <div class="feature-stat-label">منتجات</div>
-                            </div>
-                            <div class="feature-stat">
-                                <div class="feature-stat-number">75M</div>
-                                <div class="feature-stat-label">عائد متوقع</div>
-                            </div>
+                <!-- Quarterly Data Section -->
+                <div style="background: white; border: 1px solid #e0e0e0; padding: 25px; margin-bottom: 20px;">
+                    <div style="font-size: 1.2em; font-weight: 700; color: #75197c; margin-bottom: 20px;">شكاوى التغطية - الأرباع الفصلية</div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                        <div style="text-align: center; padding: 20px; background: #f9f9f9; border: 1px solid #e8e8e8;">
+                            <div style="font-size: 0.85em; color: #666; margin-bottom: 8px; font-weight: 600;">الربع الأول</div>
+                            <div style="font-size: 1.8em; font-weight: 800; color: #75197c;">40.2%</div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: #f9f9f9; border: 1px solid #e8e8e8;">
+                            <div style="font-size: 0.85em; color: #666; margin-bottom: 8px; font-weight: 600;">الربع الثاني</div>
+                            <div style="font-size: 1.8em; font-weight: 800; color: #75197c;">30.7%</div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: #f9f9f9; border: 1px solid #e8e8e8;">
+                            <div style="font-size: 0.85em; color: #666; margin-bottom: 8px; font-weight: 600;">الربع الثالث</div>
+                            <div style="font-size: 1.8em; font-weight: 800; color: #75197c;">26.6%</div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: #f9f9f9; border: 1px solid #e8e8e8;">
+                            <div style="font-size: 0.85em; color: #666; margin-bottom: 8px; font-weight: 600;">الربع الرابع</div>
+                            <div style="font-size: 1.8em; font-weight: 800; color: #75197c;">34.6%</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-image">🔒</div>
-                    <div class="feature-content">
-                        <h3 class="feature-title">الأمن السيبراني</h3>
-                        <p class="feature-description">خدمات أمنية شاملة لحماية البيانات والأنظمة من التهديدات السيبرانية المتطورة</p>
-                        <div class="feature-stats">
-                            <div class="feature-stat">
-                                <div class="feature-stat-number">3</div>
-                                <div class="feature-stat-label">منتجات</div>
-                            </div>
-                            <div class="feature-stat">
-                                <div class="feature-stat-number">90M</div>
-                                <div class="feature-stat-label">عائد متوقع</div>
-                            </div>
+                <!-- Bottom Metrics -->
+                <div class="care-bottom-metrics">
+                    <div class="care-metric-box">
+                        <div class="care-metric-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="care-metric-content">
+                            <div class="care-metric-value">97.2%</div>
+                            <div class="care-metric-label">طلبات إلغاء الاشتراك من الخدمات</div>
+                        </div>
+                    </div>
+                    <div class="care-metric-box">
+                        <div class="care-metric-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="care-metric-content">
+                            <div class="care-metric-value">2.8%</div>
+                            <div class="care-metric-label">متوسط وقت الاستجابة</div>
                         </div>
                     </div>
                 </div>
@@ -2572,7 +3348,6 @@
                         <div>
                             <h3 class="project-title">فريق تطوير تطبيق ماي ليبيانا</h3>
                         </div>
-                        <div class="project-status in-progress">قيد التنفيذ</div>
                     </div>
 
                     <p class="project-description">تطبيق متكامل لإدارة حسابات ليبيانا مع خدمات متنوعة للدفع والتحكم بالاشتراكات</p>
@@ -2585,6 +3360,100 @@
                         <div class="project-stat">
                             <div class="project-stat-value">411,053</div>
                             <div class="project-stat-label">عدد المستخدمين النشطين</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Container -->
+                    <div style="display: flex; gap: 20px; margin-top: 30px;">
+                        <!-- Subscriber Growth Chart -->
+                        <div class="subscriber-growth-chart-container" style="flex: 1; margin-top: 0;">
+                            <div class="chart-header-section">
+                                <h4 class="chart-title-elegant">متوسط عدد المستخدمين النشطين شهرياً - ربع سنوي 2025</h4>
+                                <div class="chart-subtitle">نمو المستخدمين عبر الأرباع السنوية</div>
+                            </div>
+                            <div class="chart-visual-wrapper">
+                                <canvas id="myLibyanaSubscribersChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Revenue Growth Chart -->
+                        <div class="subscriber-growth-chart-container" style="flex: 1; margin-top: 0;">
+                            <div class="chart-header-section">
+                                <h4 class="chart-title-elegant">إيرادات تطبيق ماي ليبيانا - ربع سنوي 2025</h4>
+                                <div class="chart-subtitle">نمو الإيرادات عبر الأرباع السنوية</div>
+                            </div>
+                            <div class="chart-visual-wrapper">
+                                <canvas id="myLibyanaRevenueChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Boxes Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 30px;">
+                        <!-- Total App Downloads -->
+                        <div class="mini-chart-box">
+                            <div class="mini-chart-header">
+                                <h5 class="mini-chart-title">إجمالي تحميلات التطبيق</h5>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                                <div style="flex: 1; text-align: center;">
+                                    <div style="font-size: 0.75em; color: #888; margin-bottom: 5px;">أندرويد</div>
+                                    <div style="font-size: 1.4em; font-weight: 700; color: #75197c;">1,965,861</div>
+                                    <div style="font-size: 0.8em; color: #FFB800; font-weight: 600; margin-top: 3px;">81%</div>
+                                </div>
+                                <div style="width: 1px; height: 50px; background: rgba(117, 25, 124, 0.2);"></div>
+                                <div style="flex: 1; text-align: center;">
+                                    <div style="font-size: 0.75em; color: #888; margin-bottom: 5px;">iOS</div>
+                                    <div style="font-size: 1.4em; font-weight: 700; color: #9a3d9f;">446,262</div>
+                                    <div style="font-size: 0.8em; color: #FFB800; font-weight: 600; margin-top: 3px;">19%</div>
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 12px; font-size: 0.7em; color: #999; font-style: italic;">
+                                منذ اليوم الأول (23 ديسمبر 2019 - أندرويد | 24 يناير 2020 - iOS)
+                            </div>
+                        </div>
+
+                        <!-- Maximum Downloads Per Day -->
+                        <div class="mini-chart-box">
+                            <div class="mini-chart-header">
+                                <h5 class="mini-chart-title">أقصى تحميلات في اليوم</h5>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                                <div style="flex: 1; text-align: center;">
+                                    <div style="font-size: 0.75em; color: #888; margin-bottom: 5px;">أندرويد</div>
+                                    <div style="font-size: 1.6em; font-weight: 700; color: #75197c;">22,794</div>
+                                </div>
+                                <div style="width: 1px; height: 50px; background: rgba(117, 25, 124, 0.2);"></div>
+                                <div style="flex: 1; text-align: center;">
+                                    <div style="font-size: 0.75em; color: #888; margin-bottom: 5px;">iOS</div>
+                                    <div style="font-size: 1.6em; font-weight: 700; color: #9a3d9f;">5,193</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mini Charts Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px;">
+                        <!-- App Crash Android -->
+                        <div class="mini-chart-box">
+                            <div class="mini-chart-header">
+                                <h5 class="mini-chart-title">تعطل التطبيق - أندرويد</h5>
+                                <span class="mini-chart-value" id="androidCrashValue">1,002</span>
+                            </div>
+                            <div class="mini-chart-canvas-wrapper">
+                                <canvas id="androidCrashChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- App Crash iOS -->
+                        <div class="mini-chart-box">
+                            <div class="mini-chart-header">
+                                <h5 class="mini-chart-title">تعطل التطبيق - iOS</h5>
+                                <span class="mini-chart-value" id="iosCrashValue">63</span>
+                            </div>
+                            <div class="mini-chart-canvas-wrapper">
+                                <canvas id="iosCrashChart"></canvas>
+                            </div>
                         </div>
                     </div>
 
@@ -2618,7 +3487,6 @@
                         <div>
                             <h3 class="project-title">مشروع دفع فواتير الكهرباء عن طريق رصيد ليبيانا - خالص</h3>
                         </div>
-                        <div class="project-status in-progress">قيد التنفيذ</div>
                     </div>
 
                     <p class="project-description">خدمة دفع فواتير الكهرباء بواسطة رصيد ليبيانا من خلال قنوات متعددة</p>
@@ -2638,14 +3506,87 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
-                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">تقسيم الإيرادات:</h4>
-                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
-                            <li><strong>USSD:</strong> 44,425,803 د.ل</li>
-                            <li><strong>ماي ليبيانا:</strong> 110,490 د.ل</li>
-                            <li><strong>المصرف التجاري الوطني:</strong> 149,000 د.ل</li>
-                            <li><strong>مراكز مبيعات ليبيانا:</strong> 53,180 د.ل</li>
-                        </ul>
+                    <!-- Dual Chart Layout: Revenue Breakdown Table + Growth Bars -->
+                    <div class="dual-chart-layout">
+                        <!-- Revenue Breakdown Table -->
+                        <div class="revenue-table-section">
+                            <div class="chart-header-section">
+                                <h4 class="chart-title-elegant" style="color: #75197c;">تقسيم الإيرادات حسب القناة</h4>
+                                <div class="chart-subtitle">توزيع الإيرادات على قنوات الخدمة</div>
+                            </div>
+                            <div class="revenue-breakdown-table">
+                                <div class="table-row table-header">
+                                    <div class="table-cell">القناة</div>
+                                    <div class="table-cell">الإيرادات (د.ل)</div>
+                                    <div class="table-cell">النسبة</div>
+                                </div>
+                                <div class="table-row dominant-row">
+                                    <div class="table-cell">
+                                        <span class="channel-name">USSD</span>
+                                    </div>
+                                    <div class="table-cell revenue-amount">44,425,803</div>
+                                    <div class="table-cell">
+                                        <div class="percentage-bar">
+                                            <div class="percentage-fill" style="width: 99.3%"></div>
+                                            <span class="percentage-text">99.3%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">
+                                        <span class="channel-name">المصرف التجاري الوطني</span>
+                                    </div>
+                                    <div class="table-cell revenue-amount">149,000</div>
+                                    <div class="table-cell">
+                                        <div class="percentage-bar">
+                                            <div class="percentage-fill" style="width: 33%;"></div>
+                                            <span class="percentage-text">0.33%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">
+                                        <span class="channel-name">ماي ليبيانا</span>
+                                    </div>
+                                    <div class="table-cell revenue-amount">110,490</div>
+                                    <div class="table-cell">
+                                        <div class="percentage-bar">
+                                            <div class="percentage-fill" style="width: 25%;"></div>
+                                            <span class="percentage-text">0.25%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-cell">
+                                        <span class="channel-name">مراكز مبيعات ليبيانا</span>
+                                    </div>
+                                    <div class="table-cell revenue-amount">53,180</div>
+                                    <div class="table-cell">
+                                        <div class="percentage-bar">
+                                            <div class="percentage-fill" style="width: 12%;"></div>
+                                            <span class="percentage-text">0.12%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-row table-footer">
+                                    <div class="table-cell"><strong>الإجمالي</strong></div>
+                                    <div class="table-cell revenue-amount"><strong>44,738,473</strong></div>
+                                    <div class="table-cell"><strong>100%</strong></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Revenue Growth Creative Bars -->
+                        <div class="bars-chart-section">
+                            <div class="chart-header-section">
+                                <h4 class="chart-title-elegant" style="color: #F59E0B;">نمو الإيرادات الربع سنوية</h4>
+                                <div class="chart-subtitle">الإيرادات الفصلية خلال 2025</div>
+                            </div>
+                            <div class="creative-bars-wrapper">
+                                <canvas id="khalesQuarterlyBars"></canvas>
+                            </div>
+                            <div class="growth-text-simple">نمو مستمر بمعدل <span class="growth-highlight">+17.8%</span> فصلياً</div>
+                        </div>
                     </div>
 
                     <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
@@ -2668,81 +3609,69 @@
                 </div>
 
                 <!-- Project 3: Electronic Wallet -->
-                <div class="project-card">
+                <div class="project-card" style="background: #ffffff; padding-top: 35px;">
                     <div class="project-sidebar">المحفظة الإلكترونية</div>
                     <div class="project-header">
                         <div>
                             <h3 class="project-title">مشروع المحفظة الإلكترونية</h3>
                         </div>
-                        <div class="project-status in-progress">قيد التنفيذ</div>
                     </div>
 
                     <p class="project-description">خدمة الدفع الآجل والمحفظة الإلكترونية بالشراكة مع المؤسسات المالية</p>
 
-                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
-                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">خدمة Buy Now Pay Later - المراجعة الإسلامية:</h4>
-                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
-                            <li>تم عقد المشاركة مع شركة المكتب بتاريخ 11/12/2025</li>
-                            <li>على أن تكون العقود المرتوع توقيعها مع المصارف على هيئة ما</li>
-                        </ul>
-                    </div>
+                    <div style="display: flex; gap: 30px; margin-top: 30px; align-items: flex-start;">
+                        <!-- Left Side: Text Content -->
+                        <div style="flex: 1;">
+                            <div style="padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                                <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">خدمة Buy Now Pay Later - المراجعة الإسلامية:</h4>
+                                <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                                    <li>تم عقد المشاركة مع شركة المكتب بتاريخ 11/12/2025</li>
+                                    <li>على أن تكون العقود المرتوع توقيعها مع المصارف على هيئة ما</li>
+                                </ul>
+                            </div>
 
-                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
-                        <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">خدمة المحفظة الإلكترونية - ليبيانا باي:</h4>
-                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
-                            <li>تم إجراء دراسة شاملة للمشروع وتقديمها من ضمن المستندات الخاصة به</li>
-                            <li>استكمال مرحلة الـ Technical Proposal وفي انتظار العرض التجاري</li>
-                        </ul>
-                    </div>
+                            <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
+                                <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">خدمة المحفظة الإلكترونية - ليبيانا باي:</h4>
+                                <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                                    <li>تم إجراء دراسة شاملة للمشروع وتقديمها من ضمن المستندات الخاصة به</li>
+                                    <li>استكمال مرحلة الـ Technical Proposal وفي انتظار العرض التجاري</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                    <div class="project-images">
-                        <div class="project-image-box">📷</div>
-                        <div class="project-image-box">📷</div>
-                        <div class="project-image-box">📷</div>
+                        <!-- Right Side: Images -->
+                        <div style="flex: 0 0 45%; display: flex; justify-content: center;">
+                            <img src="pics/wallet1.jpg" alt="E-Wallet" style="width: 100%; max-width: 550px; border-radius: 5px;">
+                        </div>
                     </div>
                 </div>
 
                 <!-- Project 4: Third to Fourth Generation Migration -->
-                <div class="project-card">
+                <div class="project-card" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.98)), url('pics/zte1.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
                     <div class="project-sidebar">نقل المُمَكِّنِين 3G إلى 4G</div>
-                    <div class="project-header">
+                    <div class="project-header" style="padding-top: 40px; padding-bottom: 20px;">
                         <div>
-                            <h3 class="project-title">مشروع نقل المُمَكِّنِين من الجيل الثالث الرابع</h3>
+                            <h3 class="project-title">مشروع نقل المشتركين من الجيل الثالث للرابع</h3>
                         </div>
-                        <div class="project-status in-progress">قيد التنفيذ</div>
                     </div>
 
-                    <p class="project-description">مشروع نقل المُمَكِّنِين من الجيل الثالث إلى الرابع لتحسين جودة الخدمة وزيادة الإيرادات</p>
+                    <div style="margin-left: 50%; padding-left: 30px;">
+                        <p class="project-description">مشروع نقل المُمَكِّنِين من الجيل الثالث إلى الرابع لتحسين جودة الخدمة وزيادة الإيرادات</p>
 
-                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
-                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">أبرز ما تم تغطيته حتى الآن:</h4>
-                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
-                            <li>تشغيل فريق عمل متخصص - تم تشغيل الفريق بتاريخ 21 يوليو 2025</li>
-                            <li>اختيار المشتركين المستهدفين: إعداد قائمة أساسية وقائمة احتياطية بخطوط 10,000 مشترك بناءً على معايير قيمة ولاء وتجربة مقنعة</li>
-                            <li>التواصل الفعال: إرسال أكثر من 10 رسائل نصية + 15% مكالمة صوتية لكل مشترك من سعر 1.50 ريال لكل 39 يوم عمل</li>
-                            <li>دعم التوزيع: إطلاق عروض خاصة من يوم 9 مايو 2025 وتوصيل 353 مع توصيل مجاني خلال الآن</li>
-                            <li>تحقيق نسبة استجابة قياسية: الوصول إلى 6000 مشترك منتجب من أصل المستهدفين، بنسبة نجاح 60%</li>
-                            <li>أثر مالي كبير: المشتركين المختارين يمثلون 2.7% من إجمالي مشتركي الجيل الثالث، وبساهمون بـ 9%-15% من الإيراد الشهري</li>
-                        </ul>
-                    </div>
-
-                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
-                        <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">الوضع الحالي والخطوات القادمة:</h4>
-                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
-                            <li>متابعة تسليم الأجهزة المتبقية، حيث تحدد 1940 جهازاً</li>
-                            <li>مخاطبة 4444 مشترك من بين تسليم الأجهزة لهم</li>
-                            <li>إعداد تقرير في ديسمبر ومطبوع نهائي لتقييم النتائج المحلية</li>
-                            <li>توثيق الدروس المستفادة من الحملة خطوة بخطوة</li>
-                        </ul>
-                    </div>
-
-                    <div class="project-images">
-                        <div class="project-image-box">
-                            <img src="pics/trans1.png" alt="3G to 4G Migration - Image 1">
+                        <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                            <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">أبرز ما تم تغطيته حتى الآن:</h4>
+                            <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                                <li>تنفيذ نحو <strong style="color: #75197c;">80,000</strong> اتصال خلال <strong style="color: #75197c;">40</strong> يوم عمل (بمعدل <strong style="color: #75197c;">2,000</strong> اتصال يوميًا).</li>
+                                <li>الوصول والتفاعل الناجح مع <strong style="color: #75197c;">6,000</strong> مشترك.</li>
+                                <li>التنسيق مع المشتركين لاستلام الهدايا عبر شركة التوصيل.</li>
+                                <li>توصيل <strong style="color: #75197c;">4,300</strong> جهاز حتى تاريخه عبر أرامكس.</li>
+                                <li>تحقيق الشريحة المستهدفة (<strong style="color: #75197c;">6,000</strong> مشترك) إيرادًا شهريًا يقدّر بنحو <strong style="color: #75197c;">320</strong> ألف دينار ليبي.</li>
+                                <li>تمثل هذه الإيرادات حوالي <strong style="color: #75197c;">15.3%</strong> من إجمالي إيرادات شريحة تضم <strong style="color: #75197c;">215</strong> ألف مشترك يستخدمون أجهزة تدعم الجيل الثالث فقط.</li>
+                                <li>يعكس المؤشر القيمة العالية للشريحة المستهدفة رغم صغر حجمها العددي.</li>
+                                <li>يؤكد جدوى التركيز على هذه الشريحة من منظور تجاري.</li>
+                            </ul>
                         </div>
-                        <div class="project-image-box">
-                            <img src="pics/trans2.png" alt="3G to 4G Migration - Image 2">
-                        </div>
+
                     </div>
                 </div>
 
@@ -2753,65 +3682,75 @@
                         <div>
                             <h3 class="project-title">مشروع تحسين تجربة المستخدم</h3>
                         </div>
-                        <div class="project-status in-progress">قيد التنفيذ</div>
                     </div>
 
-                    <p class="project-description">رفع كفاءة الفريق وحصولهم على شهادة دولية معتمدة من TMForum لتحسين جودة الخدمة</p>
+                    <p class="project-description">الانتقال من البيانات الخام إلى رؤى قابلة للتنفيذ لبناء تجربة مشترك متمحورة حول العميل في ليبيانا (CX)</p>
 
                     <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
-                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">أبرز ما تم تغطيته حتى الآن:</h4>
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">ملخص المشروع بالأرقام:</h4>
                         <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
-                            <li>رفع كفاءة الفريق وحصولهم على شهادة دولية معتمدة من TMForum مما يضمن عمل المشروع ضمن هندسة رقمية موحدة عالمياً</li>
-                            <li>تحديد مؤشرات الأداء للبيانا بعد 48 مؤشر رئيسي</li>
-                            <li>العمل على تقييم التفاعل الرقمية للبيانا مع وشراء الفرق والمشاريع الأخرى لكي يتم العمل بالتوازي ضمن رؤية ليبيانا والشركة القابضة</li>
+                            <li>تصميم وتنفيذ المشروع وفق منهجية منظمة متعددة المراحل مع تحديد نطاق واضح والأنشطة الرئيسية.</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">مرحلة التشخيص والتقييم:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>تقييم الحالة الحالية لنظام تجربة المشتركين في شركة ليبيانا.</li>
+                            <li>مراجعة وتحليل <strong style="color: #75197c;">65</strong> مستندًا ذا صلة.</li>
+                            <li>إجراء <strong style="color: #75197c;">+11</strong> مقابلة شخصية.</li>
+                            <li>تحليل <strong style="color: #75197c;">8</strong> قنوات رقمية.</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">مرحلة التفاعل والبناء:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>تنفيذ <strong style="color: #75197c;">3</strong> ورش عمل تفاعلية.</li>
+                            <li>تحديد <strong style="color: #75197c;">6</strong> شخصيات (Personas).</li>
+                            <li>رصد <strong style="color: #75197c;">30</strong> ملاحظة من الوكلاء ومراكز الخدمات أثناء التفاعل المباشر مع المشتركين.</li>
+                            <li>تنظيم لقاءات تشاركية لتعزيز إشراك فرق العمل وتحفيز التفاعل واعتماد منهجية البناء المشترك ميدانيًا.</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">مرحلة التنفيذ والتوصيات:</h4>
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>تنفيذ الأعمال الميدانية واستخلاص النتائج.</li>
+                            <li>تحديد <strong style="color: #75197c;">45</strong> فرصة ضمن مخطط هيكلة الخدمة.</li>
+                            <li>إطلاق <strong style="color: #75197c;">12</strong> مبادرة.</li>
+                            <li>تغطية <strong style="color: #75197c;">5</strong> نطاقات لتجربة المشتركين.</li>
+                            <li>تقديم خلاصة التوصيات والمقترحات الرامية إلى تحسين تجربة المشترك.</li>
                         </ul>
                     </div>
 
                     <div style="margin-top: 20px; padding: 20px; background: linear-gradient(to left, rgba(245, 158, 11, 0.05), transparent); border-radius: 8px; border-right: 3px solid #F59E0B;">
-                        <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">الوضع الحالي والخطوات القادمة:</h4>
+                        <h4 style="color: #F59E0B; font-weight: 700; margin-bottom: 12px; font-size: 1.1em;">النتائج الرئيسية:</h4>
                         <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
-                            <li>تفعيل نظام التذاكر بمركز مبيعات جنزو وبالتجارب كمرحلة أولى</li>
-                            <li>تحليل مؤشر NPS والوقوف على مستوى رضا المشتركين</li>
-                            <li>تطوير قياسات التطبيق بالتعاون مع فريق تطوير ماي ليبيانا</li>
+                            <li>تحقيق توازن بين احتياجات المشتركين وأولويات الأعمال كأساس للتميّز في تجربة المشترك.</li>
+                            <li>تحليل البيانات ورصد الفجوات في تجربة المشترك.</li>
+                            <li>مراجعة ودمج <strong style="color: #F59E0B;">65</strong> مستندًا تشمل مدخلات أصحاب المصلحة وتحليل قنوات الخدمة.</li>
+                            <li>تحديد <strong style="color: #F59E0B;">6</strong> شخصيات (Personas) بناءً على الدوافع والإحباطات والسلوكيات الفعلية للمشتركين.</li>
+                            <li>رسم <strong style="color: #F59E0B;">4</strong> خرائط لدورة حياة المشترك.</li>
+                            <li>إعداد <strong style="color: #F59E0B;">6</strong> مخططات لهيكل الخدمة.</li>
+                            <li>تحديد <strong style="color: #F59E0B;">12</strong> مبادرة موزعة بين الإنجازات السريعة، والأولويات متوسطة المدى، ورؤية طويلة الأمد.</li>
                         </ul>
-                    </div>
-
-                    <div class="project-images">
-                        <div class="project-image-box">📷</div>
-                        <div class="project-image-box">📷</div>
-                        <div class="project-image-box">📷</div>
                     </div>
                 </div>
 
                 <!-- Project 6: LibyanaHub Platform -->
-                <div class="project-card">
+                <div class="project-card" style="background-color: rgba(117, 25, 124, 0.05); padding: 40px 80px 40px 40px;">
                     <div class="project-sidebar">منصة LibyanaHub</div>
                     <div class="project-header">
                         <div>
                             <h3 class="project-title">منصة LibyanaHub</h3>
                         </div>
-                        <div class="project-status in-progress">قيد التنفيذ</div>
                     </div>
 
                     <p class="project-description">أول منصة لصناع المحتوى في ليبيا تمكن المبدعين من تحقيق الدخل من خبراتهم من خلال الاشتراكات، مع تكامل فريد للدفع برصيد الهاتف المحمول بدعم من ليبيانا.</p>
 
-                    <div class="project-stats">
-                        <div class="project-stat">
-                            <div class="project-stat-value">45</div>
-                            <div class="project-stat-label">يوم لبناء المنصة التجريبية</div>
-                        </div>
-                        <div class="project-stat">
-                            <div class="project-stat-value">18</div>
-                            <div class="project-stat-label">فيديو احترافي عبر 7 فئات</div>
-                        </div>
-                        <div class="project-stat">
-                            <div class="project-stat-value">200%</div>
-                            <div class="project-stat-label">نمو الفريق التقني</div>
-                        </div>
-                    </div>
-
                     <div class="project-timeline">
-                        <div class="project-timeline-icon">📅</div>
+                        <div class="project-timeline-icon"></div>
                         <div class="project-timeline-info">
                             <div class="project-timeline-label">الجدول الزمني</div>
                             <div class="project-timeline-dates">أكتوبر 2025 - الربع الثالث 2026</div>
@@ -2851,21 +3790,56 @@
                         </ul>
                     </div>
 
-                    <div class="project-images">
-                        <div class="project-image-box">
-                            <img src="pics/1.JPG" alt="LibyanaHub Expo - صورة 1">
+                    <div style="margin-top: 30px;">
+                        <div style="margin-bottom: 30px; text-align: center;">
+                            <h4 style="color: #75197c; font-weight: 700; font-size: 1.2em; margin-bottom: 15px;">الإطلاق التجريبي - رمضان 2026</h4>
+                            <p style="margin: 10px 0; color: #555; line-height: 1.8; font-size: 1em;">
+                                <strong style="color: #75197c;">الهدف الحالي:</strong> إطلاق تجريبي لفئتين من المحتوى في <strong style="color: #F59E0B;">الربع الأول من 2026</strong> بالتزامن مع شهر رمضان المبارك
+                            </p>
+                            <div style="margin-top: 15px;">
+                                <span style="color: #75197c; font-weight: 700; font-size: 1.3em;">الطبخ (Cooking)</span>
+                                <span style="color: #75197c; font-weight: 700; font-size: 1.3em; margin: 0 20px;">و</span>
+                                <span style="color: #75197c; font-weight: 700; font-size: 1.3em;">اللياقة البدنية (Fitness)</span>
+                            </div>
                         </div>
-                        <div class="project-image-box">
-                            <img src="pics/2.jpg" alt="LibyanaHub Expo - صورة 2">
+
+                        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: nowrap; overflow-x: auto;">
+                            <div style="text-align: center; flex-shrink: 0;">
+                                <img src="pics/hub5.png" alt="الطبخ" style="width: 120px; height: 160px; object-fit: cover; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <p style="margin-top: 10px; color: #75197c; font-weight: 600; font-size: 0.85em;">الطبخ</p>
+                            </div>
+                            <div style="text-align: center; flex-shrink: 0;">
+                                <img src="pics/hub4.png" alt="اللياقة البدنية" style="width: 120px; height: 160px; object-fit: cover; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <p style="margin-top: 10px; color: #75197c; font-weight: 600; font-size: 0.85em;">اللياقة البدنية</p>
+                            </div>
+                            <div style="text-align: center; flex-shrink: 0; opacity: 0.35;">
+                                <img src="pics/hub2.png" alt="الدورات" style="width: 120px; height: 160px; object-fit: cover; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <p style="margin-top: 10px; color: #75197c; font-weight: 600; font-size: 0.85em;">الدورات</p>
+                            </div>
+                            <div style="text-align: center; flex-shrink: 0; opacity: 0.35;">
+                                <img src="pics/hub1.png" alt="الدورات التفاعلية" style="width: 120px; height: 160px; object-fit: cover; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <p style="margin-top: 10px; color: #75197c; font-weight: 600; font-size: 0.85em;">الدورات التفاعلية</p>
+                            </div>
+                            <div style="text-align: center; flex-shrink: 0; opacity: 0.35;">
+                                <img src="pics/hub3.png" alt="الجلسات المباشرة" style="width: 120px; height: 160px; object-fit: cover; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <p style="margin-top: 10px; color: #75197c; font-weight: 600; font-size: 0.85em;">الجلسات المباشرة</p>
+                            </div>
+                            <div style="text-align: center; flex-shrink: 0; opacity: 0.35;">
+                                <img src="pics/hub6.png" alt="الصحة" style="width: 120px; height: 160px; object-fit: cover; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <p style="margin-top: 10px; color: #75197c; font-weight: 600; font-size: 0.85em;">الصحة</p>
+                            </div>
                         </div>
-                        <div class="project-image-box">
-                            <img src="pics/3.JPG" alt="LibyanaHub Expo - صورة 3">
-                        </div>
-                        <div class="project-image-box">
-                            <img src="pics/4.JPG" alt="LibyanaHub Expo - صورة 4">
-                        </div>
-                        <div class="project-image-box">
-                            <img src="pics/5.JPG" alt="LibyanaHub Expo - صورة 5">
+                    </div>
+
+                    <div style="margin-top: 30px;">
+                        <h4 style="color: #75197c; font-weight: 700; margin-bottom: 20px; font-size: 1.1em; text-align: center;">صور من معرض التقنية 2025</h4>
+                        <div class="project-images" style="display: flex; justify-content: center; gap: 20px;">
+                            <div class="project-image-box" style="flex: 1; max-width: 500px;">
+                                <img src="pics/IMG_4267.jpg" alt="LibyanaHub Expo - صورة 1">
+                            </div>
+                            <div class="project-image-box" style="flex: 1; max-width: 500px;">
+                                <img src="pics/1.JPG" alt="LibyanaHub Expo - صورة 2">
+                            </div>
                         </div>
                     </div>
 
@@ -2913,7 +3887,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-image">💻</div>
+                    <div class="feature-image"><img src="icons/Phone.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">منصة أكاديميا - Codemia</h3>
                         <p class="feature-description">شريك استراتيجي في مجال التعليم التقني والبرمجة</p>
@@ -2921,7 +3895,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">🔧</div>
+                    <div class="feature-image"><img src="icons/4G.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">شركة اكسيس تك - Excess Tech</h3>
                         <p class="feature-description">حلول تقنية متطورة للتسويق الرسائل الدعائية</p>
@@ -2929,7 +3903,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">🎓</div>
+                    <div class="feature-image"><img src="icons/Diamond.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">جامعة طرابلس</h3>
                         <p class="feature-description">شبكات اتصال متطورة للبيئة التعليمية والبحثية</p>
@@ -2937,7 +3911,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">📱</div>
+                    <div class="feature-image"><img src="icons/Phone.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">شركة كاملة لتسويق الرسائل الدعائية</h3>
                         <p class="feature-description">خدمات التسويق الإلكتروني والرسائل الجماعية</p>
@@ -2945,7 +3919,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">🏦</div>
+                    <div class="feature-image"><img src="icons/Star.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">مصرف الأمان - Aman Bank</h3>
                         <p class="feature-description">حلول اتصالات آمنة للقطاع المصرفي</p>
@@ -3062,7 +4036,7 @@
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-image">📡</div>
+                    <div class="feature-image"><img src="icons/Tower.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">إطلاق شبكة 5G</h3>
                         <p class="feature-description">تدشين شبكة الجيل الخامس في المدن الرئيسية مع سرعات تصل إلى 1 جيجابت/ث</p>
@@ -3080,7 +4054,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">🚀</div>
+                    <div class="feature-image"><img src="icons/Star.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">منصة الخدمات الرقمية</h3>
                         <p class="feature-description">تدشين منصة موحدة للخدمات الرقمية مع واجهة سهلة الاستخدام</p>
@@ -3098,7 +4072,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">🎓</div>
+                    <div class="feature-image"><img src="icons/Diamond.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">برنامج تطوير الكفاءات</h3>
                         <p class="feature-description">تدريب شامل للموظفين على أحدث التقنيات والممارسات العالمية</p>
@@ -3116,7 +4090,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">💳</div>
+                    <div class="feature-image"><img src="icons/Phone.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">المحفظة الرقمية</h3>
                         <p class="feature-description">إطلاق خدمة المحفظة الرقمية للدفع والتحويلات الإلكترونية</p>
@@ -3134,7 +4108,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">📶</div>
+                    <div class="feature-image"><img src="icons/Graph.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">توسعة الشبكة</h3>
                         <p class="feature-description">توسيع التغطية لتشمل المناطق النائية والريفية</p>
@@ -3152,7 +4126,7 @@
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-image">🤝</div>
+                    <div class="feature-image"><img src="icons/Users.png" alt="icon"></div>
                     <div class="feature-content">
                         <h3 class="feature-title">الشراكة المجتمعية</h3>
                         <p class="feature-description">برنامج شامل لدعم المبادرات المجتمعية والتنموية</p>
@@ -3239,7 +4213,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     // Find all counter elements
-                    const counters = entry.target.querySelectorAll('.stat-number, .video-stat-value, .kpi-value[data-target]');
+                    const counters = entry.target.querySelectorAll('.stat-number, .video-stat-value, .kpi-value[data-target], .highlight-number, .project-stat-value');
                     counters.forEach(counter => {
                         // Store original value if not already stored
                         if (!counter.hasAttribute('data-original-value')) {
@@ -3247,6 +4221,12 @@
                         }
 
                         const originalValue = counter.getAttribute('data-original-value');
+
+                        // Skip ranges (values containing hyphens like "500K-1M")
+                        if (originalValue.includes('-')) {
+                            return;
+                        }
+
                         const numberMatch = originalValue.match(/[\d.,]+/);
                         if (numberMatch) {
                             const targetNumber = parseFloat(numberMatch[0].replace(/,/g, ''));
@@ -3259,10 +4239,14 @@
                     });
                 } else {
                     // Reset counters when scrolling away
-                    const counters = entry.target.querySelectorAll('.stat-number, .video-stat-value, .kpi-value[data-target]');
+                    const counters = entry.target.querySelectorAll('.stat-number, .video-stat-value, .kpi-value[data-target], .highlight-number, .project-stat-value');
                     counters.forEach(counter => {
                         const originalValue = counter.getAttribute('data-original-value');
                         if (originalValue) {
+                            // Skip ranges (values containing hyphens like "500K-1M")
+                            if (originalValue.includes('-')) {
+                                return;
+                            }
                             const suffix = originalValue.replace(/[\d.,\s]/g, '');
                             counter.textContent = '0' + suffix;
                         }
@@ -3272,7 +4256,7 @@
         }, observerOptions);
 
         // Observe all stat showcases
-        document.querySelectorAll('.stat-showcase, .video-stats').forEach(el => {
+        document.querySelectorAll('.stat-showcase, .video-stats, .summary-highlights, .revenue-breakdown-widget, .project-stats').forEach(el => {
             observer.observe(el);
         });
 
@@ -3287,6 +4271,11 @@
         };
 
         // Store chart instances
+        // Unregister datalabels plugin globally (we'll enable it only for specific charts)
+        if (typeof ChartDataLabels !== 'undefined') {
+            Chart.unregister(ChartDataLabels);
+        }
+
         const chartInstances = {};
 
         // Revenue Chart
@@ -3640,6 +4629,599 @@
             }
         }
 
+        // My Libyana App Subscribers Growth Chart
+        function createMyLibyanaSubscribersChart() {
+            try {
+                const canvas = document.getElementById('myLibyanaSubscribersChart');
+                if (!canvas) return;
+
+                if (chartInstances.myLibyanaSubscribers) {
+                    chartInstances.myLibyanaSubscribers.destroy();
+                }
+
+                // Create gradient
+                const ctx = canvas.getContext('2d');
+                const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, 'rgba(117, 25, 124, 0.4)');
+                gradient.addColorStop(0.5, 'rgba(117, 25, 124, 0.2)');
+                gradient.addColorStop(1, 'rgba(117, 25, 124, 0.02)');
+
+                const gradientLine = ctx.createLinearGradient(0, 0, canvas.width, 0);
+                gradientLine.addColorStop(0, '#75197c');
+                gradientLine.addColorStop(0.5, '#9a3d9f');
+                gradientLine.addColorStop(1, '#FFB800');
+
+                chartInstances.myLibyanaSubscribers = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: ['الربع الأول', 'الربع الثاني', 'الربع الثالث', 'الربع الرابع'],
+                        datasets: [
+                            {
+                                label: 'عدد المشتركين',
+                                data: [316177, 335704, 364217, 435605],
+                                backgroundColor: [
+                                    'rgba(117, 25, 124, 0.8)',
+                                    'rgba(154, 61, 159, 0.8)',
+                                    'rgba(154, 61, 159, 0.8)',
+                                    'rgba(255, 184, 0, 0.8)'
+                                ],
+                                borderColor: [
+                                    '#75197c',
+                                    '#9a3d9f',
+                                    '#9a3d9f',
+                                    '#FFB800'
+                                ],
+                                borderWidth: 2,
+                                borderRadius: 8,
+                                borderSkipped: false,
+                                hoverBackgroundColor: [
+                                    'rgba(117, 25, 124, 1)',
+                                    'rgba(154, 61, 159, 1)',
+                                    'rgba(154, 61, 159, 1)',
+                                    'rgba(255, 184, 0, 1)'
+                                ]
+                            }
+                        ]
+                    },
+                    plugins: [ChartDataLabels],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeInOutCubic',
+                            delay: (context) => {
+                                let delay = 0;
+                                if (context.type === 'data' && context.mode === 'default') {
+                                    delay = context.dataIndex * 100;
+                                }
+                                return delay;
+                            }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(26, 29, 31, 0.95)',
+                                titleFont: { family: 'Cairo', size: 15, weight: 'bold' },
+                                bodyFont: { family: 'Cairo', size: 14 },
+                                padding: 15,
+                                borderColor: '#75197c',
+                                borderWidth: 2,
+                                displayColors: true,
+                                boxPadding: 6,
+                                usePointStyle: true,
+                                callbacks: {
+                                    title: function(context) {
+                                        return context[0].label;
+                                    },
+                                    label: function(context) {
+                                        return 'المشتركون: ' + context.parsed.y.toLocaleString('en-US');
+                                    },
+                                    afterLabel: function(context) {
+                                        if (context.dataIndex > 0) {
+                                            const current = context.parsed.y;
+                                            const previous = context.dataset.data[context.dataIndex - 1];
+                                            const growth = current - previous;
+                                            const growthPercent = ((growth / previous) * 100).toFixed(1);
+                                            return 'النمو: +' + growth.toLocaleString('en-US') + ' (' + growthPercent + '%)';
+                                        }
+                                        return '';
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'top',
+                                color: '#75197c',
+                                font: {
+                                    family: 'Cairo',
+                                    size: 11,
+                                    weight: 'bold'
+                                },
+                                formatter: function(value) {
+                                    return (value / 1000).toFixed(0) + 'K';
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 300000,
+                                max: 450000,
+                                ticks: {
+                                    font: { family: 'Cairo', size: 12, weight: '500' },
+                                    color: '#999',
+                                    padding: 10,
+                                    callback: function(value) {
+                                        return (value / 1000).toFixed(0) + 'K';
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(117, 25, 124, 0.08)',
+                                    drawBorder: false,
+                                    lineWidth: 1
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    font: { family: 'Cairo', size: 11, weight: '600' },
+                                    color: '#888',
+                                    padding: 8
+                                },
+                                grid: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating My Libyana subscribers chart:', error);
+            }
+        }
+
+        // My Libyana App Revenue Growth Chart
+        function createMyLibyanaRevenueChart() {
+            try {
+                const canvas = document.getElementById('myLibyanaRevenueChart');
+                if (!canvas) return;
+
+                if (chartInstances.myLibyanaRevenue) {
+                    chartInstances.myLibyanaRevenue.destroy();
+                }
+
+                // Create gradient
+                const ctx = canvas.getContext('2d');
+                const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, 'rgba(117, 25, 124, 0.4)');
+                gradient.addColorStop(0.5, 'rgba(117, 25, 124, 0.2)');
+                gradient.addColorStop(1, 'rgba(117, 25, 124, 0.02)');
+
+                const gradientLine = ctx.createLinearGradient(0, 0, canvas.width, 0);
+                gradientLine.addColorStop(0, '#75197c');
+                gradientLine.addColorStop(0.5, '#9a3d9f');
+                gradientLine.addColorStop(1, '#FFB800');
+
+                chartInstances.myLibyanaRevenue = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: ['الربع الأول', 'الربع الثاني', 'الربع الثالث', 'الربع الرابع'],
+                        datasets: [
+                            {
+                                label: 'الإيرادات',
+                                data: [6363752, 6904209, 8553660, 13160403],
+                                backgroundColor: [
+                                    'rgba(117, 25, 124, 0.8)',
+                                    'rgba(154, 61, 159, 0.8)',
+                                    'rgba(154, 61, 159, 0.8)',
+                                    'rgba(255, 184, 0, 0.8)'
+                                ],
+                                borderColor: [
+                                    '#75197c',
+                                    '#9a3d9f',
+                                    '#9a3d9f',
+                                    '#FFB800'
+                                ],
+                                borderWidth: 2,
+                                borderRadius: 8,
+                                borderSkipped: false,
+                                hoverBackgroundColor: [
+                                    'rgba(117, 25, 124, 1)',
+                                    'rgba(154, 61, 159, 1)',
+                                    'rgba(154, 61, 159, 1)',
+                                    'rgba(255, 184, 0, 1)'
+                                ]
+                            }
+                        ]
+                    },
+                    plugins: [ChartDataLabels],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeInOutCubic',
+                            delay: (context) => {
+                                let delay = 0;
+                                if (context.type === 'data' && context.mode === 'default') {
+                                    delay = context.dataIndex * 100;
+                                }
+                                return delay;
+                            }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(26, 29, 31, 0.95)',
+                                titleFont: { family: 'Cairo', size: 15, weight: 'bold' },
+                                bodyFont: { family: 'Cairo', size: 14 },
+                                padding: 15,
+                                borderColor: '#75197c',
+                                borderWidth: 2,
+                                displayColors: true,
+                                boxPadding: 6,
+                                usePointStyle: true,
+                                callbacks: {
+                                    title: function(context) {
+                                        return context[0].label;
+                                    },
+                                    label: function(context) {
+                                        return 'الإيرادات: ' + context.parsed.y.toLocaleString('en-US') + ' د.ل';
+                                    },
+                                    afterLabel: function(context) {
+                                        if (context.dataIndex > 0) {
+                                            const current = context.parsed.y;
+                                            const previous = context.dataset.data[context.dataIndex - 1];
+                                            const growth = current - previous;
+                                            const growthPercent = ((growth / previous) * 100).toFixed(1);
+                                            return 'النمو: +' + growth.toLocaleString('en-US') + ' د.ل (' + growthPercent + '%)';
+                                        }
+                                        return '';
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'top',
+                                color: '#75197c',
+                                font: {
+                                    family: 'Cairo',
+                                    size: 11,
+                                    weight: 'bold'
+                                },
+                                formatter: function(value) {
+                                    return (value / 1000000).toFixed(1) + 'M';
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 6000000,
+                                max: 14000000,
+                                ticks: {
+                                    font: { family: 'Cairo', size: 12, weight: '500' },
+                                    color: '#999',
+                                    padding: 10,
+                                    callback: function(value) {
+                                        return (value / 1000000).toFixed(1) + 'M';
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(117, 25, 124, 0.08)',
+                                    drawBorder: false,
+                                    lineWidth: 1
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    font: { family: 'Cairo', size: 11, weight: '600' },
+                                    color: '#888',
+                                    padding: 8
+                                },
+                                grid: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating My Libyana revenue chart:', error);
+            }
+        }
+
+        // Mini Chart: Android Crash
+        function createAndroidCrashChart() {
+            try {
+                const canvas = document.getElementById('androidCrashChart');
+                if (!canvas) return;
+
+                if (chartInstances.androidCrash) {
+                    chartInstances.androidCrash.destroy();
+                }
+
+                const ctx = canvas.getContext('2d');
+                chartInstances.androidCrash = new Chart(canvas, {
+                    type: 'line',
+                    data: {
+                        labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Jan-26'],
+                        datasets: [{
+                            data: [1282, 1269, 1398, 1002, 715],
+                            borderColor: '#75197c',
+                            backgroundColor: 'rgba(117, 25, 124, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#75197c',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
+                        }]
+                    },
+                    plugins: [ChartDataLabels],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false },
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'top',
+                                color: '#75197c',
+                                font: {
+                                    family: 'Cairo',
+                                    size: 9,
+                                    weight: 'bold'
+                                },
+                                formatter: function(value) {
+                                    return (value / 1000).toFixed(1) + 'K';
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                display: false,
+                                beginAtZero: true
+                            },
+                            x: {
+                                display: true,
+                                ticks: {
+                                    font: { family: 'Cairo', size: 9, weight: '600' },
+                                    color: '#888'
+                                },
+                                grid: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating Android crash chart:', error);
+            }
+        }
+
+        // Mini Chart: iOS Crash
+        function createIOSCrashChart() {
+            try {
+                const canvas = document.getElementById('iosCrashChart');
+                if (!canvas) return;
+
+                if (chartInstances.iosCrash) {
+                    chartInstances.iosCrash.destroy();
+                }
+
+                const ctx = canvas.getContext('2d');
+                chartInstances.iosCrash = new Chart(canvas, {
+                    type: 'line',
+                    data: {
+                        labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Jan-26'],
+                        datasets: [{
+                            data: [62, 21, 81, 63, 61],
+                            borderColor: '#9a3d9f',
+                            backgroundColor: 'rgba(154, 61, 159, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#9a3d9f',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
+                        }]
+                    },
+                    plugins: [ChartDataLabels],
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false },
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'top',
+                                color: '#9a3d9f',
+                                font: {
+                                    family: 'Cairo',
+                                    size: 9,
+                                    weight: 'bold'
+                                },
+                                formatter: function(value) {
+                                    return value;
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                display: false,
+                                beginAtZero: true
+                            },
+                            x: {
+                                display: true,
+                                ticks: {
+                                    font: { family: 'Cairo', size: 9, weight: '600' },
+                                    color: '#888'
+                                },
+                                grid: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating iOS crash chart:', error);
+            }
+        }
+
+        // Khales Quarterly Revenue Bars
+        function createKhalesQuarterlyBars() {
+            try {
+                const canvas = document.getElementById('khalesQuarterlyBars');
+                if (!canvas) return;
+
+                if (chartInstances.khalesQuarterlyBars) {
+                    chartInstances.khalesQuarterlyBars.destroy();
+                }
+
+                const ctx = canvas.getContext('2d');
+
+                chartInstances.khalesQuarterlyBars = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: ['الربع الأول', 'الربع الثاني', 'الربع الثالث', 'الربع الرابع'],
+                        datasets: [{
+                            label: 'الإيرادات',
+                            data: [8.4, 11.0, 12.4, 15.3],
+                            backgroundColor: [
+                                'rgba(245, 158, 11, 0.7)',
+                                'rgba(245, 158, 11, 0.8)',
+                                'rgba(255, 184, 0, 0.9)',
+                                'rgba(253, 185, 19, 1)'
+                            ],
+                            borderColor: '#F59E0B',
+                            borderWidth: 2,
+                            borderRadius: 12,
+                            hoverBackgroundColor: [
+                                'rgba(245, 158, 11, 0.9)',
+                                'rgba(245, 158, 11, 1)',
+                                'rgba(255, 184, 0, 1)',
+                                'rgba(253, 185, 19, 1)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 1800,
+                            easing: 'easeOutBounce',
+                            delay: (context) => {
+                                return context.dataIndex * 300;
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(26, 29, 31, 0.95)',
+                                titleFont: { family: 'Cairo', size: 15, weight: 'bold' },
+                                bodyFont: { family: 'Cairo', size: 14 },
+                                padding: 15,
+                                borderColor: '#F59E0B',
+                                borderWidth: 2,
+                                displayColors: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'الإيرادات: ' + context.parsed.y.toFixed(1) + ' مليون د.ل';
+                                    },
+                                    afterLabel: function(context) {
+                                        if (context.dataIndex > 0) {
+                                            const current = context.parsed.y;
+                                            const previous = context.chart.data.datasets[0].data[context.dataIndex - 1];
+                                            const growth = ((current - previous) / previous * 100).toFixed(1);
+                                            return 'النمو: +' + growth + '%';
+                                        }
+                                        return '';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 18,
+                                ticks: {
+                                    font: { family: 'Cairo', size: 12, weight: '500' },
+                                    color: '#999',
+                                    padding: 10,
+                                    callback: function(value) {
+                                        return value + ' م.د.ل';
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(245, 158, 11, 0.08)',
+                                    drawBorder: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    font: { family: 'Cairo', size: 12, weight: '600' },
+                                    color: '#888',
+                                    padding: 8
+                                },
+                                grid: {
+                                    display: false
+                                },
+                                border: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating Khales quarterly bars chart:', error);
+            }
+        }
+
         // Chart observer to animate charts on scroll
         const chartObserverOptions = {
             threshold: 0.3,
@@ -3668,13 +5250,28 @@
                         case 'marketShareChart':
                             createMarketShareChart();
                             break;
+                        case 'myLibyanaSubscribersChart':
+                            createMyLibyanaSubscribersChart();
+                            break;
+                        case 'myLibyanaRevenueChart':
+                            createMyLibyanaRevenueChart();
+                            break;
+                        case 'androidCrashChart':
+                            createAndroidCrashChart();
+                            break;
+                        case 'iosCrashChart':
+                            createIOSCrashChart();
+                            break;
+                        case 'khalesQuarterlyBars':
+                            createKhalesQuarterlyBars();
+                            break;
                     }
                 }
             });
         }, chartObserverOptions);
 
         // Observe all chart containers
-        document.querySelectorAll('.chart-card').forEach(card => {
+        document.querySelectorAll('.chart-card, .chart-container, .subscriber-growth-chart-container, .revenue-growth-chart-container, .bars-chart-section, .mini-chart-box').forEach(card => {
             if (card.querySelector('canvas')) {
                 chartObserver.observe(card);
             }
@@ -3906,6 +5503,163 @@
                         };
                     })
                 }]
+            });
+        })();
+
+        // Customer Care Charts
+        (function() {
+            const libyanaColors = {
+                primary: '#75197c',
+                secondary: '#951b81',
+                blue: '#1e88e5',
+                green: '#43a047',
+                orange: '#fb8c00',
+                teal: '#00897b',
+                red: '#e53935',
+                purple: '#8e24aa'
+            };
+
+            // Complaints Line Chart
+            new Chart(document.getElementById('complaintsLineChart'), {
+                type: 'line',
+                data: {
+                    labels: ['الربع الأول', 'الربع الثاني', 'الربع الثالث'],
+                    datasets: [{
+                        label: 'الشكاوى',
+                        data: [19229, 23646, 15486],
+                        borderColor: libyanaColors.primary,
+                        backgroundColor: 'rgba(117, 25, 124, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointBackgroundColor: libyanaColors.primary,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleFont: {
+                                family: 'Cairo',
+                                size: 13
+                            },
+                            bodyFont: {
+                                family: 'Cairo',
+                                size: 12
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    return 'الشكاوى: ' + context.parsed.y.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                font: {
+                                    family: 'Cairo',
+                                    size: 11
+                                },
+                                callback: function(value) {
+                                    return (value / 1000).toFixed(0) + 'K';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)',
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    family: 'Cairo',
+                                    size: 11
+                                }
+                            },
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            const doughnutConfig = {
+                type: 'doughnut',
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    cutout: '65%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 10,
+                            titleFont: {
+                                family: 'Cairo',
+                                size: 11
+                            },
+                            bodyFont: {
+                                family: 'Cairo',
+                                size: 10
+                            }
+                        }
+                    }
+                }
+            };
+
+            // Complaints Distribution Chart
+            new Chart(document.getElementById('complaintsDistChart'), {
+                ...doughnutConfig,
+                data: {
+                    labels: ['الربع 1', 'الربع 2', 'الربع 3'],
+                    datasets: [{
+                        data: [19229, 23646, 15486],
+                        backgroundColor: [libyanaColors.blue, libyanaColors.red, libyanaColors.green],
+                        borderWidth: 0
+                    }]
+                }
+            });
+
+            // Coverage Complaints Quarterly Chart
+            new Chart(document.getElementById('coverageQuarterlyChart'), {
+                ...doughnutConfig,
+                data: {
+                    labels: ['الربع 1', 'الربع 2', 'الربع 3', 'الربع 4'],
+                    datasets: [{
+                        data: [40.2, 30.7, 26.6, 34.6],
+                        backgroundColor: [libyanaColors.blue, libyanaColors.purple, libyanaColors.green, libyanaColors.orange],
+                        borderWidth: 0
+                    }]
+                }
+            });
+
+            // Added Services Chart
+            new Chart(document.getElementById('friendlyServicesChart'), {
+                ...doughnutConfig,
+                data: {
+                    labels: ['الغاء الاشتراك', 'صعوبة الاشتراك'],
+                    datasets: [{
+                        data: [97.2, 2.8],
+                        backgroundColor: [libyanaColors.primary, libyanaColors.orange],
+                        borderWidth: 0
+                    }]
+                }
             });
         })();
     </script>

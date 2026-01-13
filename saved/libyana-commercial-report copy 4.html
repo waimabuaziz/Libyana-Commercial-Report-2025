@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير القسم التجاري - ليبيانا - 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --libyana-primary: #B8208B;
+            --libyana-dark: #8B1A6B;
+            --libyana-light: #D946A6;
+            --libyana-accent: #E85BB8;
+            --white: #FFFFFF;
+            --light-bg: #FAFBFC;
+            --border-color: #E1E4E8;
+            --text-primary: #24292E;
+            --text-secondary: #586069;
+            --success: #28A745;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            color: var(--text-primary);
+            background: var(--white);
+            line-height: 1.6;
+            direction: rtl;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--white);
+        }
+
+        /* Professional Header */
+        .header {
+            background: var(--white);
+            padding: 60px 60px 40px;
+            border-bottom: 3px solid var(--libyana-primary);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-box {
+            width: 80px;
+            height: 80px;
+            background: var(--libyana-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2em;
+            font-weight: 800;
+            border-radius: 4px;
+        }
+
+        .company-info h1 {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--libyana-primary);
+            margin-bottom: 5px;
+        }
+
+        .company-info p {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        .report-meta {
+            text-align: left;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .report-meta .year {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--libyana-primary);
+            margin-bottom: 5px;
+        }
+
+        .report-title-section {
+            border-right: 4px solid var(--libyana-accent);
+            padding-right: 20px;
+        }
+
+        .report-title-section h2 {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .report-title-section p {
+            font-size: 1em;
+            color: var(--text-secondary);
+        }
+
+        /* Executive Summary */
+        .executive-summary {
+            background: var(--light-bg);
+            padding: 50px 60px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--libyana-primary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--libyana-accent);
+            display: inline-block;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .summary-item {
+            background: var(--white);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .summary-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .summary-item h3 {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--libyana-primary);
+            margin-bottom: 15px;
+        }
+
+        .summary-item p {
+            font-size: 0.95em;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* KPI Section */
+        .kpi-section {
+            padding: 50px 60px;
+            background: var(--white);
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .section-header.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header h2 {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .kpi-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+
+        .kpi-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .kpi-card:hover {
+            box-shadow: 0 4px 12px rgba(184, 32, 139, 0.15);
+            border-color: var(--libyana-primary);
+        }
+
+        .kpi-icon {
+            font-size: 2em;
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
+
+        .kpi-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--libyana-primary);
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .kpi-label {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .kpi-change {
+            font-size: 0.9em;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .kpi-change.negative {
+            color: #D73A49;
+        }
+
+        /* Data Table */
+        .table-section {
+            padding: 40px 60px;
+            background: var(--light-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .data-table {
+            width: 100%;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-collapse: collapse;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .data-table.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .data-table thead {
+            background: var(--libyana-primary);
+            color: var(--white);
+        }
+
+        .data-table th {
+            padding: 15px;
+            text-align: right;
+            font-weight: 600;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95em;
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--light-bg);
+        }
+
+        .data-table strong {
+            color: var(--libyana-primary);
+            font-weight: 600;
+        }
+
+        .positive {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .negative {
+            color: #D73A49;
+            font-weight: 600;
+        }
+
+        /* Charts */
+        .charts-section {
+            padding: 50px 60px;
+            background: var(--white);
+        }
+
+        .chart-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .chart-row.reverse {
+            direction: ltr;
+        }
+
+        .chart-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .chart-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chart-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-explanation {
+            padding: 30px;
+            direction: rtl;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .chart-explanation.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .chart-explanation h4 {
+            font-size: 1.3em;
+            color: var(--libyana-primary);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .chart-explanation p {
+            font-size: 0.95em;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .chart-explanation .highlight {
+            background: var(--light-bg);
+            padding: 20px;
+            border-right: 3px solid var(--libyana-accent);
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .chart-explanation .highlight strong {
+            color: var(--libyana-primary);
+            font-size: 1.1em;
+        }
+
+        .chart-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--libyana-dark);
+            color: var(--white);
+            padding: 40px 60px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin: 5px 0;
+        }
+
+        /* Watermark */
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--libyana-primary);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            opacity: 0.9;
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-row {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-row.reverse {
+                direction: rtl;
+            }
+
+            .header, .kpi-section, .charts-section, .table-section, .executive-summary {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-top">
+                <div class="logo-section">
+                    <div class="logo-box">L</div>
+                    <div class="company-info">
+                        <h1>ليبيانا للهاتف المحمول</h1>
+                        <p>Libyana Mobile Phone</p>
+                    </div>
+                </div>
+                <div class="report-meta">
+                    <div class="year">2024</div>
+                    <p>التقرير السنوي</p>
+                </div>
+            </div>
+            <div class="report-title-section">
+                <h2>تقرير الأداء التجاري</h2>
+                <p>نظرة شاملة على مؤشرات الأداء الرئيسية والنتائج المالية للقسم التجاري</p>
+            </div>
+        </header>
+
+        <!-- Executive Summary -->
+        <section class="executive-summary">
+            <h2 class="summary-title">الملخص التنفيذي</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <h3>الأداء المالي</h3>
+                    <p>حقق القسم التجاري لعام 2024 إيرادات إجمالية بلغت 850 مليون دينار ليبي، بنمو 18.5% مقارنة بالعام السابق، مما يعكس قوة الأداء التشغيلي واستمرار النمو في جميع قطاعات الأعمال.</p>
+                </div>
+                <div class="summary-item">
+                    <h3>قاعدة المشتركين</h3>
+                    <p>وصل عدد المشتركين النشطين إلى 2.46 مليون مشترك، بزيادة صافية قدرها 400 ألف مشترك خلال العام، مع الحفاظ على حصة سوقية رائدة بنسبة 42.5%.</p>
+                </div>
+                <div class="summary-item">
+                    <h3>البنية التحتية</h3>
+                    <p>تم توسيع شبكة 4G لتغطي 95% من السكان، مع إضافة 600 موقع خلوي جديد، مما أدى إلى تحسين جودة الخدمة ورضا العملاء بنسبة 92%.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- KPI Section -->
+        <section class="kpi-section">
+            <div class="section-header">
+                <h2>مؤشرات الأداء الرئيسية</h2>
+                <p>نتائج عام 2024 مقارنة بالعام السابق</p>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon">📱</div>
+                    <div class="kpi-value" data-target="2465000">0</div>
+                    <div class="kpi-label">إجمالي المشتركين</div>
+                    <div class="kpi-change">↑ 16.3%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">💰</div>
+                    <div class="kpi-value" data-target="850">0</div>
+                    <div class="kpi-label">إجمالي الإيرادات (مليون د.ل)</div>
+                    <div class="kpi-change">↑ 18.5%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">📊</div>
+                    <div class="kpi-value" data-target="42.5" data-decimals="1">0</div>
+                    <div class="kpi-label">الحصة السوقية (%)</div>
+                    <div class="kpi-change">↑ 3.2%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">💎</div>
+                    <div class="kpi-value" data-target="95">0</div>
+                    <div class="kpi-label">متوسط الإيرادات/مشترك (د.ل)</div>
+                    <div class="kpi-change">↑ 5.5%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">📈</div>
+                    <div class="kpi-value" data-target="235">0</div>
+                    <div class="kpi-label">إيرادات الربع الرابع (مليون د.ل)</div>
+                    <div class="kpi-change">↑ 4.4%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">🌐</div>
+                    <div class="kpi-value" data-target="95" data-suffix="%">0%</div>
+                    <div class="kpi-label">تغطية شبكة 4G</div>
+                    <div class="kpi-change">↑ 10%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">📶</div>
+                    <div class="kpi-value" data-target="26.5" data-decimals="1">0</div>
+                    <div class="kpi-label">متوسط استهلاك البيانات (GB)</div>
+                    <div class="kpi-change">↑ 112%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">⭐</div>
+                    <div class="kpi-value" data-target="92" data-suffix="%">0%</div>
+                    <div class="kpi-label">مؤشر رضا العملاء</div>
+                    <div class="kpi-change">↑ 3.5%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">🔄</div>
+                    <div class="kpi-value" data-target="1.9" data-decimals="1" data-suffix="%">0%</div>
+                    <div class="kpi-label">معدل التوقف الشهري</div>
+                    <div class="kpi-change">↓ 0.9%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">📡</div>
+                    <div class="kpi-value" data-target="2850">0</div>
+                    <div class="kpi-label">أبراج الاتصالات</div>
+                    <div class="kpi-change">↑ 26.6%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">💳</div>
+                    <div class="kpi-value" data-target="1850000">0</div>
+                    <div class="kpi-label">مستخدمو التطبيق</div>
+                    <div class="kpi-change">↑ 35.2%</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon">⚡</div>
+                    <div class="kpi-value" data-target="45">0</div>
+                    <div class="kpi-label">متوسط سرعة 4G (Mbps)</div>
+                    <div class="kpi-change">↑ 80%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+            <div class="section-header">
+                <h2>التحليلات المالية والتشغيلية</h2>
+                <p>رسوم بيانية توضح اتجاهات الأداء خلال عام 2024</p>
+            </div>
+
+            <div class="chart-grid">
+                <!-- Revenue Chart -->
+                <div class="chart-row reverse">
+                    <div class="chart-explanation">
+                        <h4>نمو مستدام في الإيرادات</h4>
+                        <p>شهد عام 2024 نموًا متواصلًا في الإيرادات الفصلية، حيث ارتفعت من 185 مليون دينار في الربع الأول إلى 235 مليون في الربع الرابع، بمعدل نمو ربع سنوي متوسط قدره 8.3%.</p>
+                        <p>يعزى هذا النمو الإيجابي إلى التوسع في قاعدة المشتركين وزيادة استهلاك خدمات البيانات، بالإضافة إلى نجاح استراتيجيات التسعير والباقات الجديدة.</p>
+                        <div class="highlight">
+                            <strong>النقطة الرئيسية:</strong> تحقيق نمو سنوي بنسبة <strong>18.5%</strong> في الإيرادات مقارنة بالعام السابق.
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3 class="chart-title">الإيرادات الفصلية (مليون د.ل)</h3>
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscribers Chart -->
+                <div class="chart-row">
+                    <div class="chart-card">
+                        <h3 class="chart-title">نمو قاعدة المشتركين</h3>
+                        <div class="chart-container">
+                            <canvas id="subscriberChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-explanation">
+                        <h4>توسع قاعدة المشتركين</h4>
+                        <p>حققت ليبيانا نموًا قويًا في قاعدة المشتركين خلال عام 2024، حيث ارتفع العدد من 2.15 مليون في الربع الأول إلى 2.46 مليون في الربع الرابع.</p>
+                        <p>هذا النمو بنسبة 16.3% على مدار العام يعكس نجاح حملاتنا التسويقية وتحسين جودة الخدمة وتوسيع التغطية الجغرافية.</p>
+                        <div class="highlight">
+                            <strong>إنجاز رئيسي:</strong> إضافة <strong>400,000</strong> مشترك جديد خلال 2024.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Revenue -->
+                <div class="chart-row reverse">
+                    <div class="chart-explanation">
+                        <h4>تحول نحو الخدمات الرقمية</h4>
+                        <p>تُظهر البيانات تحولاً واضحاً في هيكل الإيرادات، حيث أصبحت خدمات البيانات المصدر الأول للدخل بنسبة 45% من إجمالي الإيرادات بقيمة 380 مليون دينار.</p>
+                        <p>انخفضت حصة المكالمات الصوتية إلى 33%، بينما شهدت خدمات القيمة المضافة والرسائل نمواً ملحوظاً.</p>
+                        <div class="highlight">
+                            <strong>التوجه الاستراتيجي:</strong> الاستثمار المستمر في تطوير البنية التحتية للبيانات لمواكبة الطلب المتزايد.
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3 class="chart-title">توزيع الإيرادات حسب الخدمة</h3>
+                        <div class="chart-container">
+                            <canvas id="serviceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Usage -->
+                <div class="chart-row">
+                    <div class="chart-card">
+                        <h3 class="chart-title">معدلات استخدام البيانات (GB/شهر)</h3>
+                        <div class="chart-container">
+                            <canvas id="dataUsageChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-explanation">
+                        <h4>نمو متسارع في استهلاك البيانات</h4>
+                        <p>يوضح الرسم البياني الاتجاه الواضح نحو استهلاك البيانات، حيث نما متوسط الاستهلاك الشهري من 12.5 GB في يناير إلى 26.5 GB في ديسمبر بزيادة 112%.</p>
+                        <p>هذا النمو الكبير يعكس التحول العالمي نحو تطبيقات الفيديو والبث المباشر والخدمات السحابية.</p>
+                        <div class="highlight">
+                            <strong>قوة الشبكة:</strong> البنية التحتية قادرة على استيعاب <strong>مضاعفة الاستهلاك</strong> خلال السنوات القادمة.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Share -->
+                <div class="chart-row reverse">
+                    <div class="chart-explanation">
+                        <h4>المقارنة مع المنافسين</h4>
+                        <p>تحتفظ ليبيانا بالصدارة في السوق الليبي بحصة 42.5%، محققة نمواً مستمراً من 35.8% عام 2020 إلى 42.5% عام 2024.</p>
+                        <p>يعكس هذا الأداء المتميز نجاح الاستراتيجية التجارية والتشغيلية للشركة في تقديم أفضل الخدمات.</p>
+                        <div class="highlight">
+                            <strong>الريادة:</strong> الحفاظ على المركز الأول بفارق <strong>12.7%</strong> عن أقرب منافس.
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3 class="chart-title">الحصة السوقية (%)</h3>
+                        <div class="chart-container">
+                            <canvas id="marketShareChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Performance Table -->
+        <section class="table-section">
+            <div class="section-header">
+                <h2>الأداء المالي التفصيلي</h2>
+                <p>مقارنة النتائج المالية الفصلية لعام 2024</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>الربع</th>
+                        <th>الإيرادات (مليون د.ل)</th>
+                        <th>النمو الفصلي</th>
+                        <th>النمو السنوي</th>
+                        <th>الهامش الربحي</th>
+                        <th>ARPU (د.ل)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>الربع الأول</strong></td>
+                        <td>185</td>
+                        <td>-</td>
+                        <td class="positive">+15.6%</td>
+                        <td>24.3%</td>
+                        <td>86</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الربع الثاني</strong></td>
+                        <td>205</td>
+                        <td class="positive">+10.8%</td>
+                        <td class="positive">+17.2%</td>
+                        <td>26.1%</td>
+                        <td>91</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الربع الثالث</strong></td>
+                        <td>225</td>
+                        <td class="positive">+9.8%</td>
+                        <td class="positive">+19.5%</td>
+                        <td>27.8%</td>
+                        <td>96</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الربع الرابع</strong></td>
+                        <td>235</td>
+                        <td class="positive">+4.4%</td>
+                        <td class="positive">+21.0%</td>
+                        <td>28.5%</td>
+                        <td>95</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Service Performance Table -->
+        <section class="table-section">
+            <div class="section-header">
+                <h2>أداء الخدمات التفصيلي</h2>
+                <p>مقارنة الأداء لجميع خطوط الخدمات</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>نوع الخدمة</th>
+                        <th>عدد المستخدمين</th>
+                        <th>الإيرادات (مليون د.ل)</th>
+                        <th>% من الإيرادات</th>
+                        <th>النمو السنوي</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>خدمات البيانات</strong></td>
+                        <td>2,450,000</td>
+                        <td>380</td>
+                        <td>44.7%</td>
+                        <td class="positive">+45.8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>المكالمات الصوتية</strong></td>
+                        <td>2,465,000</td>
+                        <td>285</td>
+                        <td>33.5%</td>
+                        <td class="negative">-5.0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>الرسائل النصية</strong></td>
+                        <td>2,120,000</td>
+                        <td>95</td>
+                        <td>11.2%</td>
+                        <td class="negative">-8.7%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>خدمات القيمة المضافة</strong></td>
+                        <td>890,000</td>
+                        <td>90</td>
+                        <td>10.6%</td>
+                        <td class="positive">+28.6%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p><strong>ليبيانا للهاتف المحمول</strong> | Libyana Mobile Phone</p>
+            <p>© 2024 جميع الحقوق محفوظة | تقرير القسم التجاري</p>
+        </footer>
+
+        <!-- Watermark -->
+        <div class="watermark">ليبيانا 2024</div>
+    </div>
+
+    <script>
+        // Animated Counter Function
+        function animateCounter(element) {
+            const target = parseFloat(element.getAttribute('data-target'));
+            const decimals = parseInt(element.getAttribute('data-decimals')) || 0;
+            const suffix = element.getAttribute('data-suffix') || '';
+            const duration = 1500;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = current.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + suffix;
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + suffix;
+                }
+            };
+
+            updateCounter();
+        }
+
+        // Intersection Observer
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+
+                    // Animate counters
+                    const counters = entry.target.querySelectorAll('.kpi-value[data-target]');
+                    counters.forEach(counter => {
+                        if (!counter.classList.contains('counted')) {
+                            counter.classList.add('counted');
+                            animateCounter(counter);
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.section-header, .summary-item, .kpi-card, .chart-card, .chart-explanation, .data-table').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Chart Colors
+        const chartColors = {
+            primary: '#B8208B',
+            light: '#D946A6',
+            accent: '#E85BB8',
+            gray: '#94a3b8'
+        };
+
+        // Revenue Chart
+        new Chart(document.getElementById('revenueChart'), {
+            type: 'line',
+            data: {
+                labels: ['الربع الأول', 'الربع الثاني', 'الربع الثالث', 'الربع الرابع'],
+                datasets: [{
+                    label: 'الإيرادات',
+                    data: [185, 205, 225, 235],
+                    borderColor: chartColors.primary,
+                    backgroundColor: 'rgba(184, 32, 139, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: { font: { family: 'Cairo' } },
+                        grid: { color: '#E1E4E8' }
+                    },
+                    x: {
+                        ticks: { font: { family: 'Cairo' } }
+                    }
+                }
+            }
+        });
+
+        // Subscriber Chart
+        new Chart(document.getElementById('subscriberChart'), {
+            type: 'bar',
+            data: {
+                labels: ['الربع الأول', 'الربع الثاني', 'الربع الثالث', 'الربع الرابع'],
+                datasets: [{
+                    label: 'المشتركون',
+                    data: [2150000, 2242000, 2347000, 2465000],
+                    backgroundColor: chartColors.primary
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            font: { family: 'Cairo' },
+                            callback: function(value) {
+                                return (value / 1000000).toFixed(1) + 'M';
+                            }
+                        },
+                        grid: { color: '#E1E4E8' }
+                    },
+                    x: {
+                        ticks: { font: { family: 'Cairo' } }
+                    }
+                }
+            }
+        });
+
+        // Service Revenue Chart
+        new Chart(document.getElementById('serviceChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['البيانات', 'المكالمات', 'الرسائل', 'القيمة المضافة'],
+                datasets: [{
+                    data: [380, 285, 95, 90],
+                    backgroundColor: [chartColors.primary, chartColors.light, chartColors.accent, chartColors.gray]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: 'Cairo' } }
+                    }
+                }
+            }
+        });
+
+        // Data Usage Chart
+        new Chart(document.getElementById('dataUsageChart'), {
+            type: 'line',
+            data: {
+                labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+                datasets: [{
+                    label: 'استهلاك البيانات',
+                    data: [12.5, 13.2, 14.1, 15.3, 16.8, 18.2, 19.5, 21.0, 22.3, 23.8, 25.1, 26.5],
+                    borderColor: chartColors.primary,
+                    backgroundColor: 'rgba(184, 32, 139, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { font: { family: 'Cairo' } },
+                        grid: { color: '#E1E4E8' }
+                    },
+                    x: {
+                        ticks: { font: { family: 'Cairo', size: 10 } }
+                    }
+                }
+            }
+        });
+
+        // Market Share Chart
+        new Chart(document.getElementById('marketShareChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                datasets: [
+                    {
+                        label: 'ليبيانا',
+                        data: [35.8, 38.2, 39.3, 41.0, 42.5],
+                        backgroundColor: chartColors.primary
+                    },
+                    {
+                        label: 'المنافس أ',
+                        data: [32.5, 31.8, 31.2, 30.5, 29.8],
+                        backgroundColor: chartColors.gray
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { font: { family: 'Cairo' } }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { font: { family: 'Cairo' } },
+                        grid: { color: '#E1E4E8' }
+                    },
+                    x: {
+                        ticks: { font: { family: 'Cairo' } }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3108,7 +3108,8 @@
                             <!-- Services Performance Charts Grid -->
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 30px;">
                                 <!-- Chart 1: خالص -->
-                                <div class="chart-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); height: 300px;">
+                                <div class="chart-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); height: 300px; position: relative;">
+                                    <img src="pics/serices/khales.jpg" alt="خالص" style="position: absolute; top: -15px; right: -15px; width: 50px; height: 50px; border-radius: 8px; border: 3px solid #75197c; box-shadow: 0 4px 8px rgba(0,0,0,0.2); object-fit: cover; z-index: 10;">
                                     <h4 style="text-align: center; color: #75197c; margin-bottom: 20px; font-size: 1.1em;">خالص</h4>
                                     <canvas id="serviceChart1" style="height: 250px;"></canvas>
                                 </div>
@@ -3889,10 +3890,8 @@
                                 </div>
                                 <div class="table-row">
                                     <div class="table-cell">
-                                        <div>
-                                            <div class="channel-name">المصرف التجاري الوطني</div>
-                                            <div style="font-size: 0.7em; color: #999; margin-top: 4px;">12-2025</div>
-                                        </div>
+                                        <span class="channel-name">المصرف التجاري الوطني</span><br>
+                                        <span style="font-size: 0.7em; color: #999;">12-2025</span>
                                     </div>
                                     <div class="table-cell revenue-amount">149,000</div>
                                     <div class="table-cell">
@@ -3904,10 +3903,8 @@
                                 </div>
                                 <div class="table-row">
                                     <div class="table-cell">
-                                        <div>
-                                            <div class="channel-name">ماي ليبيانا</div>
-                                            <div style="font-size: 0.7em; color: #999; margin-top: 4px;">12-2025</div>
-                                        </div>
+                                        <span class="channel-name">ماي ليبيانا</span><br>
+                                        <span style="font-size: 0.7em; color: #999;">12-2025</span>
                                     </div>
                                     <div class="table-cell revenue-amount">110,490</div>
                                     <div class="table-cell">
@@ -3919,10 +3916,8 @@
                                 </div>
                                 <div class="table-row">
                                     <div class="table-cell">
-                                        <div>
-                                            <div class="channel-name">مراكز مبيعات ليبيانا</div>
-                                            <div style="font-size: 0.7em; color: #999; margin-top: 4px;">10-2025</div>
-                                        </div>
+                                        <span class="channel-name">مراكز مبيعات ليبيانا</span><br>
+                                        <span style="font-size: 0.7em; color: #999;">10-2025</span>
                                     </div>
                                     <div class="table-cell revenue-amount">53,180</div>
                                     <div class="table-cell">
@@ -4034,25 +4029,22 @@
                 </div>
 
                 <!-- Project 5: User Experience Improvement -->
-                <div class="project-card" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.98)), url('pics/projects/customerjourney/PHOTO-2026-01-13-22-53-50.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="project-card">
                     <div class="project-sidebar">تحسين تجربة المستخدم</div>
-                    <div class="project-header" style="padding-top: 40px; padding-bottom: 20px;">
+                    <div class="project-header">
                         <div>
                             <h3 class="project-title">مشروع تحسين تجربة المستخدم</h3>
                         </div>
                     </div>
 
-                    <div style="margin-left: 50%; padding-left: 30px;">
-                        <p class="project-description">ضمن مشروع رحلة العميل، تم إنجاز ما يلي:</p>
+                    <p class="project-description">ضمن مشروع رحلة العميل، تم إنجاز ما يلي:</p>
 
-                        <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
-                            <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
-                                <li>تحديد <strong style="color: #75197c;">48</strong> مؤشر أداء رئيسي (KPIs)، منها <strong style="color: #75197c;">22</strong> مؤشرًا خاصًا بالقنوات الرقمية.</li>
-                                <li>بناء <strong style="color: #75197c;">6</strong> شخصيات عملاء (Personas) بناءً على تحليل توزيع الإيرادات.</li>
-                                <li>تنفيذ دراسات حالة ميدانية في مركز الأولمبية وجنزور.</li>
-                            </ul>
-                        </div>
-
+                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>تحديد <strong style="color: #75197c;">48</strong> مؤشر أداء رئيسي (KPIs)، منها <strong style="color: #75197c;">22</strong> مؤشرًا خاصًا بالقنوات الرقمية.</li>
+                            <li>بناء <strong style="color: #75197c;">6</strong> شخصيات عملاء (Personas) بناءً على تحليل توزيع الإيرادات.</li>
+                            <li>تنفيذ دراسات حالة ميدانية في مركز الأولمبية وجنزور.</li>
+                        </ul>
                     </div>
                 </div>
 

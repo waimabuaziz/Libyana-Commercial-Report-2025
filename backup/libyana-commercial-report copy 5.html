@@ -2219,12 +2219,6 @@
             margin: 0;
         }
 
-        .project-title a:hover {
-            color: #9c27b0 !important;
-            text-decoration: underline !important;
-            cursor: pointer;
-        }
-
         .project-status {
             font-size: 0.9em;
             font-weight: 600;
@@ -2696,11 +2690,9 @@
             display: flex;
             gap: 15px;
             margin-bottom: 35px;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(117, 25, 124, 0.08), rgba(117, 25, 124, 0.02));
-            border-right: 4px solid #75197c;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(117, 25, 124, 0.1);
+            padding: 0;
+            background: transparent;
+            border: none;
         }
 
         .project-timeline-icon {
@@ -2713,18 +2705,17 @@
         }
 
         .project-timeline-label {
-            font-size: 0.85em;
-            color: #75197c;
-            margin-bottom: 8px;
+            font-size: 0.75em;
+            color: #999;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .project-timeline-dates {
-            font-size: 1.15em;
+            font-size: 1em;
             color: #333;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .project-progress {
@@ -2751,19 +2742,16 @@
         }
 
         .project-progress-track {
-            height: 12px;
+            height: 6px;
             background: #e0e0e0;
-            border-radius: 10px;
+            border-radius: 0;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .project-progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #75197c, #9c27b0);
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(117, 25, 124, 0.3);
-            transition: width 0.3s ease;
+            background: #75197c;
+            border-radius: 0;
         }
 
         .project-images {
@@ -3108,7 +3096,8 @@
                             <!-- Services Performance Charts Grid -->
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 30px;">
                                 <!-- Chart 1: خالص -->
-                                <div class="chart-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); height: 300px;">
+                                <div class="chart-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); height: 300px; position: relative;">
+                                    <img src="pics/serices/khales.jpg" alt="خالص" style="position: absolute; top: -15px; right: -15px; width: 50px; height: 50px; border-radius: 8px; border: 3px solid #75197c; box-shadow: 0 4px 8px rgba(0,0,0,0.2); object-fit: cover; z-index: 10;">
                                     <h4 style="text-align: center; color: #75197c; margin-bottom: 20px; font-size: 1.1em;">خالص</h4>
                                     <canvas id="serviceChart1" style="height: 250px;"></canvas>
                                 </div>
@@ -3889,10 +3878,8 @@
                                 </div>
                                 <div class="table-row">
                                     <div class="table-cell">
-                                        <div>
-                                            <div class="channel-name">المصرف التجاري الوطني</div>
-                                            <div style="font-size: 0.7em; color: #999; margin-top: 4px;">12-2025</div>
-                                        </div>
+                                        <span class="channel-name">المصرف التجاري الوطني</span><br>
+                                        <span style="font-size: 0.7em; color: #999;">12-2025</span>
                                     </div>
                                     <div class="table-cell revenue-amount">149,000</div>
                                     <div class="table-cell">
@@ -3904,10 +3891,8 @@
                                 </div>
                                 <div class="table-row">
                                     <div class="table-cell">
-                                        <div>
-                                            <div class="channel-name">ماي ليبيانا</div>
-                                            <div style="font-size: 0.7em; color: #999; margin-top: 4px;">12-2025</div>
-                                        </div>
+                                        <span class="channel-name">ماي ليبيانا</span><br>
+                                        <span style="font-size: 0.7em; color: #999;">12-2025</span>
                                     </div>
                                     <div class="table-cell revenue-amount">110,490</div>
                                     <div class="table-cell">
@@ -3919,10 +3904,8 @@
                                 </div>
                                 <div class="table-row">
                                     <div class="table-cell">
-                                        <div>
-                                            <div class="channel-name">مراكز مبيعات ليبيانا</div>
-                                            <div style="font-size: 0.7em; color: #999; margin-top: 4px;">10-2025</div>
-                                        </div>
+                                        <span class="channel-name">مراكز مبيعات ليبيانا</span><br>
+                                        <span style="font-size: 0.7em; color: #999;">10-2025</span>
                                     </div>
                                     <div class="table-cell revenue-amount">53,180</div>
                                     <div class="table-cell">
@@ -4034,25 +4017,22 @@
                 </div>
 
                 <!-- Project 5: User Experience Improvement -->
-                <div class="project-card" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.98)), url('pics/projects/customerjourney/PHOTO-2026-01-13-22-53-50.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="project-card">
                     <div class="project-sidebar">تحسين تجربة المستخدم</div>
-                    <div class="project-header" style="padding-top: 40px; padding-bottom: 20px;">
+                    <div class="project-header">
                         <div>
                             <h3 class="project-title">مشروع تحسين تجربة المستخدم</h3>
                         </div>
                     </div>
 
-                    <div style="margin-left: 50%; padding-left: 30px;">
-                        <p class="project-description">ضمن مشروع رحلة العميل، تم إنجاز ما يلي:</p>
+                    <p class="project-description">ضمن مشروع رحلة العميل، تم إنجاز ما يلي:</p>
 
-                        <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
-                            <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
-                                <li>تحديد <strong style="color: #75197c;">48</strong> مؤشر أداء رئيسي (KPIs)، منها <strong style="color: #75197c;">22</strong> مؤشرًا خاصًا بالقنوات الرقمية.</li>
-                                <li>بناء <strong style="color: #75197c;">6</strong> شخصيات عملاء (Personas) بناءً على تحليل توزيع الإيرادات.</li>
-                                <li>تنفيذ دراسات حالة ميدانية في مركز الأولمبية وجنزور.</li>
-                            </ul>
-                        </div>
-
+                    <div style="margin-top: 25px; padding: 20px; background: linear-gradient(to left, rgba(117, 25, 124, 0.05), transparent); border-radius: 8px; border-right: 3px solid #75197c;">
+                        <ul style="color: #555; line-height: 1.8; margin: 0; padding-right: 20px;">
+                            <li>تحديد <strong style="color: #75197c;">48</strong> مؤشر أداء رئيسي (KPIs)، منها <strong style="color: #75197c;">22</strong> مؤشرًا خاصًا بالقنوات الرقمية.</li>
+                            <li>بناء <strong style="color: #75197c;">6</strong> شخصيات عملاء (Personas) بناءً على تحليل توزيع الإيرادات.</li>
+                            <li>تنفيذ دراسات حالة ميدانية في مركز الأولمبية وجنزور.</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -4061,14 +4041,14 @@
                     <div class="project-sidebar">منصة LibyanaHub</div>
                     <div class="project-header">
                         <div>
-                            <h3 class="project-title"><a href="https://libyanahub-demo.web.app" target="_blank" style="color: inherit; text-decoration: none; transition: color 0.3s ease;">منصة LibyanaHub</a></h3>
+                            <h3 class="project-title">منصة LibyanaHub</h3>
                         </div>
                     </div>
 
                     <p class="project-description">أول منصة لصناع المحتوى في ليبيا تمكن المبدعين من تحقيق الدخل من خبراتهم من خلال الاشتراكات، مع تكامل فريد للدفع برصيد الهاتف المحمول بدعم من ليبيانا.</p>
 
                     <div class="project-timeline">
-                        <div class="project-timeline-icon">📅</div>
+                        <div class="project-timeline-icon"></div>
                         <div class="project-timeline-info">
                             <div class="project-timeline-label">الجدول الزمني</div>
                             <div class="project-timeline-dates">أكتوبر 2025 - الربع الثالث 2026</div>
@@ -4154,7 +4134,7 @@
                     <div style="margin-top: 30px;">
                         <h4 style="color: #75197c; font-weight: 700; margin-bottom: 20px; font-size: 1.1em; text-align: center;">صور من معرض التقنية 2025</h4>
                         <div class="project-images" style="display: flex; justify-content: center;">
-                            <div style="background-color: black; max-width: 800px; height: 450px; overflow: hidden; display: flex; align-items: flex-end; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);">
+                            <div style="background-color: black; max-width: 800px; max-height: 500px; overflow: hidden;">
                                 <img src="pics/1.JPG" alt="LibyanaHub Expo - صورة 2" style="width: 100%; height: auto;">
                             </div>
                         </div>
